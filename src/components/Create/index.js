@@ -149,8 +149,7 @@ const Create = () => {
       <div className="App2">
         <div className="container" onDrop={handleImageChange} onDragOver={dragOverHandler}>
           {error && <p className="errorMsg">File not supported</p>}
-          <div 
-          className="imgPreview"
+          <div className="imgPreview"
           style= {{background: imgPreview ? `url("${imgPreview}")no-repeat center/cover` : "transparent"}}
           >
             {!imgPreview && (
