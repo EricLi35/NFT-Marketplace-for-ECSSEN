@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
@@ -15,7 +15,51 @@ import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 import ProgressBar from "../Progress_bar";
+function ElogDateTime({selected, handleChange}){
+    const [date, setDate] = useState(selected && selected.split(" ")[0]);
+    const [time, setTime] = useState(selected && selected.split(" ")[1]);
+    const dateRef = useRef(null);
+    const timeRef = useRef(null);
 
+    useEffect(() => {
+        if(!date || !time) return;
+    }, [date, time]);
+
+    function _handleChange(e) {
+        // onChange();
+        const value = e.target.value;
+        const elid = e.target.id;
+        let newStr;
+    
+        if ("elogdate" === elid) {
+          setDate(value);
+          newStr = new String("").concat(value||"0000-00-00", " ", time||"00:00");
+        } else if ("elogtime" === elid) {
+          setTime(value);
+          newStr = new String("").concat(date||"0000-00-00", " ", value||"00:00");
+        }
+        handleChange(newStr);
+    }
+    
+    return (
+        <>
+          <input
+            id="elogdate"
+            ref={dateRef}
+            value={date}
+            onChange={_handleChange}
+            type="date"
+          />
+          <input
+            id="elogtime"
+            ref={timeRef}
+            value={time}
+            onChange={_handleChange}
+            type="time"
+          />
+        </>
+      );
+}
 
 function Sell() {
 
@@ -81,16 +125,12 @@ function Sell() {
     }
 
     const[data, setData] = useState(null)
-    const[method, setMethod] = useState('set')
+    const[method, setMethod] = useState('bid')
     const[bid, setBid] = useState(null)
     const[reserved, setReserved] = useState(null)
-    const[selectedDate, setSelectedDate] = useState(null)
-    const[datetime, setDatetime] = useState('')
-    
-    let today=new Date();
-    let month=today.getMonth+1;
-    let year=today.getFullYear();
-    let date=today.getDate();
+    const [expireDate, setExpireDate] = useState(null)
+    // const[selectedDate, setSelectedDate] = useState(null)
+    // const[datetime, setDatetime] = useState('')
 
     function changeData(val){
         setData(val.target.value);
@@ -219,11 +259,11 @@ function Sell() {
         return wethAddress;
     }
 
-    function changeDateTime(ev) {
-        if (!ev.target['validity'].valid) return;
-        const dt= ev.target['value'] + ':00';
-        setDatetime(dt);
-    }
+    // function changeDateTime(ev) {
+    //     if (!ev.target['validity'].valid) return;
+    //     const dt= ev.target['value'] + ':00';
+    //     setDatetime(dt);
+    // }
 
     return (
         <section className='sellPage'>
@@ -289,9 +329,12 @@ function Sell() {
                                         <p className='expiration-date-desciption'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                     </div>
                                     <div className='expiration-date-right'>
-                                    <input type="datetime-local" id="expirationTime" className="expiration-date-time"
+                                        {/* <input type="datetime-local" className="expiration-date-time"
                                             value={(datetime || '').toString().substring(0, 16)}
-                                            onChange={changeDateTime} />
+                                            onChange={changeDateTime} /> */}
+                                        <ElogDateTime handleChange={(val) => {
+                                            setExpireDate(val);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -332,8 +375,8 @@ function Sell() {
                             method==='bid' &&
                             <div>
                                 <p className='listing-description'>Your item will be auctioned.
-                                The highest bidder will win it on {datetime}, as long as their bid is at least {reserved}</p>
-                                <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button>
+                                The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
+                                <button className='post-button' /*onClick={() => makeSellOrder()}*/>Post your listing</button>
                             </div>
                         }
                     </div>
