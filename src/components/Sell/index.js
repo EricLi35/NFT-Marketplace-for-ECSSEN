@@ -14,7 +14,6 @@ import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-import ProgressBar from "../Progress_bar";
 
 
 function Sell() {
@@ -29,10 +28,6 @@ function Sell() {
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
   
-    // progress bar info
-    const [progress, setProgress] = useState(0);
-    const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
-    const [transactionHash, setTransactionHash] = useState("");
     /**
      * Uses React effects perform one-time actions.
      *
@@ -110,7 +105,6 @@ function Sell() {
 
     async function makeSellOrder(){
 
-        setProgress(25);
         const seaport = await getOpenSeaPort()
      
         let urlParts = window.location.pathname.split('/');
@@ -122,23 +116,12 @@ function Sell() {
         let asset = {tokenId, tokenAddress};
         // if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
     
-        setProgress(50);
+        const listing = await seaport.createSellOrder({
+        asset,
+        accountAddress,
+        startAmount: getSalePrice()})
 
-        try{
-          const listing = await seaport.createSellOrder({
-          asset,
-          accountAddress,
-          startAmount: getSalePrice()})
-
-          setProgress(100);
-          console.log(listing);
-          document.getElementById("sellButton").innerHTML = "NFT listed for sale";
-          setProgressBg("var(--success-color)");
-        }catch(err){
-          setProgress(100);
-          setProgressBg("var(--failure-color)");
-          console.error(err);
-        }
+        document.getElementById("sellButton").innerHTML = "NFT listed for sale";
     }
 
     /*
@@ -313,18 +296,6 @@ function Sell() {
                                         (<p className='error-msg'>Invalid price.</p>) : 
                                         (<p className='listing-description'>Your item will be listed for {data}</p>)
                                 }
-                                <div className="TransactionDetails">
-                                {
-                                  progress > 0
-                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
-                                  : <></>
-                                }
-                                {
-                                  transactionHash !== ""
-                                  ? <p>Your transaction is: {transactionHash}</p>
-                                  : <p></p>
-                                }
-                                </div>
                                 <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button>
                             </div>
                         }
