@@ -60,6 +60,17 @@ function ElogDateTime({selected, handleChange}){
       );
 }
 
+function setPriceErrorMsg(){
+    return <p>Invalid start price.</p>
+}
+
+// function isValidInputSetPrice(input){
+//     if (input === null){
+//         return <setPriceErrorMsg />;
+//     }
+//     return <p>Your item will be listed for {data}</p>
+// }
+
 function Sell() {
 
     const API_URL = "https://rinkeby-api.opensea.io/api/v1";
@@ -120,10 +131,10 @@ function Sell() {
     }
 
     const[data, setData] = useState(null)
-    const[method, setMethod] = useState('bid')
+    const[method, setMethod] = useState('set')
     const[bid, setBid] = useState(null)
     const[reserved, setReserved] = useState(null)
-    const [expireDate, setExpireDate] = useState(null)
+    const[expireDate, setExpireDate] = useState(null)
     // const[selectedDate, setSelectedDate] = useState(null)
     // const[datetime, setDatetime] = useState('')
 
@@ -257,6 +268,7 @@ function Sell() {
                         }
                     </div>
                 </div>
+
                 {/* Summary part of the page */}
                 <div className='sellpage-top-summary'>
                     <h1 className='summary'>Summary</h1>
@@ -269,28 +281,26 @@ function Sell() {
 
                             <div>
                                 { 
-                                let sellDescription = ({data}===null) ?
-                                    "Invalid price." : 
-                                    "Your item will be listed for ${data}"
+                                // let sellDescription = ({data}===null) ?
+                                //     "Invalid price." : 
+                                //     "Your item will be listed for ${data}"
                                     
-                                    /* ({data}===null) ?
-                                        (<p className='error-msg'>Invalid price.</p>) : 
-                                        (<p className='listing-description'>Your item will be listed for {data}</p)> */
+                                //     /* ({data}===null) ?
+                                //         (<p className='error-msg'>Invalid price.</p>) : 
+                                //         (<p className='listing-description'>Your item will be listed for {data}</p)> */
                                 }
-
-                                <p className='listing-description'>{sellDescription}</p>
+                                <p className='listing-description'>Your item will be listed for {data}</p>
                                 <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button>
                             </div>
                         }
                         {
                             method==='bid' &&
                             <div>
-                                { 
+                                {/* { 
                                 let bidDescription = ({bid}===null) ?
                                     "Invalid price." : 
                                     "Your item will be listed for ${bid}"
-                                }
-
+                                } */}
                                 <p className='listing-description'>Your item will be auctioned.
                                 The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
                                 <button className='post-button' /*onClick={() => makeSellOrder()}*/>Post your listing</button>
