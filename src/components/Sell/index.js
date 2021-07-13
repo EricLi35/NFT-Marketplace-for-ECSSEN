@@ -221,7 +221,7 @@ function Sell() {
             paymentTokenAddress: getPaymentToken(),
             startAmount: getMinBid(),
             waitForHighestBid: true,
-            expirationTime: getExpirationTime(),
+            expirationTime: expireDate,
         });
     }
 
@@ -236,9 +236,9 @@ function Sell() {
         return Number(document.getElementById("salePrice").value);
     }
     
-    function getExpirationTime() {
+    /* function getExpirationTime() {
         return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
-    }
+    } */
     
     function getMinBid() {
         return Number(document.getElementById("min-bid").value);
@@ -376,7 +376,7 @@ function Sell() {
                             <div>
                                 <p className='listing-description'>Your item will be auctioned.
                                 The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
-                                <button className='post-button' /*onClick={() => makeSellOrder()}*/>Post your listing</button>
+                                <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button>
                             </div>
                         }
                     </div>
