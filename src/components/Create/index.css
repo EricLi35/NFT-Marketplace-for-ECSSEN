@@ -188,5 +188,6 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
   .CreateButton {
     margin-top: -50px;
     margin-bottom: 5vh;
+    cursor: pointer;
     /* outline: springgreen solid; */
   }

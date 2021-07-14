@@ -17,7 +17,7 @@ h2 {
     padding-bottom: 8rem;
     height: 95vh;
 
-    border: red solid;
+    /* border: red solid; */
 }
 
 .AssetContent {
@@ -140,7 +140,7 @@ h2 {
 }
 
 .sellButton {
-    border: yellow solid;
+    /* border: yellow solid; */
 }
 
 .buyButtonAsset {
@@ -148,18 +148,21 @@ h2 {
     padding: 4px;
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .donateButtonAsset {
     padding: 4px;
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
 }
 
 .sellButtonAsset {
     padding: 4px;
     font-weight: bold;
     font-size: 18px;
+    cursor: pointer;
 }
 
 /* experimental radio styles that won't be needed for the asset page, maybe the donate page 

@@ -61,6 +61,7 @@
     border: 1px solid blue;
     border-radius: 0.3rem;
     padding: 20px;
+    cursor: pointer;
 }
 
 .set-sell-price{
