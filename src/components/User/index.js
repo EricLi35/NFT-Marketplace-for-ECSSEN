@@ -115,7 +115,11 @@ const User = () => {
           </div>
         </div>
         <div className="UserAssetContainer">
-          <h2>Your Assets</h2>
+          <h2>{
+            myAccount
+            ? "Your Assets"
+            : "Their Assets"
+          }</h2>
           <a href="/Create">
             <button className="CreateButton">
               <Plus className="CreatePlus" />
