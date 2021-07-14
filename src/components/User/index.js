@@ -59,7 +59,9 @@ const User = () => {
    */
   async function fetchAssets(){
     let limit = 20;
-    let offset = userAssets.length;
+    let offset = limit * assetPage;
+
+    if(walletAddress === undefined || walletAddress.length === 0){return;}
 
     fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${walletAddress}`)
     .then((resp) => resp.json())
@@ -86,11 +88,14 @@ const User = () => {
   }
 
   async function updateAssets(assetList){
+    console.log(assetList);
+    let htmlList = []
+
     for(let index in assetList){
       let asset = assetList[index];
       let assetHTML = await renderAssetCard(asset);
-      userAssets.push(assetHTML);
-      setUserAssets(userAssets);
+
+      htmlList.push(assetHTML);
     }
     console.log(userAssets);
     ReactDOM.render(userAssets, document.querySelector(".UserAssets"));
