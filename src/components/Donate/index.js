@@ -7,6 +7,7 @@ import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, smartContract } from '../../constants';
 import { func } from "prop-types";
 
+import ProgressBar from "../Progress_bar";
 
 let charityAddrs = {
     "Charity 1 (Tony Address)": "0x11f408335E4B70459dF69390ab8948fcD51004D0",
@@ -25,6 +26,11 @@ const Donate = () => {
   const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
   const [tokenPrice, setTokenPrice] = useState(-1);
+
+  // progress bar info
+  const [progress, setProgress] = useState(0);
+  const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
+  const [transactionHash, setTransactionHash] = useState("");
 
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
@@ -67,49 +73,14 @@ const Donate = () => {
 
 
   function updateChosenCharity(evt){
-    setChosenCharity(evt.target.value);
+    console.log(evt.target);
+    setChosenCharity(evt.target.innerText);
     // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
   }
 
-/* NOT NEEDED ANYMORE
-
-function createCharityRadio(charityName) {
-      return(
-        <span className="charityRadio">
-        <div key={charityName}>
-          <span className="charityInput">
-            <input className="charityNameInput" type="radio" value={charityName} id={charityName}
-              name="chosenCharity" onChange={updateChosenCharity}/>
-            <span className="charityInputControl"></span>
-          </span> 
-          <label htmlFor={charityName} className="charityName">{charityName}</label>
-        </div>
-        </span>  
-      );
-  }
-
-
-function renderDonateToggle(){
-    const charities = Object.entries(charityAddrs);
-    
-    for (let charity in charities) {
-
-        charities.push(createCharityRadio(charity));
-
-    } 
-
-    return (
-        <div className="donateContainer">
-            <button className="button" onClick={() => makeTransfer()}>Donate</button>
-            <form className="charitySelection">
-              {charities}
-            </form>
-        </div>
-    );
-    } */
-
   async function makeTransfer(){
 
+    setProgress(25);
     const seaport = await getOpenSeaPort();
 
     let userInfo = JSON.parse(getCookie("uid"));
@@ -120,16 +91,35 @@ function renderDonateToggle(){
 
     let asset = {tokenId, tokenAddress};
     if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
+    setProgress(50)
 
-    const transactionHash = await seaport.transfer({
-        asset,
-        fromAddress, //your address (you must own the asset)
-        toAddress: charityAddrs[chosenCharity]
-    })
+    try{
+      const th = await seaport.transfer({
+          asset,
+          fromAddress, //your address (you must own the asset)
+          toAddress: charityAddrs[chosenCharity]
+      })
 
-    waitForTx(transactionHash); //wait until transaction is completed
-    document.getElementById("donateButton").innerHTML = "Donation Complete!";
+      setProgress(75);
 
+      let result = waitForTx(th); //wait until transaction is completed
+
+      setProgress(100);
+      setTransactionHash(th);
+
+      if(result === null){
+        setProgressBg("var(--failure-color)");
+        return;
+      }
+
+      setProgressBg("var(--success-color)");
+      // document.getElementById("donateButton").innerHTML = "Donation Complete!";
+    }catch(err){
+      setProgress(100);
+      setProgressBg("var(--failure-color)");
+      console.error(err);
+      return;
+    }
   }
 
   async function getOpenSeaPort(){
@@ -145,9 +135,21 @@ function renderDonateToggle(){
     const web3 = new Web3(new Web3.providers.HttpProvider('https://eth-rinkeby.alchemyapi.io/v2/TDvA5STwGZ7Uv_loxm5msg-tuujVCk4_')); //read-only provider
 
     var result = null;
-    while (result === null){ //blocking function that resolves after transaction is completed
-      result = web3.eth.getTransactionReceipt(tx_hash); 
-    }
+    // while (result === null){ //blocking function that resolves after transaction is completed
+    result = web3.eth.getTransactionReceipt(tx_hash); 
+    // }
+
+    result
+      .then((response) => {
+        console.log(response);
+        return response;
+      })
+      .catch((err) => {
+        console.error(err);
+        return null;
+      });
+
+    //return result;
   }
 
   function showDropdownContent() {
@@ -170,14 +172,14 @@ function renderDonateToggle(){
     }
   }
 
-var div = document.getElementsByClassName('dropdown-content_eric');
-for(var i=0 ; i < div.length ; i++){
-for(var j=0 ; j < div[i].children.length ; j++){
-div[i].children[j].addEventListener('click',function(){
-this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
-})
-}
-}
+  var div = document.getElementsByClassName('dropdown-content_eric');
+  for(var i=0 ; i < div.length ; i++){
+    for(var j=0 ; j < div[i].children.length ; j++){
+      div[i].children[j].addEventListener('click',function(){
+        this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
+      })
+    }
+  }
 
   return(
     <div className="wholeThing">
@@ -190,14 +192,17 @@ this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
     {/* <p>(Please click the charity twice for confirmation purposes) </p> */}
 
 
+    {/* this still needs work... 
+        i'm adding things to it for now, but again, this need to be reworked
+      */}
 <div className="dropdown_eric">
   <button className="allCharitiesButton" onClick={showDropdownContent}>All Charities</button>
   <div className="dropdown-content_eric" id="myDropdown">
-    <a href="#">{((Object.keys(charityAddrs))[0])}</a>
+    <a href="#" onClick={updateChosenCharity} value={Object.values(charityAddrs)[0]}>{((Object.keys(charityAddrs))[0])}</a>
     {/* <a href="#">{((Object.keys(charityAddrs))[1])}</a> */}
     <a href="#">long charity name long charity name </a>
     
-    <a href="#">{((Object.keys(charityAddrs))[2])}</a>
+    <a href="#" onClick={updateChosenCharity} value={Object.values(charityAddrs)[2]} >{((Object.keys(charityAddrs))[2])}</a>
   </div>
 </div>
 
@@ -222,8 +227,20 @@ this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
 </div>
 
 
+<div className="TransactionDetails">
+{
+  progress > 0
+  ? <ProgressBar completed={progress} bgcolor={progressBg} />
+  : <></>
+}
+{
+  transactionHash !== ""
+  ? <p>Your transaction is: {transactionHash}</p>
+  : <p></p>
+}
+</div>
 <div className="donateButtonDiv">
-<button className="donateButton">
+<button className="donateButton" onClick={() => makeTransfer()}>
         DONATE 
     </button>
 </div>
