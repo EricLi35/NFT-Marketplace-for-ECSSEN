@@ -205,7 +205,7 @@ function Sell() {
             paymentTokenAddress: getPaymentToken(),
             startAmount: getMinBid(),
             waitForHighestBid: true,
-            expirationTime: expireDate,
+            expirationTime: setExpirationTime(),
         });
     }
 
@@ -223,6 +223,11 @@ function Sell() {
     /* function getExpirationTime() {
         return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
     } */
+
+    function setExpirationTime() {
+        //console.log(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value);
+        return Number(Math.round(new Date(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value)/1000));
+    }
     
     function getMinBid() {
         return Number(document.getElementById("min-bid").value);
