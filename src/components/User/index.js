@@ -189,7 +189,7 @@ const User = () => {
     return(
       <div className="LoginError">
         <h1>You are not signed in at the moment</h1>
-        <h3>Please Sign-In <a href="/signin">here</a></h3>
+        <h3>Please Sign-In <Link to="/signin">here</Link></h3>
       </div>
     );
   }
