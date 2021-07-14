@@ -18,6 +18,12 @@
   --failure-color: #f9616e;
 }
 
+html {
+  background: var(--main-background-colour);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 .App {
   text-align: center;
   outline: purple transparent;
@@ -74,3 +80,4 @@
     text-align: left;
     height: 1rem;
 }
+

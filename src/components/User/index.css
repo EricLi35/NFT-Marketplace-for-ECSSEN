@@ -9,7 +9,7 @@
 .UserStyleContainer{
   height: 20vh;
   width: 100%;
-  background-color: var(--sidebar-active);
+  background-image: linear-gradient(340deg, #ff90d1 30%, #ff839d);
   background-position: center;
   background-size: cover;
 }
@@ -50,13 +50,24 @@
   box-shadow: 1rem 1rem 1rem -0.5rem var(--shadow-color);
 }
 
+.ProfilePicContainer img{
+  min-height: 6rem;
+  min-width: 6rem;
+  height: auto;
+  width: 20vmin;
+
+
+  margin: auto;
+  overflow: hidden;
+}
+
 .UserAssetContainer{
   margin: 0 20vmin;
   margin-top: 5rem;
   text-align: start;
 }
 
-.CreateButton{
+.UserCreateButton{
   display: flex;
   flex-direction: row;
   padding: 1rem 3rem;
@@ -67,14 +78,15 @@
   color: white;
   border: none;
   border-radius: 999rem;
+  cursor: pointer;
 }
 
-.CreatePlus{
+.UserCreatePlus{
   font-weight: bold;
   font-size: 1.5rem;
 }
 
-.CreateButton p{
+.UserCreateButton p{
   margin: auto;
 }
 

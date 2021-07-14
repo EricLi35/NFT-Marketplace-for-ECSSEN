@@ -92,21 +92,21 @@ const User = () => {
       <div className="UserInfoContainer">
         <div className="UserStyleContainer" 
           style={{
-            backgroundImage: `url(${"https://cdn.pixabay.com/photo/2015/04/05/16/12/lego-708088_960_720.jpg"})`,
+            backgroundImage: `url(${"https://64.media.tumblr.com/fa9e3596b53edece325c9e2a1181994d/tumblr_pul9fipFgY1wnjxxqo6_1280.png"})`,
           }}
         >
           <div className="ProfileInfo">
             <div className="ProfilePicContainer">
-              <img alt="" src={"https://randomuser.me/api/portraits/lego/1.jpg"} />
+              <img alt="" src={"https://images.rawpixel.com/image_png_1300/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvdjc5MC1udW5ueS01Mi5wbmc.png?s=ievT3yCXyRc_rXnYNPZw3EoVeSekrNN2d_0vy5gaF9Y"} />
             </div>
             <p>&nbsp;{walletAddress}</p>
           </div>
         </div>
         <div className="UserAssetContainer">
-          <h2>Your Assets</h2>
+          <div><h2>Your Assets</h2></div>
           <a href="/Create">
-            <button className="CreateButton">
-              <Plus className="CreatePlus" />
+            <button className="UserCreateButton">
+              <Plus className="UserCreatePlus" />
               <p>Mint a new Token </p>
             </button>
           </a>
