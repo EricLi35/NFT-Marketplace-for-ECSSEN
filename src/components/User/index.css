@@ -105,6 +105,10 @@
   font-weight: bold;
 }
 
+.pageSwitch:hover{
+  box-shadow: 0 0 1rem 0.75rem var(--shadow-color);
+}
+
 .pageSwitch:disabled{
   box-shadow: none;
   color: var(--shadow-color);
