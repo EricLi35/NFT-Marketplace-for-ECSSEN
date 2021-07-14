@@ -162,6 +162,7 @@ const User = () => {
               className="pageSwitch"
               id="prev"
               onClick={enablePrevious? () => switchPage(-1) : () => {}}
+              disabled={!enablePrevious}
               >
                 <ArrowLeftShort />
             </button>
@@ -169,6 +170,7 @@ const User = () => {
               className="pageSwitch"
               id="next"
               onClick={enableNext? () => switchPage(1) : () => {}}
+              disabled={!enableNext}
             >
               <ArrowRightShort />
             </button>
