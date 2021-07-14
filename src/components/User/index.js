@@ -99,8 +99,12 @@ const User = () => {
 
       htmlList.push(assetHTML);
     }
-    console.log(userAssets);
-    ReactDOM.render(userAssets, document.querySelector(".UserAssets"));
+    setUserAssets(htmlList);
+  }
+
+  function switchPage(increment){
+    setAssetPage(assetPage + increment);
+    fetchAssets();
   }
 
   function renderCreateLink(){
@@ -146,6 +150,8 @@ const User = () => {
           <div className="UserAssets">
             {userAssets}
           </div>
+          <a href="#" onClick={() => switchPage(1)}>Next</a>
+          <a href="#" onclick={() => switchPage(-1)}>Previous</a>
         </div>
       </div>
     );
