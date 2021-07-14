@@ -157,8 +157,8 @@ const User = () => {
           <div className="UserAssets">
             {userAssets}
           </div>
-          <a href="#" onClick={() => switchPage(1)}>Next</a>
-          <a href="#" onClick={() => switchPage(-1)}>Previous</a>
+          <button onClick={enableNext? () => switchPage(1) : () => {}}>Next</button>
+          <button onClick={enablePrevious? () => switchPage(-1) : () => {}}>Previous</button>
         </div>
       </div>
     );
