@@ -6,6 +6,7 @@
  */
 import React from "react";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import fetch from "node-fetch";
 
 import { OrderSide } from 'opensea-js/lib/types';
@@ -149,9 +150,9 @@ const Asset = () => {
 
     return(
       <span>
-        <a href={`/Sell/${collectionAddr}/${tokenID}`}>
+        <Link to={`/Sell/${collectionAddr}/${tokenID}`}>
           <button id="button" className="button">Sell</button>
-        </a>
+        </Link>
         
       {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
         <input type="text" id="salePrice" defaultValue={"0"} placeholder="sale price" />*/}
@@ -212,9 +213,9 @@ const Asset = () => {
 
     return(
       <div className="donateContainer">
-        <a href={`/Donate/${collectionAddr}/${tokenID}`}>
+        <Link to={`/Donate/${collectionAddr}/${tokenID}`}>
           <button id="button" className="button">Donate</button>
-        </a>
+        </Link>
       </div>
     );
   }
@@ -398,7 +399,7 @@ const Asset = () => {
         <div className="AssetContent">
           <h1 className="tokenName">{tokenName}</h1>
           <p className="tokenCollection"><i>{tokenCollection}</i></p>
-          <p className="tokenOwner">Owned by: <a href="#">{tokenOwnerId}</a></p>
+          <p className="tokenOwner">Owned by: <Link to={`/user/${tokenOwnerId}`}>{tokenOwnerId}</Link></p>
           <div className="tokenDescription">
             <p>{tokenDescription}</p>
           </div>
