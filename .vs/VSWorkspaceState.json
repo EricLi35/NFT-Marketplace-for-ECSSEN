@@ -3,7 +3,10 @@
     "",
     "\\src",
     "\\src\\components",
-    "\\src\\components\\Create"
+    "\\src\\components\\Asset",
+    "\\src\\components\\Create",
+    "\\src\\components\\Sell"
   ],
+  "SelectedNode": "\\src\\components\\Asset\\index.js",
   "PreviewInSolutionExplorer": false
 }

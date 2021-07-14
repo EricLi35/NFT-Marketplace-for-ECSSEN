@@ -138,7 +138,7 @@ const Asset = () => {
     return(
       <div>
         <input type="number" id="bidPrice" placeholder="BID HERE"/>
-        <button className="placeBidButton" id="bidButton" type="button" onClick={() => console.log("make bid")}>Place Bid</button>
+        <button className="placeBidButton" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
       </div>
     )
   }
@@ -247,7 +247,7 @@ const Asset = () => {
       document.getElementById("buyButton").innerHTML = "NFT purchased!";
 
       setProgress(100);
-      setTransactionHash(transactionHash);
+      setTransactionHash(th);
 
       if(result === null){
         setProgressBg("var(--failure-color)");
@@ -262,6 +262,47 @@ const Asset = () => {
       return;
     }
   }
+
+    async function makeBuyOffer() {
+        setProgress(33);
+        const seaport = await getOpenSeaPort()
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let urlParts = window.location.pathname.split('/');
+        //console.log(urlParts);
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        console.log(tokenAddress);
+        console.log(tokenId);
+
+        let asset = await seaport.api.getAsset({
+            tokenAddress, 
+            tokenId
+        })
+
+        setProgress(66)
+
+        try {
+            const offer = await seaport.createBuyOrder({
+                asset,
+                accountAddress,
+                startAmount: Number(document.getElementById("bidPrice").value)
+            })
+
+            setProgress(100);
+            document.getElementById("bidButton").innerHTML = "Offer has been placed!";
+
+            setProgressBg("var(--success-color)");
+
+        }catch (err) {
+        setProgress(100);
+        setProgressBg("var(--failure-color)");
+        console.error(err);
+        return;
+        }
+    }
 
   async function cancelOrder(){
 
@@ -282,14 +323,14 @@ const Asset = () => {
           });
 
       setProgress(50);
-      const transactionHash = await seaport.cancelOrder({order, accountAddress});
+      const th = await seaport.cancelOrder({order, accountAddress});
 
       setProgress(75);
-      let result = waitForTx(transactionHash); //wait until transaction is completed
+      let result = waitForTx(th); //wait until transaction is completed
       document.getElementById("cancelSellButton").innerHTML = "Sell Listing Cancelled";
 
       setProgress(100);
-      setTransactionHash(transactionHash);
+      setTransactionHash(th);
 
       if(result === null){
         setProgressBg("var(--failure-color)");
@@ -362,7 +403,7 @@ const Asset = () => {
        }
     }
 
-    console.log(saleType)
+    //console.log(saleType)
 
     if(saleType === 1){
       return(
