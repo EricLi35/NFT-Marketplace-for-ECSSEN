@@ -26,7 +26,6 @@ const User = () => {
 
   useEffect(() => {
     getUrlAddress();
-    fetchAssets(0);
   }, []);
 
   async function getUrlAddress(){
@@ -35,6 +34,7 @@ const User = () => {
       setWalletAddress(urlEnd[0]);
       setLoginStatus(true);
       setMyAccount(false);
+      fetchAssets(0, urlEnd[0]);
       return;
     }
 
@@ -53,19 +53,22 @@ const User = () => {
 
     setLoginStatus(true);
     setWalletAddress(userData.walletAddress);
+    fetchAssets(0, userData.walletAddress);
   }
 
   /**
    * Fetches Assets the user has associated to their wallet if they have any.
    * These assets will be stored in a state variable.
    */
-  async function fetchAssets(page){
+  function fetchAssets(page, wa){
+    wa = wa || walletAddress;
+    console.log(wa);
     let limit = 20;
     let offset = limit * page;
 
-    if(walletAddress === undefined || walletAddress.length === 0){return;}
+    if(wa === undefined || wa === 0){return;}
 
-    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${walletAddress}`)
+    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
     .then((resp) => resp.json())
     // .then((json) => console.log(json))
     .then((json) => updateAssets(json.assets))
