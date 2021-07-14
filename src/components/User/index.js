@@ -21,6 +21,8 @@ const User = () => {
   const [myAccount, setMyAccount] = useState(true);
   const [userAssets, setUserAssets] = useState(new Array(20));
   const [assetPage, setAssetPage] = useState(0);
+  const [enableNext, setEnableNext] = useState(true);
+  const [enablePrevious, setEnablePrevious] = useState(false);
 
   useEffect(() => {
     getUrlAddress();
@@ -70,6 +72,8 @@ const User = () => {
     // .then((json) => console.log(json))
     .then((json) => updateAssets(json.assets))
     .catch((err) => console.error(err.message));
+
+    setEnablePrevious(page > 0);
   }
 
   /**
@@ -100,6 +104,8 @@ const User = () => {
       htmlList.push(assetHTML);
     }
     setUserAssets(htmlList);
+
+    setEnableNext(htmlList.length === 20);
   }
 
   async function switchPage(increment){
