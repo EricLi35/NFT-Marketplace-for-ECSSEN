@@ -4,8 +4,7 @@ import Order from '../Order';
 import { OrderSide } from 'opensea-js/lib/types';
 import { connectWallet } from '../../../constants';
 import "./index.css";
-
-
+import {ArrowRightShort, ArrowLeftShort} from "react-bootstrap-icons";
 
 export default class Log extends React.Component {
   static propTypes = {
@@ -151,16 +150,16 @@ export default class Log extends React.Component {
       <nav>
         <ul className="pagination justify-content-center">
           <li className={"page-item " + (page === 1 ? "disabled" : "")}>
-            <a className="page-link" href="#Log"
+            <button className="page-link" href="#Log" className="pageSwitch"
               onClick={() => this.paginateTo(page - 1)} tabIndex="-1">
-              Previous
-            </a>
+              <ArrowLeftShort />
+            </button>
           </li>
           <li className={"page-item " + (noMorePages ? "disabled" : "")}>
-            <a className="page-link" href="#Log"
+            <button className="page-link" className="pageSwitch"
               onClick={() => this.paginateTo(page + 1)}>
-              Next
-            </a>
+              <ArrowRightShort />
+            </button>
           </li>
         </ul>
       </nav>
