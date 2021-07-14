@@ -1,3 +1,13 @@
+/* html, body {
+  height: 100%;
+  background: var(--main-background-colour);
+}
+body {
+  background-repeat: no-repeat;
+}
+FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
+
+
 .createThing {
   /* border: red solid; */
   padding-left: 80px;
@@ -17,6 +27,7 @@
   
 .file_descrip {
   /* border: 1px red solid; */
+
   margin-bottom: 20px;
   /* margin-top: 200px; */
 }
@@ -114,14 +125,12 @@
     max-height: 460px;
     /* background: #35297a; */
     display: flex;
-    /* border: solid;
-    border-color: darkgreen; */
+    /* border: solid darkgreen; */
   }
   
 
   .container {
     overflow: hidden;
-    margin: 10px 0px 0px 80px;
     width: 100%;
     max-width: 400px;
     /* max-height: 900px; */
@@ -129,8 +138,7 @@
     /* border: solid;
     border-color: red; */
     /* background: black; */
-
-    
+    margin-top: 5px;    
   }
   
   .errorMsg {
@@ -149,7 +157,7 @@
     text-align: center;
     color: #a3a3a3;
     border: dashed;
-
+    
     /* border: 2px blue solid; */
 
     /* background: transparent; */
@@ -176,3 +184,9 @@
     font-size: 17px;
   }
 
+
+  .CreateButton {
+    margin-top: -50px;
+    margin-bottom: 5vh;
+    /* outline: springgreen solid; */
+  }

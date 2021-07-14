@@ -6,16 +6,71 @@
  * @since 2021.06.30
  */
 
-import React, { Component } from 'react'
-import { useEffect, useState } from "react";
-import './Sell.css'
+import React, { Component } from 'react';
+import { useEffect, useState, useRef } from "react";
+import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 import ProgressBar from "../Progress_bar";
+function ElogDateTime({selected, handleChange}){
+    const [date, setDate] = useState(selected && selected.split(" ")[0]);
+    const [time, setTime] = useState(selected && selected.split(" ")[1]);
+    const dateRef = useRef(null);
+    const timeRef = useRef(null);
 
+    useEffect(() => {
+        if(!date || !time) return;
+    }, [date, time]);
+
+    function _handleChange(e) {
+        // onChange();
+        const value = e.target.value;
+        const elid = e.target.id;
+        let newStr;
+    
+        if ("elogdate" === elid) {
+          setDate(value);
+          newStr = new String("").concat(value||"0000-00-00", " ", time||"00:00");
+        } else if ("elogtime" === elid) {
+          setTime(value);
+          newStr = new String("").concat(date||"0000-00-00", " ", value||"00:00");
+        }
+        handleChange(newStr);
+    }
+    
+    return (
+        <>
+          <input
+            id="elogdate"
+            ref={dateRef}
+            value={date}
+            onChange={_handleChange}
+            type="date"
+          />
+          <input
+            id="elogtime"
+            ref={timeRef}
+            value={time}
+            onChange={_handleChange}
+            type="time"
+          />
+        </>
+      );
+}
+
+function setPriceErrorMsg(){
+    return <p>Invalid start price.</p>
+}
+
+// function isValidInputSetPrice(input){
+//     if (input === null){
+//         return <setPriceErrorMsg />;
+//     }
+//     return <p>Your item will be listed for {data}</p>
+// }
 
 function Sell() {
 
@@ -29,10 +84,6 @@ function Sell() {
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
   
-    // progress bar info
-    const [progress, setProgress] = useState(0);
-    const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
-    const [transactionHash, setTransactionHash] = useState("");
     /**
      * Uses React effects perform one-time actions.
      *
@@ -84,7 +135,10 @@ function Sell() {
     const[method, setMethod] = useState('set')
     const[bid, setBid] = useState(null)
     const[reserved, setReserved] = useState(null)
-    
+    const[expireDate, setExpireDate] = useState(null)
+    // const[selectedDate, setSelectedDate] = useState(null)
+    // const[datetime, setDatetime] = useState('')
+
     function changeData(val){
         setData(val.target.value);
     }
@@ -103,7 +157,6 @@ function Sell() {
 
     async function makeSellOrder(){
 
-        setProgress(25);
         const seaport = await getOpenSeaPort()
      
         let urlParts = window.location.pathname.split('/');
@@ -115,23 +168,56 @@ function Sell() {
         let asset = {tokenId, tokenAddress};
         // if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
     
-        setProgress(50);
+        const listing = await seaport.createSellOrder({
+        asset,
+        accountAddress,
+        startAmount: getSalePrice()})
 
-        try{
-          const listing = await seaport.createSellOrder({
-          asset,
-          accountAddress,
-          startAmount: getSalePrice()})
+        document.getElementById("sellButton").innerHTML = "NFT listed for sale";
+    }
 
-          setProgress(100);
-          console.log(listing);
-          document.getElementById("sellButton").innerHTML = "NFT listed for sale";
-          setProgressBg("var(--success-color)");
-        }catch(err){
-          setProgress(100);
-          setProgressBg("var(--failure-color)");
-          console.error(err);
-        }
+    /*
+     * This function would add dutch auction support.  
+    async function makeDescendingAuction() {
+        const seaport = await getOpenSeaPort()
+
+        let urlParts = window.location.pathname.split('/');
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let asset = { tokenId, tokenAddress };
+
+        const dutchAuctionSellOrder = await seaport.createSellOrder({
+            asset,
+            accountAddress,
+            startAmount: getSalePrice(),
+            endAmount: getEndPrice(),
+            expirationTime: getExpirationTime(),
+        });
+    }
+    */
+
+    async function makeAscendingAuction() {
+        const seaport = await getOpenSeaPort()
+
+        let urlParts = window.location.pathname.split('/');
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let asset = { tokenId, tokenAddress };
+
+        const EnglishAuctionSellOrder = await seaport.createSellOrder({
+            asset,
+            accountAddress,
+            paymentTokenAddress: getPaymentToken(),
+            startAmount: getMinBid(),
+            waitForHighestBid: true,
+            expirationTime: setExpirationTime(),
+        });
     }
 
     async function getOpenSeaPort(){
@@ -143,7 +229,41 @@ function Sell() {
 
     function getSalePrice(){
         return Number(document.getElementById("salePrice").value);
-    }    
+    }
+    
+    /* function getExpirationTime() {
+        return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
+    } */
+
+    function setExpirationTime() {
+        //console.log(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value);
+        return Number(Math.round(new Date(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value)/1000));
+    }
+    
+    function getMinBid() {
+        return Number(document.getElementById("min-bid").value);
+    }
+    /*
+     * This is required for dutch auctions, but not for English auctions.  
+    function getEndPrice() {
+        return Number(document.getElementById("endPrice").value);
+    }
+    */
+    function getPaymentToken() {
+        //Currently only returns weth's Address depending on whether the network is on mainnet or Rinkeby.  
+        //Modify this to take in the input payment token address when the input criteria becomes available and default to weth if none is entered.  
+        const wethAddress =
+            Network === "mainnet" || Network === "live"
+                ? "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                : "0xc778417e063141139fce010982780140aa0cd5ab";
+        return wethAddress;
+    }
+
+    // function changeDateTime(ev) {
+    //     if (!ev.target['validity'].valid) return;
+    //     const dt= ev.target['value'] + ':00';
+    //     setDatetime(dt);
+    // }
 
     return (
         <section className='sellPage'>
@@ -166,23 +286,23 @@ function Sell() {
                             <p>Auction to the highest bidder</p>
                         </button>
                     </div>
-                    <hr />
                     <div>
                         {
-                            method==='set' && 
+                            method==='set' &&   
                             <div className='set-sell-price'>
                                 <div className='set-sell-price-left'>
                                     <h3 className='price'>Price</h3>
                                     <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
                                 </div>
                                 <div className='set-sell-price-right'>
-                                    <input type="number" placeholder="Amount" id="salePrice" onChange={changeData} />
+                                    <input type="number" placeholder="Amount" id="salePrice" onChange={changeData}/>
                                 </div>
                             </div>
                         }
                         {
                             method==='bid' && 
                             <div className='auction'>
+                                <hr />
                                 <div className='minimum-bid'>
                                     <div className='set-minimum-bid-left'>
                                         <h3 className='minimum'>Minimum Bid</h3>
@@ -209,13 +329,19 @@ function Sell() {
                                         <p className='expiration-date-desciption'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                     </div>
                                     <div className='expiration-date-right'>
-                                        
+                                        {/* <input type="datetime-local" className="expiration-date-time"
+                                            value={(datetime || '').toString().substring(0, 16)}
+                                            onChange={changeDateTime} /> */}
+                                        <ElogDateTime className="calendar" handleChange={(val) => {
+                                            setExpireDate(val);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
                         }
                     </div>
                 </div>
+
                 {/* Summary part of the page */}
                 <div className='sellpage-top-summary'>
                     <h1 className='summary'>Summary</h1>
@@ -225,33 +351,32 @@ function Sell() {
             
                         {
                             method==='set' &&
+
                             <div>
-                                {
-                                    ({data}===null) ?
-                                        (<p className='error-msg'>Invalid price.</p>) : 
-                                        (<p className='listing-description'>Your item will be listed for {data}</p>)
+                                { 
+                                // let sellDescription = ({data}===null) ?
+                                //     "Invalid price." : 
+                                //     "Your item will be listed for ${data}"
+                                    
+                                //     /* ({data}===null) ?
+                                //         (<p className='error-msg'>Invalid price.</p>) : 
+                                //         (<p className='listing-description'>Your item will be listed for {data}</p)> */
                                 }
-                                <div className="TransactionDetails">
-                                {
-                                  progress > 0
-                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
-                                  : <></>
-                                }
-                                {
-                                  transactionHash !== ""
-                                  ? <p>Your transaction is: {transactionHash}</p>
-                                  : <p></p>
-                                }
-                                </div>
+                                <p className='listing-description'>Your item will be listed for {data}</p>
                                 <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button>
                             </div>
                         }
                         {
                             method==='bid' &&
                             <div>
+                                {/* { 
+                                let bidDescription = ({bid}===null) ?
+                                    "Invalid price." : 
+                                    "Your item will be listed for ${bid}"
+                                } */}
                                 <p className='listing-description'>Your item will be auctioned.
-                                The highest bidder will win it on a date, as long as their bid is at least {reserved}</p>
-                                <button className='post-button' /*onClick={() => makeSellOrder()}*/>Post your listing</button>
+                                The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
+                                <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button>
                             </div>
                         }
                     </div>

@@ -16,6 +16,8 @@ h2 {
     justify-content: center;
     padding-bottom: 8rem;
     height: 95vh;
+
+    border: red solid;
 }
 
 .AssetContent {
@@ -65,17 +67,34 @@ h2 {
     width: 100%;
 }
 
-.button {
+#bidPrice {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
+    padding: 3px;
+}
+
+#bidPrice::placeholder {
+    font-weight: 500;
+}
+
+
+.placeBidButton {
     background-image: var(--pink-gradient);
     background-color: var(--pink-gradient-start);
-    width: 4rem;
+    width: fit-content;
+    /* max-width: calc(fit-content); */
     height: auto;
     cursor: pointer;
     transition-duration: 0.2s;
 
+    margin-left: 10px;
+    padding: 3px 8px 3px 8px;
+    font-weight: bold;
+    font-size: 16px;
+    
 }
 
-.button:hover {
+.placeBidButton:hover {
     background-image: var(--pink-gradient-start);
     background-color: lightpink;
 }
@@ -110,6 +129,37 @@ h2 {
     grid-column: 2 / 3;
     grid-row: 3 / 4;
     justify-self: start;
+}
+
+.renderToggles {
+    /* border: greenyellow solid; */
+}
+
+.AssetButtonContainer {
+    /* border: blue solid; */
+}
+
+.sellButton {
+    border: yellow solid;
+}
+
+.buyButtonAsset {
+    /* border: yellow solid; */
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.donateButtonAsset {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sellButtonAsset {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
 }
 
 /* experimental radio styles that won't be needed for the asset page, maybe the donate page 

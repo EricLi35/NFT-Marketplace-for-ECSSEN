@@ -191,7 +191,7 @@ const Donate = () => {
 
     {/* {renderDonateToggle()} */}
     <h3 className="charitySelect">Select your Charity:</h3>
-    <p>(Please click the charity twice for confirmation purposes) </p>
+    {/* <p>(Please click the charity twice for confirmation purposes) </p> */}
 
 
     {/* this still needs work... 
@@ -209,24 +209,27 @@ const Donate = () => {
 </div>
 
 
+<div className="tyAndInfo">
 
+<div className="nftInfo">
+  <h3 className="nftName">NFT NAME HERE{tokenName}</h3>
+  <img className="nftImg" src={imgUrl}>
+  </img>
+</div>
 
 <div className="thankYou">
 <h3>
   Thank you for your kindness and generosity!
   </h3>
     <h4 className="thankYou_sub">Every donation counts, no matter how small!</h4>
-    <img className="generous" src="https://content.thriveglobal.com/wp-content/uploads/2020/02/be-generous-1.jpg?w=1550">
+    <img className="generous_pic" src="https://content.thriveglobal.com/wp-content/uploads/2020/02/be-generous-1.jpg?w=1550">
 </img>
 </div>
 
 
-
-<div className="nftInfo">
-  <h3 className="nftName">{tokenName}</h3>
-  <img className="nftImg" src={imgUrl}>
-  </img>
 </div>
+
+
 
 
 <div className="TransactionDetails">
