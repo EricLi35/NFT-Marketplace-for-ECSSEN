@@ -34,6 +34,7 @@ const Asset = () => {
   const [schemaName, setSchemaName] = useState("");
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
+  const [saleType, setSaleType] = useState(0);
 
   const [transactionBusy, setTransactionBusy] = useState(false);
 
@@ -95,6 +96,7 @@ const Asset = () => {
     setSchemaName(tokenData.asset_contract.schema_name);
     setTokenOwnerId(tokenData.top_ownerships[0].owner.address);
     setSaleState(currentlyOnSale(tokenData));
+    setSaleType(tokenData.orders[0].payment_token_contract.id); // 2 is a regular listing, 1 is an auction
 
     if(tokenData.orders.length > 0){
       setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
@@ -129,6 +131,16 @@ const Asset = () => {
     return(
       <button className="button" id="buyButton" type="button" onClick={() => makeBuyOrder()}>Buy</button>
     );
+  }
+
+  function renderBidToggle(){
+    // ensure that the bid is greater than the current highest bid?
+    return(
+      <div>
+        <input type="number" id="bidPrice" />
+            <button className="button" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
+      </div>
+    )
   }
 
   function renderSellToggle(){
@@ -207,29 +219,6 @@ const Asset = () => {
     );
   }
 
-/* MOVED TO SELL PAGE
-async function makeSellOrder(){
-
-    const seaport = await getOpenSeaPort()
- 
-    let urlParts = window.location.pathname.split('/');
-    const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
-
-    let userInfo = JSON.parse(getCookie("uid"));
-    const accountAddress = userInfo["walletAddress"];
-
-    let asset = {tokenId, tokenAddress};
-    if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
-
-    const listing = await seaport.createSellOrder({
-    asset,
-    accountAddress,
-    startAmount: getSalePrice()})
-
-    document.getElementById("sellButton").innerHTML = "NFT listed for sale";
-
-  } */
-
   async function makeBuyOrder(){
 
     setProgress(25);
@@ -258,7 +247,7 @@ async function makeSellOrder(){
       document.getElementById("buyButton").innerHTML = "NFT purchased!";
 
       setProgress(100);
-      setTransactionHash(transactionHash);
+      setTransactionHash(th);
 
       if(result === null){
         setProgressBg("var(--failure-color)");
@@ -273,6 +262,47 @@ async function makeSellOrder(){
       return;
     }
   }
+
+    async function makeBuyOffer() {
+        setProgress(33);
+        const seaport = await getOpenSeaPort()
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let urlParts = window.location.pathname.split('/');
+        //console.log(urlParts);
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        console.log(tokenAddress);
+        console.log(tokenId);
+
+        let asset = await seaport.api.getAsset({
+            tokenAddress, 
+            tokenId
+        })
+
+        setProgress(66)
+
+        try {
+            const offer = await seaport.createBuyOrder({
+                asset,
+                accountAddress,
+                startAmount: Number(document.getElementById("bidPrice").value)
+            })
+
+            setProgress(100);
+            document.getElementById("bidButton").innerHTML = "Offer has been placed!";
+
+            setProgressBg("var(--success-color)");
+
+        }catch (err) {
+        setProgress(100);
+        setProgressBg("var(--failure-color)");
+        console.error(err);
+        return;
+        }
+    }
 
   async function cancelOrder(){
 
@@ -293,14 +323,14 @@ async function makeSellOrder(){
           });
 
       setProgress(50);
-      const transactionHash = await seaport.cancelOrder({order, accountAddress});
+      const th = await seaport.cancelOrder({order, accountAddress});
 
       setProgress(75);
-      let result = waitForTx(transactionHash); //wait until transaction is completed
+      let result = waitForTx(th); //wait until transaction is completed
       document.getElementById("cancelSellButton").innerHTML = "Sell Listing Cancelled";
 
       setProgress(100);
-      setTransactionHash(transactionHash);
+      setTransactionHash(th);
 
       if(result === null){
         setProgressBg("var(--failure-color)");
@@ -315,31 +345,6 @@ async function makeSellOrder(){
       return;
     }
   }
-
-/* MOVED TO DONATE PAGE 
-async function makeTransfer(){
-
-    const seaport = await getOpenSeaPort();
-
-    let userInfo = JSON.parse(getCookie("uid"));
-    const fromAddress = userInfo["walletAddress"];
-
-    let urlParts = window.location.pathname.split('/');
-    const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
-
-    let asset = {tokenId, tokenAddress};
-    if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
-
-    const transactionHash = await seaport.transfer({
-      asset,
-      fromAddress, //your address (you must own the asset)
-      toAddress: charityAddrs[chosenCharity]
-    })
-
-    waitForTx(transactionHash); //wait until transaction is completed
-    document.getElementById("donateButton").innerHTML = "Donation Complete!";
-
-  } */
 
   async function getOpenSeaPort(){
     const provider = await detectEthereumProvider();
@@ -396,6 +401,16 @@ async function makeTransfer(){
             </div>
           );    
        }
+    }
+
+    //console.log(saleType)
+
+    if(saleType === 1){
+      return(
+        <div className="AssetButtonContainer">
+          {renderBidToggle()}
+        </div>
+      );
     }
 
     return (

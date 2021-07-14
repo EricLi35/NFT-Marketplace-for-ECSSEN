@@ -6,15 +6,60 @@
  * @since 2021.06.30
  */
 
-import React, { Component } from 'react'
-import { useEffect, useState } from "react";
-import './Sell.css'
+import React, { Component } from 'react';
+import { useEffect, useState, useRef } from "react";
+import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
+import ProgressBar from "../Progress_bar";
+function ElogDateTime({selected, handleChange}){
+    const [date, setDate] = useState(selected && selected.split(" ")[0]);
+    const [time, setTime] = useState(selected && selected.split(" ")[1]);
+    const dateRef = useRef(null);
+    const timeRef = useRef(null);
 
+    useEffect(() => {
+        if(!date || !time) return;
+    }, [date, time]);
+
+    function _handleChange(e) {
+        // onChange();
+        const value = e.target.value;
+        const elid = e.target.id;
+        let newStr;
+    
+        if ("elogdate" === elid) {
+          setDate(value);
+          newStr = new String("").concat(value||"0000-00-00", " ", time||"00:00");
+        } else if ("elogtime" === elid) {
+          setTime(value);
+          newStr = new String("").concat(date||"0000-00-00", " ", value||"00:00");
+        }
+        handleChange(newStr);
+    }
+    
+    return (
+        <>
+          <input
+            id="elogdate"
+            ref={dateRef}
+            value={date}
+            onChange={_handleChange}
+            type="date"
+          />
+          <input
+            id="elogtime"
+            ref={timeRef}
+            value={time}
+            onChange={_handleChange}
+            type="time"
+          />
+        </>
+      );
+}
 
 function Sell() {
 
@@ -76,10 +121,13 @@ function Sell() {
     }
 
     const[data, setData] = useState(null)
-    const[method, setMethod] = useState('set')
+    const[method, setMethod] = useState('bid')
     const[bid, setBid] = useState(null)
     const[reserved, setReserved] = useState(null)
-    
+    const [expireDate, setExpireDate] = useState(null)
+    // const[selectedDate, setSelectedDate] = useState(null)
+    // const[datetime, setDatetime] = useState('')
+
     function changeData(val){
         setData(val.target.value);
     }
@@ -117,6 +165,50 @@ function Sell() {
         document.getElementById("sellButton").innerHTML = "NFT listed for sale";
     }
 
+    /*
+     * This function would add dutch auction support.  
+    async function makeDescendingAuction() {
+        const seaport = await getOpenSeaPort()
+
+        let urlParts = window.location.pathname.split('/');
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let asset = { tokenId, tokenAddress };
+
+        const dutchAuctionSellOrder = await seaport.createSellOrder({
+            asset,
+            accountAddress,
+            startAmount: getSalePrice(),
+            endAmount: getEndPrice(),
+            expirationTime: getExpirationTime(),
+        });
+    }
+    */
+
+    async function makeAscendingAuction() {
+        const seaport = await getOpenSeaPort()
+
+        let urlParts = window.location.pathname.split('/');
+        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+
+        let userInfo = JSON.parse(getCookie("uid"));
+        const accountAddress = userInfo["walletAddress"];
+
+        let asset = { tokenId, tokenAddress };
+
+        const EnglishAuctionSellOrder = await seaport.createSellOrder({
+            asset,
+            accountAddress,
+            paymentTokenAddress: getPaymentToken(),
+            startAmount: getMinBid(),
+            waitForHighestBid: true,
+            expirationTime: setExpirationTime(),
+        });
+    }
+
     async function getOpenSeaPort(){
         const provider = await detectEthereumProvider();
         return new OpenSeaPort(provider, {
@@ -126,7 +218,41 @@ function Sell() {
 
     function getSalePrice(){
         return Number(document.getElementById("salePrice").value);
-    }    
+    }
+    
+    /* function getExpirationTime() {
+        return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
+    } */
+
+    function setExpirationTime() {
+        //console.log(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value);
+        return Number(Math.round(new Date(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value)/1000));
+    }
+    
+    function getMinBid() {
+        return Number(document.getElementById("min-bid").value);
+    }
+    /*
+     * This is required for dutch auctions, but not for English auctions.  
+    function getEndPrice() {
+        return Number(document.getElementById("endPrice").value);
+    }
+    */
+    function getPaymentToken() {
+        //Currently only returns weth's Address depending on whether the network is on mainnet or Rinkeby.  
+        //Modify this to take in the input payment token address when the input criteria becomes available and default to weth if none is entered.  
+        const wethAddress =
+            Network === "mainnet" || Network === "live"
+                ? "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+                : "0xc778417e063141139fce010982780140aa0cd5ab";
+        return wethAddress;
+    }
+
+    // function changeDateTime(ev) {
+    //     if (!ev.target['validity'].valid) return;
+    //     const dt= ev.target['value'] + ':00';
+    //     setDatetime(dt);
+    // }
 
     return (
         <section className='sellPage'>
@@ -192,7 +318,12 @@ function Sell() {
                                         <p className='expiration-date-desciption'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                     </div>
                                     <div className='expiration-date-right'>
-                                        
+                                        {/* <input type="datetime-local" className="expiration-date-time"
+                                            value={(datetime || '').toString().substring(0, 16)}
+                                            onChange={changeDateTime} /> */}
+                                        <ElogDateTime handleChange={(val) => {
+                                            setExpireDate(val);
+                                        }} />
                                     </div>
                                 </div>
                             </div>
@@ -221,8 +352,8 @@ function Sell() {
                             method==='bid' &&
                             <div>
                                 <p className='listing-description'>Your item will be auctioned.
-                                The highest bidder will win it on a date, as long as their bid is at least {reserved}</p>
-                                <button className='post-button' /*onClick={() => makeSellOrder()}*/>Post your listing</button>
+                                The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
+                                <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button>
                             </div>
                         }
                     </div>

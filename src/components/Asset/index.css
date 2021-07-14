@@ -61,6 +61,10 @@ h2 {
     gap: 1rem;
 }
 
+.AssetButtonContainer ProgressBar{
+    width: 100%;
+}
+
 .button {
     background-image: var(--pink-gradient);
     background-color: var(--pink-gradient-start);
