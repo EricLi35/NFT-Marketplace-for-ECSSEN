@@ -60,9 +60,9 @@ const Asset = () => {
    * - Adds a load event listener to fetch the details of the connected NFT
    */
   useEffect(() => {
-    window.addEventListener("load", getDetails);
+    getDetails();
     addSmartContractListener();
-  });
+  }, []);
 
   /**
    * Gets the details of the connected NFT, found within the url.
