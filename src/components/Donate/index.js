@@ -43,9 +43,9 @@ const Donate = () => {
   }
 
   useEffect(() => {
-    window.addEventListener("load", getDetails);
+    getDetails();
     addSmartContractListener();
-  });
+  }, []);
 
   async function getDetails(){
     let urlParts = window.location.pathname.split('/');
