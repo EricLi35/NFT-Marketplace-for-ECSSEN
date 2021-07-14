@@ -1,3 +1,13 @@
+/* html, body {
+  height: 100%;
+  background: var(--main-background-colour);
+}
+body {
+  background-repeat: no-repeat;
+}
+FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
+
+
 .createThing {
   /* border: red solid; */
   padding-left: 80px;

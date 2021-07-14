@@ -129,7 +129,7 @@ const Asset = () => {
 
   function renderBuyToggle(){
     return(
-      <button className="buyButton" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
+      <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
         Buy
         </button>
     );

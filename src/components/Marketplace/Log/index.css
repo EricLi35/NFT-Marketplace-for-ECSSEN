@@ -5,12 +5,10 @@
 }
 
 .py-3 {
-    /* border: solid; */
-    /* border-color: red; */
-    /* border-width: 1.5px; */
-    
+    border: purple solid;
     /* background-color: green; */
-    
+    min-height: 75vh;
+    /* height: max-content; */
 }
 
 
@@ -27,12 +25,16 @@
     /* border-width: 1.5px; */
 }
 
-.row button {
+.btn-group_ml-4 button {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
     padding: 5px;
     cursor: pointer;
+    font-weight: bold;
 }
+
+
+
 
 .btn-group_ml-4 {
     display: flex;
@@ -40,3 +42,4 @@
     justify-content: center;
     column-gap: 0.5rem;
 }
+
