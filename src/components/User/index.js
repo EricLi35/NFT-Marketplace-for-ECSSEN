@@ -159,17 +159,17 @@ const User = () => {
           </div>
           <button
             className="pageSwitch"
-            id="next"
-            onClick={enableNext? () => switchPage(1) : () => {}}
-          >
-            <ArrowRightShort />
-          </button>
-          <button
-            className="pageSwitch"
             id="prev"
             onClick={enablePrevious? () => switchPage(-1) : () => {}}
             >
               <ArrowLeftShort />
+          </button>
+          <button
+            className="pageSwitch"
+            id="next"
+            onClick={enableNext? () => switchPage(1) : () => {}}
+          >
+            <ArrowRightShort />
           </button>
         </div>
       </div>
