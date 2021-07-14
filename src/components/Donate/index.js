@@ -4,7 +4,8 @@ import "./index.css";
 
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, smartContract } from '../../constants';
+// import { getCookie, smartContract } from '../../constants';
+import { getCookie } from "../../constants";
 import { func } from "prop-types";
 
 import ProgressBar from "../Progress_bar";
@@ -32,6 +33,7 @@ const Donate = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
+  /*
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
       if(err){
@@ -40,11 +42,11 @@ const Donate = () => {
       } 
       console.log(data);
     })
-  }
+  }//*/
 
   useEffect(() => {
     getDetails();
-    addSmartContractListener();
+    // addSmartContractListener();
   }, []);
 
   async function getDetails(){

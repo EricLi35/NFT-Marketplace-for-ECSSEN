@@ -13,7 +13,8 @@ import { OrderSide } from 'opensea-js/lib/types';
 import "./index.css"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, smartContract } from '../../constants';
+// import { getCookie, smartContract } from '../../constants';
+import { getCookie } from "../../constants";
 import ProgressBar from "../Progress_bar";
 
 var charityAddrs = {
@@ -44,6 +45,7 @@ const Asset = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
+  /*
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
       if(err){
@@ -53,7 +55,7 @@ const Asset = () => {
 
       console.log(data);
     })
-  }
+  }//*/
 
   /**
    * Uses React effects perform one-time actions.
@@ -62,7 +64,7 @@ const Asset = () => {
    */
   useEffect(() => {
     getDetails();
-    addSmartContractListener();
+    // addSmartContractListener();
   }, []);
 
   /**
