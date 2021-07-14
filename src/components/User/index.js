@@ -18,6 +18,7 @@ const User = () => {
 
   const [walletAddress, setWalletAddress] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
+  const [myAccount, setMyAccount] = useState(true);
   const [userAssets, setUserAssets] = useState([]);
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const User = () => {
     if(urlEnd !== "user"){
       setWalletAddress(urlEnd[0]);
       setLoginStatus(true);
+      setMyAccount(false);
       return;
     }
 
