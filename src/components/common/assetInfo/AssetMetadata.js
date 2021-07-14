@@ -1,5 +1,6 @@
 import React from 'react'
 import "./AssetMetadata.css";
+import {Link} from "react-router-dom";
 
 export default class AssetMetadata extends React.Component {
   
@@ -41,20 +42,20 @@ export default class AssetMetadata extends React.Component {
       <div className="frag">
         <div className="card-container">
           <div className="img-container">
-            <a rel="noopener noreferrer" className="image-link text-center d-inline-block m-100" href={`/asset/${assetAddr}/${assetId}`}>
+            <Link rel="noopener noreferrer" className="image-link text-center d-inline-block m-100" to={`/asset/${assetAddr}/${assetId}`}>
               <img
                 alt="Asset artwork"
                 onLoad={this.scalePhoto}
                 src={assetImage} />
-            </a>
+            </Link>
           </div>
             
           <div className="card-body h-25">
             <div className="card-text text-truncate">
-              <a rel="noopener noreferrer" href={`/asset/${assetAddr}/${assetId}`} className="card-link">
+              <Link rel="noopener noreferrer" to={`/asset/${assetAddr}/${assetId}`} className="card-link">
                 <h4>{asset.name}</h4>
                 <h5><i>{assetContractName}</i></h5>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

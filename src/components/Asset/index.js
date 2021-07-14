@@ -6,13 +6,15 @@
  */
 import React from "react";
 import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 import fetch from "node-fetch";
 
 import { OrderSide } from 'opensea-js/lib/types';
 import "./index.css"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, smartContract } from '../../constants';
+// import { getCookie, smartContract } from '../../constants';
+import { getCookie } from "../../constants";
 import ProgressBar from "../Progress_bar";
 
 var charityAddrs = {
@@ -43,6 +45,7 @@ const Asset = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
+  /*
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
       if(err){
@@ -52,7 +55,7 @@ const Asset = () => {
 
       console.log(data);
     })
-  }
+  }//*/
 
   /**
    * Uses React effects perform one-time actions.
@@ -60,9 +63,9 @@ const Asset = () => {
    * - Adds a load event listener to fetch the details of the connected NFT
    */
   useEffect(() => {
-    window.addEventListener("load", getDetails);
-    addSmartContractListener();
-  });
+    getDetails();
+    // addSmartContractListener();
+  }, []);
 
   /**
    * Gets the details of the connected NFT, found within the url.
@@ -151,11 +154,11 @@ const Asset = () => {
 
     return(
       <span>
-        <a href={`/Sell/${collectionAddr}/${tokenID}`}>
+        <Link to={`/Sell/${collectionAddr}/${tokenID}`}>
           <button id="button" className="sellButtonAsset">
             Sell
-            </button>
-        </a>
+          </button>
+        </Link>
         
       {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
         <input type="text" id="salePrice" defaultValue={"0"} placeholder="sale price" />*/}
@@ -216,11 +219,11 @@ const Asset = () => {
 
     return(
       <div className="donateContainer">
-        <a href={`/Donate/${collectionAddr}/${tokenID}`}>
+        <Link to={`/Donate/${collectionAddr}/${tokenID}`}>
           <button id="button" className="donateButtonAsset">
             Donate
-            </button>
-        </a>
+          </button>
+        </Link>
       </div>
     );
   }
@@ -445,7 +448,7 @@ const Asset = () => {
         <div className="AssetContent">
           <h1 className="tokenName">{tokenName}</h1>
           <p className="tokenCollection"><i>{tokenCollection}</i></p>
-          <p className="tokenOwner">Owned by: <a href="#">{tokenOwnerId}</a></p>
+          <p className="tokenOwner">Owned by: <Link to={`/user/${tokenOwnerId}`}>{tokenOwnerId}</Link></p>
           <div className="tokenDescription">
             <p>{tokenDescription}</p>
           </div>
