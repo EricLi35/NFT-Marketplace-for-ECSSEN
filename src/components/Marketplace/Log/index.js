@@ -148,20 +148,20 @@ export default class Log extends React.Component {
     const noMorePages = page*ordersPerPage >= total
     return (
       <nav>
-        <ul className="pagination justify-content-center">
-          <li className={"page-item " + (page === 1 ? "disabled" : "")}>
-            <button className="page-link" href="#Log" className="pageSwitch"
-              onClick={() => this.paginateTo(page - 1)} tabIndex="-1">
-              <ArrowLeftShort />
-            </button>
-          </li>
-          <li className={"page-item " + (noMorePages ? "disabled" : "")}>
-            <button className="page-link" className="pageSwitch"
-              onClick={() => this.paginateTo(page + 1)}>
-              <ArrowRightShort />
-            </button>
-          </li>
-        </ul>
+        <div className="pagination pageButtons">
+          <button className="page-link" href="#Log" className="pageSwitch"
+            onClick={() => this.paginateTo(page - 1)} tabIndex="-1"
+            disabled={page===1}
+          >
+            <ArrowLeftShort />
+          </button>
+          <button className="page-link" className="pageSwitch"
+            onClick={() => this.paginateTo(page + 1)}
+            disabled={noMorePages}
+          >
+            <ArrowRightShort />
+          </button>
+        </div>
       </nav>
     )
   }
