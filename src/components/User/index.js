@@ -26,10 +26,8 @@ const User = () => {
 
   useEffect(() => {
     getUrlAddress();
-    window.addEventListener("load", () => {
-      fetchAssets(0);
-    });
-  });
+    fetchAssets(0);
+  }, []);
 
   async function getUrlAddress(){
     let urlEnd = window.location.pathname.split('/').slice(-1);
