@@ -6,6 +6,7 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
+import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import "./index.css";
 import {getCookie} from "../../constants";
@@ -117,12 +118,12 @@ const User = () => {
 
   function renderCreateLink(){
     return(
-      <a href="/Create">
+      <Link to="/Create">
         <button className="CreateButton">
           <Plus className="CreatePlus" />
           <p>Mint a new Token </p>
         </button>
-      </a>
+      </Link>
     )
   }
 
