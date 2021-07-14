@@ -286,7 +286,6 @@ function Sell() {
                             <p>Auction to the highest bidder</p>
                         </button>
                     </div>
-                    <hr />
                     <div>
                         {
                             method==='set' &&   
@@ -303,6 +302,7 @@ function Sell() {
                         {
                             method==='bid' && 
                             <div className='auction'>
+                                <hr />
                                 <div className='minimum-bid'>
                                     <div className='set-minimum-bid-left'>
                                         <h3 className='minimum'>Minimum Bid</h3>

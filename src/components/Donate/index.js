@@ -189,7 +189,7 @@ const Donate = () => {
 
     {/* {renderDonateToggle()} */}
     <h3 className="charitySelect">Select your Charity:</h3>
-    <p>(Please click the charity twice for confirmation purposes) </p>
+    {/* <p>(Please click the charity twice for confirmation purposes) </p> */}
 
 
     {/* this still needs work... 

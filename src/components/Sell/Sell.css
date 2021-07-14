@@ -161,3 +161,59 @@ input {
     flex-direction: column;
     align-items: flex-start;
 }
+
+#salePrice {
+    /* border: red solid; */
+    padding: 3px;
+    width: 130px;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
+}
+
+
+/* Bidding stuff begins here */
+.auction p{
+    /* outline: red solid; */
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.minimum-bid {
+    margin-top: 10px;
+    margin-bottom: 13px;
+    /* border: 1px blue solid; */
+}
+
+.minimum-bid-description{
+    /* border: 1px green solid; */
+}
+
+.set-minimum-bid-right {
+    /* border: 1px orange solid; */
+}
+
+#min-bid {
+    /* border: 3px purple solid; */
+    padding: 2px;
+    width: 150px;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
+}
+
+.reserve-price {
+    margin-top: 10px;
+    margin-bottom: 13px;
+}
+
+.expiration-date {
+    margin-top: 10px;
+    /* margin-bottom: 13px; */
+}
+
+#reserve-p {
+    padding: 2px;
+    width: 150px;
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
+
+}
