@@ -25,7 +25,7 @@ const User = () => {
   useEffect(() => {
     getUrlAddress();
     window.addEventListener("load", () => {
-      fetchAssets();
+      fetchAssets(0);
     });
   });
 
@@ -59,9 +59,9 @@ const User = () => {
    * Fetches Assets the user has associated to their wallet if they have any.
    * These assets will be stored in a state variable.
    */
-  async function fetchAssets(){
+  async function fetchAssets(page){
     let limit = 20;
-    let offset = limit * assetPage;
+    let offset = limit * page;
 
     if(walletAddress === undefined || walletAddress.length === 0){return;}
 
@@ -102,9 +102,10 @@ const User = () => {
     setUserAssets(htmlList);
   }
 
-  function switchPage(increment){
-    setAssetPage(assetPage + increment);
-    fetchAssets();
+  async function switchPage(increment){
+    if(increment + assetPage < 0){return;}
+    await setAssetPage(assetPage + increment);
+    fetchAssets(assetPage + increment);
   }
 
   function renderCreateLink(){
@@ -151,7 +152,7 @@ const User = () => {
             {userAssets}
           </div>
           <a href="#" onClick={() => switchPage(1)}>Next</a>
-          <a href="#" onclick={() => switchPage(-1)}>Previous</a>
+          <a href="#" onClick={() => switchPage(-1)}>Previous</a>
         </div>
       </div>
     );
