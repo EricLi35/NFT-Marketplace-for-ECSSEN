@@ -96,6 +96,17 @@ const User = () => {
     ReactDOM.render(userAssets, document.querySelector(".UserAssets"));
   }
 
+  function renderCreateLink(){
+    return(
+      <a href="/Create">
+        <button className="CreateButton">
+          <Plus className="CreatePlus" />
+          <p>Mint a new Token </p>
+        </button>
+      </a>
+    )
+  }
+
   /**
    * Displays everything about the user, if they are signed in at the moment
    */
@@ -120,12 +131,11 @@ const User = () => {
             ? "Your Assets"
             : "Their Assets"
           }</h2>
-          <a href="/Create">
-            <button className="CreateButton">
-              <Plus className="CreatePlus" />
-              <p>Mint a new Token </p>
-            </button>
-          </a>
+          {
+            myAccount
+            ? renderCreateLink()
+            : <></>
+          }
           <div className="UserAssets">
             {userAssets}
           </div>
