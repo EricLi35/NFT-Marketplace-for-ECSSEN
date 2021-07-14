@@ -86,3 +86,10 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem;
 }
+
+.pageButtons{
+  display: flex;
+  gap: 5rem;
+  margin: 1rem auto;
+  justify-content: center;
+}

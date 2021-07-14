@@ -157,20 +157,22 @@ const User = () => {
           <div className="UserAssets">
             {userAssets}
           </div>
-          <button
-            className="pageSwitch"
-            id="prev"
-            onClick={enablePrevious? () => switchPage(-1) : () => {}}
+          <div className="pageButtons">
+            <button
+              className="pageSwitch"
+              id="prev"
+              onClick={enablePrevious? () => switchPage(-1) : () => {}}
+              >
+                <ArrowLeftShort />
+            </button>
+            <button
+              className="pageSwitch"
+              id="next"
+              onClick={enableNext? () => switchPage(1) : () => {}}
             >
-              <ArrowLeftShort />
-          </button>
-          <button
-            className="pageSwitch"
-            id="next"
-            onClick={enableNext? () => switchPage(1) : () => {}}
-          >
-            <ArrowRightShort />
-          </button>
+              <ArrowRightShort />
+            </button>
+          </div>
         </div>
       </div>
     );
