@@ -11,7 +11,7 @@ import "./index.css";
 import {getCookie} from "../../constants";
 import fetch from "node-fetch"
 import AssetMetadata from "../common/assetInfo/AssetMetadata.js";
-import {Plus} from "react-bootstrap-icons";
+import {Plus, ArrowRightShort, ArrowLeftShort} from "react-bootstrap-icons";
 
 const User = () => {
   const API_URL = "https://rinkeby-api.opensea.io/api/v1";
@@ -157,8 +157,8 @@ const User = () => {
           <div className="UserAssets">
             {userAssets}
           </div>
-          <button onClick={enableNext? () => switchPage(1) : () => {}}>Next</button>
-          <button onClick={enablePrevious? () => switchPage(-1) : () => {}}>Previous</button>
+          <button onClick={enableNext? () => switchPage(1) : () => {}}><ArrowRightShort /></button>
+          <button onClick={enablePrevious? () => switchPage(-1) : () => {}}><ArrowLeftShort /></button>
         </div>
       </div>
     );
