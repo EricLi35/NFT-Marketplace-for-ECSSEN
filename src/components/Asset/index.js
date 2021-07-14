@@ -129,7 +129,9 @@ const Asset = () => {
 
   function renderBuyToggle(){
     return(
-      <button className="button" id="buyButton" type="button" onClick={() => makeBuyOrder()}>Buy</button>
+      <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
+        Buy
+        </button>
     );
   }
 
@@ -150,7 +152,9 @@ const Asset = () => {
     return(
       <span>
         <a href={`/Sell/${collectionAddr}/${tokenID}`}>
-          <button id="button" className="button">Sell</button>
+          <button id="button" className="sellButtonAsset">
+            Sell
+            </button>
         </a>
         
       {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
@@ -213,7 +217,9 @@ const Asset = () => {
     return(
       <div className="donateContainer">
         <a href={`/Donate/${collectionAddr}/${tokenID}`}>
-          <button id="button" className="button">Donate</button>
+          <button id="button" className="donateButtonAsset">
+            Donate
+            </button>
         </a>
       </div>
     );
@@ -450,7 +456,9 @@ const Asset = () => {
               : <h2>Ξ {tokenPrice.toFixed(3)}</h2>
             }
           </div>
-          <span className="renderToggles">{renderToggles()}</span>
+          <span className="renderToggles">
+            {renderToggles()}
+            </span>
         </div>
     </div>
   );

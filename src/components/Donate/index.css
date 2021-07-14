@@ -4,12 +4,12 @@
 
 .wholeThing {
   border: blue transparent;
-  height: 80vh;
   max-height: 100vh;
   /* padding-bottom: 22.5vh; */
   position: relative;
   margin-top: 17px;
-  height: 95vh;
+  height: 77vh;
+  /* border: purple solid; */
 }
 
 .charitySelect {
@@ -19,8 +19,10 @@
 
 
 .allCharitiesButton {
-    background-color: #3498DB;
-    color: white;
+    /* background-color: #3498DB; */
+    /* color: white; */
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
     padding: 14px;
     font-size: 16px;
     /* border: none; */
@@ -36,7 +38,7 @@
     margin-top: 12px;
     position: relative;
     display: inline-block;
-    /* border: orange solid; */
+    outline: orange solid;
     /* margin-bottom: 300px; */
   }
   
@@ -90,7 +92,8 @@
   .donateButtonDiv {
       /* display: block; */
       /* margin: auto; */
-      /* border: lightgreen double; */
+      border: lightgreen double;
+      margin-top: 4vh;
       /* position: fixed; */
       
       /* width: max-content; */
@@ -102,16 +105,19 @@
       /* margin-left: 50vw; */
 
       /* padding-top: 25%; */
+
     }
 
   .donateButton {
-      background-color: #3498DB;
-      color: white;
+      /* background-color: #3498DB; */
+      /* color: white; */
+      background: rgba(0, 0, 0, 0.03);
+      border-color: rgba(0, 0, 0, 0.175);
       padding: 10px;
       font-size: 13px;
       cursor: pointer;
 
-      margin-top: 10%;
+      /* margin-top: 10%; */
       
       /* outline: springgreen solid; */
 
@@ -125,12 +131,19 @@
       /* bottom: 50px;  */
     }
   
-  
+  .tyAndInfo {
+    margin-top: 50px;
+    outline: 2px red solid;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 3vh;
+  }
+
   .nftInfo {
-    margin-top: 4px;
-    /* outline: 2px turquoise solid; */
-    margin-left: 4vw;
-    max-width: max-content;
+    /* margin-top: 4px; */
+    outline: 2px turquoise solid;
+    /* margin-left: 4vw; */
+    /* max-width: max-content; */
   }
   
   .nftName {
@@ -139,8 +152,8 @@
   }
   
   .nftImg {
-    width: 15vw;
-    height: 24vh;
+    width: 21.6vw;
+    height: 34.56vh;
     /* float: left; */
     margin-top: 3px;
     border: 3px black solid;
@@ -150,21 +163,22 @@
   }
   
   .thankYou {
-    /* outline: 2px hotpink solid; */
+    margin-left: 5rem;
+    outline: 2px hotpink solid;
     /* margin-bottom: 16px; */
     /* width: max-content; */
-    position: absolute;
-    right: 3.5vw;
+    /* position: absolute; */
+    /* right: 3.5vw; */
   }
   
   .thankYou_sub {
     margin-top: 4px;
   }
 
-  .generous {
+  .generous_pic {
     margin-top: 6px;
-    width: 16.5vw;
-    height: 11vw;
+    width: 19.8vw;
+    height: 13.2vw;
     outline: 3px black solid;
     padding: 2.5px;
   }

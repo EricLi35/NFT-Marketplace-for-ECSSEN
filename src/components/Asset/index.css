@@ -131,6 +131,37 @@ h2 {
     justify-self: start;
 }
 
+.renderToggles {
+    /* border: greenyellow solid; */
+}
+
+.AssetButtonContainer {
+    /* border: blue solid; */
+}
+
+.sellButton {
+    border: yellow solid;
+}
+
+.buyButtonAsset {
+    /* border: yellow solid; */
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.donateButtonAsset {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.sellButtonAsset {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 /* experimental radio styles that won't be needed for the asset page, maybe the donate page 
 
 .charityRadio {

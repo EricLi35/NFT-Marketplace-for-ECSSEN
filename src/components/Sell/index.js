@@ -332,7 +332,7 @@ function Sell() {
                                         {/* <input type="datetime-local" className="expiration-date-time"
                                             value={(datetime || '').toString().substring(0, 16)}
                                             onChange={changeDateTime} /> */}
-                                        <ElogDateTime handleChange={(val) => {
+                                        <ElogDateTime className="calendar" handleChange={(val) => {
                                             setExpireDate(val);
                                         }} />
                                     </div>
