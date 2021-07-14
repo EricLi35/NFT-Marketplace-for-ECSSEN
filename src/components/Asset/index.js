@@ -322,6 +322,8 @@ const Asset = () => {
         token_id,
           });
 
+        console.log(order);
+
       setProgress(50);
       const th = await seaport.cancelOrder({order, accountAddress});
 

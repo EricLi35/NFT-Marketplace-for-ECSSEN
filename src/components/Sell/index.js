@@ -172,8 +172,6 @@ function Sell() {
         asset,
         accountAddress,
         startAmount: getSalePrice()})
-
-        document.getElementById("sellButton").innerHTML = "NFT listed for sale";
     }
 
     /*
