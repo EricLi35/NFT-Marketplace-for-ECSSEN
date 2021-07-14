@@ -21,6 +21,19 @@ const User = () => {
   const [userAssets, setUserAssets] = useState([]);
 
   useEffect(() => {
+    window.addEventListener("load", () => getUrlAddress());
+    if(walletAddress.length === 0) return;
+    fetchAssets();
+  });
+
+  async function getUrlAddress(){
+    let urlEnd = window.location.pathname.split('/').slice(-1);
+    if(urlEnd !== "user"){
+      setWalletAddress(urlEnd[0]);
+      setLoginStatus(true);
+      return;
+    }
+
     let userCookie = getCookie("uid");
 
     if(userCookie === undefined){
@@ -36,10 +49,7 @@ const User = () => {
 
     setLoginStatus(true);
     setWalletAddress(userData.walletAddress);
-
-    if(walletAddress.length === 0) return;
-    fetchAssets();
-  });
+  }
 
   /**
    * Fetches Assets the user has associated to their wallet if they have any.
