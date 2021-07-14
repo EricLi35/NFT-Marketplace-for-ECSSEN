@@ -29,7 +29,7 @@ const User = () => {
 
   async function getUrlAddress(){
     let urlEnd = window.location.pathname.split('/').slice(-1);
-    if(urlEnd !== "user"){
+    if(urlEnd[0] !== "user"){
       setWalletAddress(urlEnd[0]);
       setLoginStatus(true);
       setMyAccount(false);
