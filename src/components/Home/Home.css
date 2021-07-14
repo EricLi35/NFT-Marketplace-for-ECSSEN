@@ -90,15 +90,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
 .homepage-bottom {
     width: 84%;
     margin-top: 80px;
@@ -139,7 +130,7 @@
 
 .categoryBtn {
     background: rgba(0, 0, 0, 0.03);
-    /* border-color: rgba(0, 0, 0, 0.175); */
+    border-color: rgba(0, 0, 0, 0.175);
     padding: 5px;
     cursor: pointer;
     /* outline: hotpink solid; */
@@ -147,4 +138,5 @@
     align-items: end;
     width: max-content;
     justify-self: center;
+    border-radius: 0.3rem;
 }
