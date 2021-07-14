@@ -93,3 +93,14 @@
   margin: 1rem auto;
   justify-content: center;
 }
+
+.pageSwitch{
+  border: none;
+  background: none;
+  border-radius: 500%;
+  box-shadow: 0 0 1rem 0.5rem var(--shadow-color);
+  height: 3rem;
+  width: 3rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
