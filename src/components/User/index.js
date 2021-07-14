@@ -19,12 +19,14 @@ const User = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
   const [myAccount, setMyAccount] = useState(true);
-  const [userAssets, setUserAssets] = useState([]);
+  const [userAssets, setUserAssets] = useState(new Array(20));
+  const [assetPage, setAssetPage] = useState(0);
 
   useEffect(() => {
-    window.addEventListener("load", () => getUrlAddress());
-    if(walletAddress.length === 0) return;
-    fetchAssets();
+    getUrlAddress();
+    window.addEventListener("load", () => {
+      fetchAssets();
+    });
   });
 
   async function getUrlAddress(){
@@ -36,7 +38,7 @@ const User = () => {
       return;
     }
 
-    let userCookie = getCookie("uid");
+    let userCookie = await getCookie("uid");
 
     if(userCookie === undefined){
       window.location.reload(false);
