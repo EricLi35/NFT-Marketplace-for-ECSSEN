@@ -203,6 +203,8 @@ function Sell() {
 
     async function makeAscendingAuction() {
         const seaport = await getOpenSeaPort()
+        //Testing some weird stuff with the provider.  
+        const provider = await detectEthereumProvider()
 
         let urlParts = window.location.pathname.split('/');
         const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL

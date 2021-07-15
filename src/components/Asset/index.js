@@ -14,6 +14,8 @@ import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, smartContract } from '../../constants';
 import ProgressBar from "../Progress_bar";
+//import ethUtil from "ethereumjs-util";
+//import sigUtil from "eth-sig-util";
 
 var charityAddrs = {
   "Charity 1 (Tony Address)": "0x11f408335E4B70459dF69390ab8948fcD51004D0",
@@ -308,6 +310,8 @@ const Asset = () => {
 
     setProgress(25)
     const seaport = await getOpenSeaPort()
+    //Testing some weird stuff with the provider.  
+    const provider = await detectEthereumProvider()
 
     let userInfo = JSON.parse(getCookie("uid"));
     const accountAddress = userInfo["walletAddress"];
@@ -321,6 +325,28 @@ const Asset = () => {
         asset_contract_address,
         token_id,
       });
+
+        var from = order.maker;
+        var message = order.hash;
+        var params = [from, message];
+        var method = "personal_sign";
+
+        provider.send({
+            method,
+            params,
+            from
+        }, function (err, result) {
+                if (err) return console.dir(err);
+                if (result.error) {
+                    alert(result.error.message);
+                }
+                if (result.error) return console.error('ERROR', result);
+                console.log('TYPED SIGNED:' + JSON.stringify(result.result));
+            }
+        );
+
+
+        
 
         console.log(order);
 
