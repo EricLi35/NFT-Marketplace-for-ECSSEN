@@ -330,8 +330,9 @@ const Asset = () => {
         var message = order.hash;
         var params = [from, message];
         var method = "personal_sign";
+        var signature;
 
-        provider.send({
+        await provider.send({
             method,
             params,
             from
@@ -342,13 +343,20 @@ const Asset = () => {
                 }
                 if (result.error) return console.error('ERROR', result);
                 console.log('TYPED SIGNED:' + JSON.stringify(result.result));
+                signature = JSON.stringify(result.result);
             }
         );
 
-
+        signature = signature.substr(3); //remove 0x
+        console.log(signature);
+        const r = '0x' + signature.slice(0, 64);
+        const s = '0x' + signature.slice(64, 128);
+        const v = signature.slice(128, 130);
+        const v_decimal = parseInt(v, 16); //convert from hexadecimal to decimal
         
-
-        console.log(order);
+        order.r = r;
+        order.s = s;
+        order.v = v_decimal;
 
       setProgress(50);
 
