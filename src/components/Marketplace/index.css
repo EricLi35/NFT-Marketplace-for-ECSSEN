@@ -36,7 +36,7 @@ header {
 
 .card-deck {
   /* background-color: Gray; */
-  max-width: calc(100vw - 12rem);
+  max-width: 100%;
   min-height: 10em;
   max-height: 100%;
   display: grid;
@@ -44,7 +44,6 @@ header {
   grid-auto-flow: row;
   grid-auto-rows: minmax(1em, auto);
   gap: 1em;
-  margin: 0 10rem;
   /*margin-left: 13rem;*/
   margin-top: 1rem;
   place-items: center;
