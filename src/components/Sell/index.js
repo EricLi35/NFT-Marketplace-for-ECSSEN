@@ -216,6 +216,7 @@ function Sell() {
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
     }
 
     async function getOpenSeaPort(){

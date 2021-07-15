@@ -320,11 +320,14 @@ const Asset = () => {
         side: OrderSide.Sell,
         asset_contract_address,
         token_id,
-          });
+      });
 
         console.log(order);
 
       setProgress(50);
+
+      console.info({ order, accountAddress });
+
       const th = await seaport.cancelOrder({order, accountAddress});
 
       setProgress(75);
