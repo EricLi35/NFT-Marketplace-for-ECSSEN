@@ -17,12 +17,6 @@ import ProgressBar from "../Progress_bar";
 //import ethUtil from "ethereumjs-util";
 //import sigUtil from "eth-sig-util";
 
-var charityAddrs = {
-  "Charity 1 (Tony Address)": "0x11f408335E4B70459dF69390ab8948fcD51004D0",
-  "Charity 2 (Rui Address)": "0x6926f20dD0e6cf785052705bB39c91816a753D23",
-  "Charity 3 (Ethan Address)": "0x1437B4031f2b6c3a6d1D5F68502407283c3fAE31",
-}
-
 const Asset = () => {
   
   const API_URL = "https://rinkeby-api.opensea.io/api/v1";
@@ -37,8 +31,6 @@ const Asset = () => {
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
   const [saleType, setSaleType] = useState(0);
-
-  const [transactionBusy, setTransactionBusy] = useState(false);
 
   // progress bar info
   const [progress, setProgress] = useState(0);
@@ -182,29 +174,9 @@ const Asset = () => {
     );
   }
 
-  // TEMP
-  function getSalePrice(){
-    return Number(document.getElementById("salePrice").value);
-  }
-
   function updateChosenCharity(evt){
     setChosenCharity(evt.target.value);
     // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
-  }
-
-  function createCharityRadio(charityName){
-    return(
-      <span className="charityRadio">
-      <div key={charityName}>
-        <span className="charityInput">
-          <input className="charityNameInput" type="radio" value={charityName} id={charityName}
-            name="chosenCharity" onChange={updateChosenCharity}/>
-          <span className="charityInputControl"></span>
-        </span> 
-        <label htmlFor={charityName} className="charityName">{charityName}</label>
-      </div>
-      </span>
-    );
   }
 
   function renderDonateToggle(){
