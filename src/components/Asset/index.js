@@ -337,19 +337,25 @@ const Asset = () => {
 
       console.info({ order, accountAddress });
 
-      const th = await seaport.cancelOrder({order, accountAddress});
+      const th = await seaport.cancelOrder({ order, accountAddress });
+
+      //console.log(th);
+      //seaport.cancelOrder is a void function with no return
 
       setProgress(75);
-      let result = waitForTx(th); //wait until transaction is completed
+      //let result = waitForTx(th); //wait until transaction is completed
       document.getElementById("cancelSellButton").innerHTML = "Sell Listing Cancelled";
 
       setProgress(100);
-      setTransactionHash(th);
+      //setTransactionHash(th);
 
+      /*
+       * removed this since waitForTx(th) has a strange error
       if(result === null){
         setProgressBg("var(--failure-color)");
         return;
       }
+      */
 
       setProgressBg("var(--success-color)");
     }catch(err){
