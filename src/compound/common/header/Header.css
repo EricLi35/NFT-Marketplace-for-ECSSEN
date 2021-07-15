@@ -89,10 +89,12 @@ a {
   color: black;
   padding-top: 3px;
   flex-shrink: 1;
+  /* outline: red solid; */
 }
 
 .navlink-items{
   text-decoration: none;
+  /* outline: red solid; */
 }
 
 .navbar-item.navbar-active{
@@ -122,12 +124,35 @@ a {
   border-radius: 0.5rem;
   flex-shrink: 1;
   margin-left: 30px;
-  /* border: red solid; */
+  /* outline: red solid; */  
+}
+
+.searchLabel {
+  position: relative;
+}
+
+.searchLabel::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: -2px;
+  /* bottom: 7px; */
+  width: 20px;
+  height: 17px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'  width='20' height='20' fill='currentColor' class='bi bi-search' viewBox='0 0 16 16' fill-rule='evenodd'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") center / contain no-repeat;
+  /* padding-bottom: 7px; */
+  /* margin-bottom: 7px; */
 }
 
 .searchBar {
   background: rgba(0, 0, 0, 0.03);
-  border-color: lightgrey;
+  /* border: lightgrey solid; */
+  /* border: purple solid; */
+  border: none;
+
+  padding: 10px 1px 10px 35px;
+  /* margin-top: 3px; */
+  margin: 0;
 
 }
 
@@ -156,6 +181,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .icon-button{
@@ -183,13 +209,19 @@ a {
   z-index: 2;
   position: absolute;
   top: 83px;
-  width: 300px;
+  width: auto;
   transform: translateX(-43%);
   background-color: white;
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 1rem;
   overflow: hidden;
+  /* border: gold solid; */
+
+  background: rgba(0, 0, 0, 0.03);
+  /* border-color: rgba(0, 0, 0, 0.175); */
+
+  /* font-size: 30px; */
 }
 
 .menu-item{
@@ -198,12 +230,48 @@ a {
   align-items: center;
   border-radius: var(--border-radius);
   padding: 0.5rem;
+  /* border: red solid; */
+  text-align: center;
 }
 
 .menu-item:hover {
-  background-color: red;
+  background-color: #c3c3c3;
 }
 
 .icon-right{
   margin-left: auto;
+  /* border: blueviolet solid; */
+}
+
+
+
+.navv1 {
+  text-decoration: none;
+}
+
+.navv1 h3 {
+  color: black;
+  font-weight: normal;
+}
+
+
+.navv2 {
+  text-decoration: none;
+}
+
+.navv2 h3{
+  color: black;
+  font-weight: normal;
+}
+
+
+.navv3 {
+  text-decoration: none;
+  /* border: red solid; */
+}
+
+.navv3 h3{
+  color: black;
+  font-weight: normal;
+  /* border: red solid; */
 }

@@ -93,6 +93,7 @@ function Sell() {
       window.addEventListener("load", getDetails);
     });
   
+
     /**
      * Gets the details of the connected NFT, found within the url.
      * A valid NFT collection address and tokenID are expected within
@@ -259,12 +260,13 @@ function Sell() {
         return wethAddress;
     }
 
+
     // function changeDateTime(ev) {
     //     if (!ev.target['validity'].valid) return;
     //     const dt= ev.target['value'] + ':00';
     //     setDatetime(dt);
     // }
-
+            
     return (
         <section className='sellPage'>
             <div className="sellTokenInfo">
@@ -295,7 +297,8 @@ function Sell() {
                                     <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
                                 </div>
                                 <div className='set-sell-price-right'>
-                                    <input type="number" placeholder="Amount" id="salePrice" onChange={changeData}/>
+                                    <input type="number" placeholder="Amount" id="salePrice" min="0" 
+                                    onChange={changeData}  />                                
                                 </div>
                             </div>
                         }

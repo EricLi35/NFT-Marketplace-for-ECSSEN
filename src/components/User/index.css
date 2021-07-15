@@ -85,8 +85,8 @@
 }
 
 .UserCreateButton{
-  display: flex;
-  flex-direction: row;
+  /* display: flex;
+  flex-direction: row; */
   
   padding: 1rem 3rem;
   background-color: var(--pink-gradient-start);
@@ -105,10 +105,10 @@
 .UserCreatePlus{
   font-weight: bold;
   font-size: 1.5rem;
+  display: inline;
 }
 
 .UserCreateButton p{
   margin: auto;
+  display: inline;
 }
-
-
