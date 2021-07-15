@@ -16,12 +16,8 @@ import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
 import { getCookie } from "../../constants";
 import ProgressBar from "../Progress_bar";
-
-var charityAddrs = {
-  "Charity 1 (Tony Address)": "0x11f408335E4B70459dF69390ab8948fcD51004D0",
-  "Charity 2 (Rui Address)": "0x6926f20dD0e6cf785052705bB39c91816a753D23",
-  "Charity 3 (Ethan Address)": "0x1437B4031f2b6c3a6d1D5F68502407283c3fAE31",
-}
+//import ethUtil from "ethereumjs-util";
+//import sigUtil from "eth-sig-util";
 
 const Asset = () => {
   
@@ -37,8 +33,6 @@ const Asset = () => {
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
   const [saleType, setSaleType] = useState(0);
-
-  const [transactionBusy, setTransactionBusy] = useState(false);
 
   // progress bar info
   const [progress, setProgress] = useState(0);
@@ -182,34 +176,14 @@ const Asset = () => {
         }
         </div>
 
-        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="button"> Cancel Sell Listing</button>
+        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
       </span>
     );
-  }
-
-  // TEMP
-  function getSalePrice(){
-    return Number(document.getElementById("salePrice").value);
   }
 
   function updateChosenCharity(evt){
     setChosenCharity(evt.target.value);
     // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
-  }
-
-  function createCharityRadio(charityName){
-    return(
-      <span className="charityRadio">
-      <div key={charityName}>
-        <span className="charityInput">
-          <input className="charityNameInput" type="radio" value={charityName} id={charityName}
-            name="chosenCharity" onChange={updateChosenCharity}/>
-          <span className="charityInputControl"></span>
-        </span> 
-        <label htmlFor={charityName} className="charityName">{charityName}</label>
-      </div>
-      </span>
-    );
   }
 
   function renderDonateToggle(){
@@ -317,6 +291,8 @@ const Asset = () => {
 
     setProgress(25)
     const seaport = await getOpenSeaPort()
+    //Testing some weird stuff with the provider.  
+    const provider = await detectEthereumProvider()
 
     let userInfo = JSON.parse(getCookie("uid"));
     const accountAddress = userInfo["walletAddress"];
@@ -329,22 +305,66 @@ const Asset = () => {
         side: OrderSide.Sell,
         asset_contract_address,
         token_id,
-          });
+      });
 
+      if (order.r === null || order.s === null || order.v === null){ //check if sell order is auction; if auction, then r s v = null
+
+        var from = order.maker;
+        var message = order.hash;
+        var params = [from, message];
+        var method = "personal_sign";
+        var signature;
+
+        await provider.send({
+            method,
+            params,
+            from
+        }, function (err, result) {
+                if (err) return console.dir(err);
+                if (result.error) {
+                    alert(result.error.message);
+                }
+                if (result.error) return console.error('ERROR', result);
+                console.log('TYPED SIGNED:' + JSON.stringify(result.result));
+                signature = JSON.stringify(result.result);
+            }
+        );
+
+        signature = signature.substr(3); //remove 0x
+        console.log(signature);
+        const r = '0x' + signature.slice(0, 64);
+        const s = '0x' + signature.slice(64, 128);
+        const v = signature.slice(128, 130);
+        const v_decimal = parseInt(v, 16); //convert from hexadecimal to decimal
+        
+        order.r = r;
+        order.s = s;
+        order.v = v_decimal;
+
+        }
       setProgress(50);
-      const th = await seaport.cancelOrder({order, accountAddress});
+
+      console.info({ order, accountAddress });
+
+      const th = await seaport.cancelOrder({ order, accountAddress });
+
+      //console.log(th);
+      //seaport.cancelOrder is a void function with no return
 
       setProgress(75);
-      let result = waitForTx(th); //wait until transaction is completed
+      //let result = waitForTx(th); //wait until transaction is completed
       document.getElementById("cancelSellButton").innerHTML = "Sell Listing Cancelled";
 
       setProgress(100);
-      setTransactionHash(th);
+      //setTransactionHash(th);
 
+      /*
+       * removed this since waitForTx(th) has a strange error
       if(result === null){
         setProgressBg("var(--failure-color)");
         return;
       }
+      */
 
       setProgressBg("var(--success-color)");
     }catch(err){

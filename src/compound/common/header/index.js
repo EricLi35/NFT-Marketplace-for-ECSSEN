@@ -6,7 +6,7 @@ import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
-import User from "../../../components/User";
+import User from "../../../components/User"; 
 import './bcharity_logo.png';
 import './Header.css';
 import { nonEmptyArray } from 'check-types';
@@ -68,7 +68,9 @@ function Header(){
                 <div className="navbar-item" onClick={updateNavbar}>About</div>
              </div>
              <div className="navbar_search">
+                 <label className="searchLabel">
                  <input className="searchBar" type="text" placeholder="Search..." />
+                 </label>
              </div>
              <Login>
                  <Login_item icon={<LoginIcon />}>
@@ -114,16 +116,28 @@ function DropdownMenu(){
     return (
         <div className="dropdown">
             <DropdownItem>
-                <NavLink as={Link} to={"/Signin"}>
+                <NavLink className="navv1" as={Link} to={"/Signin"}>
+                    <h3>
                     Sign In
+                    </h3>
                 </NavLink>
             </DropdownItem>
+
             <DropdownItem>
-                <NavLink as={Link} to={"/user"}>
+                <NavLink className="navv2" as={Link} to={"/user"}>
+                    <h3>
                     My NFTs
+                    </h3>
                 </NavLink>
             </DropdownItem>
-            <DropdownItem>Log off</DropdownItem>
+            
+            <DropdownItem className="navv3">
+            <NavLink className="navv3" as={Link} to={"#"}>
+                    <h3>
+                    Log Off
+                    </h3>
+                </NavLink>
+                </DropdownItem>
         </div>
     )
 }

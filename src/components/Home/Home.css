@@ -18,10 +18,12 @@
 }
 
 .homepage-top-left{
+    width: 432.391px;
+    height: 345;
     background-color: transparent;
     font-size: 35px;
-    margin-right: 60px;
-    border: 2px blue transparent;
+    margin-right: 100px;
+    /* border: blue solid; */
     align-items: center;
     margin-top: auto;
     margin-bottom: auto;
@@ -48,6 +50,16 @@
     cursor: pointer;
 }
 
+.ExploreButton {
+    color: black;
+    text-decoration: none;
+}
+
+.CreateButton {
+    color: black;
+    text-decoration: none;
+}
+
 .top-button-right{
     /* margin-right: 20px; */
     font-size: 25px;
@@ -63,6 +75,13 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+
+.catImg {
+    width: 45vw;
+    /* height: 500px; */
+}
+
 
 .homepage-middle{
     width: 90%;
@@ -106,7 +125,8 @@
     border: 1px solid black;
     border-radius: 0.5rem;
     display: grid;
-    height: 120px;
+    height: auto;
+    /* border: blue solid; */
 }
 
 .categories h3 {
@@ -131,6 +151,7 @@
     padding: 5px;
     cursor: pointer;
     /* outline: hotpink solid; */
+    margin-top: 4px;
     margin-bottom: 5px;
     align-items: end;
     width: max-content;

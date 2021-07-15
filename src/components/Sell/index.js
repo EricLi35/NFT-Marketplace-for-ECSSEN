@@ -6,15 +6,14 @@
  * @since 2021.06.30
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { useEffect, useState, useRef } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, smartContract } from '../../constants';
+import { getCookie } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-import ProgressBar from "../Progress_bar";
 function ElogDateTime({selected, handleChange}){
     const [date, setDate] = useState(selected && selected.split(" ")[0]);
     const [time, setTime] = useState(selected && selected.split(" ")[1]);
@@ -80,7 +79,6 @@ function Sell() {
     const [tokenCollection, setTokenCollection] = useState("");
     const [imgUrl, setImgUrl] = useState("");
     const [tokenOwnerId, setTokenOwnerId] = useState("");
-    const [chosenCharity, setChosenCharity] = useState("");
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
   
@@ -93,6 +91,7 @@ function Sell() {
       window.addEventListener("load", getDetails);
     });
   
+
     /**
      * Gets the details of the connected NFT, found within the url.
      * A valid NFT collection address and tokenID are expected within
@@ -171,9 +170,10 @@ function Sell() {
         const listing = await seaport.createSellOrder({
         asset,
         accountAddress,
-        startAmount: getSalePrice()})
+            startAmount: getSalePrice()
+        })
 
-        document.getElementById("sellButton").innerHTML = "NFT listed for sale";
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
     }
 
     /*
@@ -196,11 +196,14 @@ function Sell() {
             endAmount: getEndPrice(),
             expirationTime: getExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your dutch auction has been posted";
     }
     */
 
     async function makeAscendingAuction() {
         const seaport = await getOpenSeaPort()
+        //Testing some weird stuff with the provider.  
+        const provider = await detectEthereumProvider()
 
         let urlParts = window.location.pathname.split('/');
         const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
@@ -218,6 +221,7 @@ function Sell() {
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
     }
 
     async function getOpenSeaPort(){
@@ -230,10 +234,6 @@ function Sell() {
     function getSalePrice(){
         return Number(document.getElementById("salePrice").value);
     }
-    
-    /* function getExpirationTime() {
-        return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
-    } */
 
     function setExpirationTime() {
         //console.log(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value);
@@ -259,12 +259,13 @@ function Sell() {
         return wethAddress;
     }
 
+
     // function changeDateTime(ev) {
     //     if (!ev.target['validity'].valid) return;
     //     const dt= ev.target['value'] + ':00';
     //     setDatetime(dt);
     // }
-
+            
     return (
         <section className='sellPage'>
             <div className="sellTokenInfo">
@@ -295,7 +296,8 @@ function Sell() {
                                     <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
                                 </div>
                                 <div className='set-sell-price-right'>
-                                    <input type="number" placeholder="Amount" id="salePrice" onChange={changeData}/>
+                                    <input type="number" placeholder="Amount" id="salePrice" min="0" 
+                                    onChange={changeData}  />                                
                                 </div>
                             </div>
                         }
