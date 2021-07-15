@@ -173,7 +173,7 @@ export default class Log extends React.Component {
 
     return (
       <div className="row">
-        <div className="mb-3_ml-4">
+        <div className="mb-3_ml-4 btn-group_ml-4">
           Filter orderbook:
           <div className="btn-group_ml-4" role="group">
             <button type="button" className={"btn btn-outline-primary " + (sellSide ? "active" : "")} data-toggle="button" onClick={() => this.toggleSide(OrderSide.Sell)}>
