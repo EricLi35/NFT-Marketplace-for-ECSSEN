@@ -61,19 +61,28 @@
 
 .card-text{
     /*padding: 0px 0px 0px 10px;*/
-    padding-left: 1.5rem;
-    transform: rotate(90deg);
+    padding: 1.5rem 0rem;
+    /*transform: rotate(90deg);*/
     /* height: 50px; */
- 
+    writing-mode: vertical-rl; 
+    height: 100%;
+    width: 100%;
+    display: grid;
+    align-items: center;
 }
 
-.card-text a{
+.card-link{
   color: white;
   text-decoration: none;
+  width: min-content%;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
 }
 
 .card-text h4, .card-text h5{
-    width: 16rem;
+    width: 100%;
     font-weight: normal;
     text-align: left;
     /* transform: rotate(180deg); */
