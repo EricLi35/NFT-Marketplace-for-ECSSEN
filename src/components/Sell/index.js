@@ -15,6 +15,7 @@ import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 import ProgressBar from "../Progress_bar";
+import { validate } from 'uuid';
 function ElogDateTime({selected, handleChange}){
     const [date, setDate] = useState(selected && selected.split(" ")[0]);
     const [time, setTime] = useState(selected && selected.split(" ")[1]);
@@ -42,22 +43,26 @@ function ElogDateTime({selected, handleChange}){
     }
     
     return (
-        <>
-          <input
-            id="elogdate"
-            ref={dateRef}
-            value={date}
-            onChange={_handleChange}
-            type="date"
-          />
-          <input
-            id="elogtime"
-            ref={timeRef}
-            value={time}
-            onChange={_handleChange}
-            type="time"
-          />
-        </>
+        <div className='auction-date-time'>
+            <div className='auction-date'>
+                <input
+                    id="elogdate"
+                    ref={dateRef}
+                    value={date}
+                    onChange={_handleChange}
+                    type="date"
+                />
+            </div>
+            <div className="auction-time">
+                <input
+                    id="elogtime"
+                    ref={timeRef}
+                    value={time}
+                    onChange={_handleChange}
+                    type="time"
+                />
+            </div>
+        </div>
       );
 }
 
@@ -136,6 +141,7 @@ function Sell() {
     const[bid, setBid] = useState(null)
     const[reserved, setReserved] = useState(null)
     const[expireDate, setExpireDate] = useState(null)
+    const[message, setMessage] = useState("Invalid input");
     // const[selectedDate, setSelectedDate] = useState(null)
     // const[datetime, setDatetime] = useState('')
 
@@ -265,6 +271,10 @@ function Sell() {
     //     setDatetime(dt);
     // }
 
+    function handlePost(){
+        
+    }
+
     return (
         <section className='sellPage'>
             <div className="sellTokenInfo">
@@ -288,14 +298,17 @@ function Sell() {
                     </div>
                     <div>
                         {
-                            method==='set' &&   
-                            <div className='set-sell-price'>
-                                <div className='set-sell-price-left'>
-                                    <h3 className='price'>Price</h3>
-                                    <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
-                                </div>
-                                <div className='set-sell-price-right'>
-                                    <input type="number" placeholder="Amount" id="salePrice" onChange={changeData}/>
+                            method==='set' && 
+                            <div>
+                                <hr />
+                                <div className='set-sell-price'>
+                                    <div className='set-sell-price-left'>
+                                        <h3 className='price'>Price</h3>
+                                        <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
+                                    </div>
+                                    <div className='set-sell-price-right'>
+                                        <input type="number" placeholder=" Amount" id="salePrice" onChange={changeData}/>
+                                    </div>
                                 </div>
                             </div>
                         }
@@ -309,7 +322,7 @@ function Sell() {
                                         <p className='minimum-bid-description'>Set your public starting bid price.</p>
                                     </div>
                                     <div className='set-minimum-bid-right'>
-                                        <input type="number" placeholder="Amount" id="min-bid" onChange={changeBid} />
+                                        <input type="number" placeholder=" Amount" id="min-bid" onChange={changeBid} />
                                     </div>
                                 </div>
                                 <hr />
@@ -319,20 +332,20 @@ function Sell() {
                                         <p className='reserve-price-description'>Create a hidden limit by setting a reserve price.</p>
                                     </div>
                                     <div className='reserve-price-right'>
-                                        <input type="number" placeholder="Amount" id="reserve-p" onChange={changeReserved} />
+                                        <input type="number" placeholder=" Amount" id="reserve-p" onChange={changeReserved} />
                                     </div>
                                 </div>
                                 <hr />
                                 <div className='expiration-date'>
-                                    <div className='expiration-date'>
-                                        <h3 className='expir-date'>Expiration Date</h3>
-                                        <p className='expiration-date-desciption'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
+                                    <div className='expiration-date-left'>
+                                        <h3 className='expire-date'>Expiration Date</h3>
+                                        <p className='expiration-date-description'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                     </div>
                                     <div className='expiration-date-right'>
                                         {/* <input type="datetime-local" className="expiration-date-time"
                                             value={(datetime || '').toString().substring(0, 16)}
                                             onChange={changeDateTime} /> */}
-                                        <ElogDateTime className="calendar" handleChange={(val) => {
+                                        <ElogDateTime handleChange={(val) => {
                                             setExpireDate(val);
                                         }} />
                                     </div>
@@ -362,8 +375,10 @@ function Sell() {
                                 //         (<p className='error-msg'>Invalid price.</p>) : 
                                 //         (<p className='listing-description'>Your item will be listed for {data}</p)> */
                                 }
+                                {message}
                                 <p className='listing-description'>Your item will be listed for {data}</p>
-                                <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button>
+                                {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
+                                <button className='post-button' onClick={() => handlePost()}>Post your listing</button>
                             </div>
                         }
                         {

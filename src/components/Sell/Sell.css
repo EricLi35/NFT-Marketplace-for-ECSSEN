@@ -182,15 +182,28 @@ input {
 .minimum-bid {
     margin-top: 10px;
     margin-bottom: 13px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     /* border: 1px blue solid; */
 }
 
+.set-minimum-bid-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.minimum {
+    display: flex;
+}
+
 .minimum-bid-description{
-    /* border: 1px green solid; */
+    display: flex;
 }
 
 .set-minimum-bid-right {
     /* border: 1px orange solid; */
+    display: flex;
+    justify-content: flex-end;
 }
 
 #min-bid {
@@ -204,12 +217,54 @@ input {
 .reserve-price {
     margin-top: 10px;
     margin-bottom: 13px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.reserve-price-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.reserve {
+    display: flex;
+}
+
+.reserve-price-description {
+    display: flex;
+}
+
+.reserve-price-right{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .expiration-date {
     margin-top: 10px;
     /* margin-bottom: 13px; */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
+
+.expiration-date-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.expire-date{
+    display: flex;
+}
+
+.expiration-date-description {
+    display: flex;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.expiration-date-right {
+    /* border: blue solid; */
+}
+
 
 #reserve-p {
     padding: 2px;
@@ -219,17 +274,29 @@ input {
 
 }
 
-.expiration-date-right {
-    /* border: blue solid; */
-}
-
-
 #elogdate {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
+    height: 35px;
 }
 
 #elogtime {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
+    height: 35px;
+}
+
+.auction-date-time{
+    display: flex;
+    flex-direction: column;;
+}
+
+.auction-date{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.auction-time{
+    display: flex;
+    justify-content: flex-end;
 }
