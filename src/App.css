@@ -70,7 +70,7 @@ html {
 }
 
 .LinkList{
-  
+  display: none;
 }
 
 @keyframes App-logo-spin {
