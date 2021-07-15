@@ -42,7 +42,6 @@
     max-height: calc(100% - 1rem);
     max-width: calc(100% - 1rem);
     object-fit: contain;
-    width: 100%;
 
     border-radius: 1rem;
     image-rendering: auto;
@@ -51,6 +50,7 @@
 
 .tiny-img{
     image-rendering: crisp-edges !important;
+    width: 100%;
 }
 
 .card-body{
