@@ -131,11 +131,12 @@ function App(){
           <Route path="/home" component={Home} />
           <Route path="/marketplace" component={Marketplace} />
           <Route path="/signin" component={SignIn}/>
-          <Route path="/asset" component={Asset} />
+          <Route path="/asset/*" component={Asset} />
           <Route path="/create" component={Create}/>
           <Route path="/user" component={User} />
-          <Route path="/donate" component={Donate}/>
-          <Route path="/sell" component={Sell} />
+          <Route path="/user/*" component={User} />
+          <Route path="/donate/*" component={Donate}/>
+          <Route path="/sell/*" component={Sell} />
           <Route path="/Progress_bar" component={Progress_bar} />
         </div>
       </Router>
