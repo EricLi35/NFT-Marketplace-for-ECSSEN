@@ -131,6 +131,7 @@ const Create = () => {
     }
 
     return (
+      <div className="createWholePage">
       <div className = "createThing">
  
         <div className = "createNewItem_text">
@@ -175,7 +176,7 @@ const Create = () => {
         <br></br><br></br>
         <div className = "name">
         {/* <div className = "name_text"> */}
-        <strong>Name *</strong> <br></br>
+        <strong>Name <span className="asterisk">*</span></strong> <br></br>
         {/* </div> */}
 
         {/* <div className = "name_textbox"> */}
@@ -227,7 +228,7 @@ const Create = () => {
           <p>Create Token</p>
         </button>
     </div>
-
+  </div>
   );
   
 };
