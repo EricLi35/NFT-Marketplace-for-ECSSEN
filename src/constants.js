@@ -2,6 +2,7 @@ import * as Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import { PortisProvider } from 'portis'
 
+/*
 import env from "react-dotenv";
 import {createAlchemyWeb3} from "@alch/alchemy-web3"
 const contractABI = require("./token_abi.json");
@@ -10,6 +11,7 @@ const alchemyKey = "wss://eth-rinkeby.ws.alchemyapi.io/v2/EPfi3xKz223ZXgjDYC2hQn
 const web3 = createAlchemyWeb3(alchemyKey);
 
 export const smartContract = new web3.eth.Contract(contractABI, contractAddress);
+// */
 
 export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"

@@ -4,8 +4,7 @@ import Order from '../Order';
 import { OrderSide } from 'opensea-js/lib/types';
 import { connectWallet } from '../../../constants';
 import "./index.css";
-
-
+import {ArrowRightShort, ArrowLeftShort} from "react-bootstrap-icons";
 
 export default class Log extends React.Component {
   static propTypes = {
@@ -52,34 +51,41 @@ export default class Log extends React.Component {
       await fetch(url, options)
         .then(res => res.json())
         .then(json => {
-          console.log(json);
+          console.log("json", json);
           for (var i = 0; i < json.orders.length; i++){
-          token_ids.push(json.orders[i].asset.token_id);
-        }})
+            token_ids.push(json.orders[i].asset.token_id);
+          }
+
+          this.setState({orders: json.orders});
+        })
         .catch(err => console.error('error:' + err));
 
-        console.log(token_ids);
+        console.log("token_ids", token_ids);
 
       } catch(error) {}
 
     const { accountAddress } = this.props
-    const { orders, count } = await this.props.seaport.api.getOrders({
-      maker: this.state.onlyByMe ? accountAddress : undefined,
-      owner: this.state.onlyForMe ? accountAddress : undefined,
-      side: this.state.side,
-      bundled: this.state.onlyBundles ? true : undefined,
-      // Possible query options:
-      asset_contract_address: "0x5F0ea95E05af06499B4F91a772f781816122Dd54",
-      // 'taker'
-      // 'token_id'
-      token_ids
-      // 'sale_kind'
-      
-    }, this.state.page)
 
-    console.log(orders);
+    try{
+      const { orders, count } = await this.props.seaport.api.getOrders({
+        maker: this.state.onlyByMe ? accountAddress : undefined,
+        owner: this.state.onlyForMe ? accountAddress : undefined,
+        side: this.state.side,
+        bundled: this.state.onlyBundles ? true : undefined,
+        // Possible query options:
+        asset_contract_address: "0x5F0ea95E05af06499B4F91a772f781816122Dd54",
+        // 'taker'
+        // 'token_id'
+        token_ids
+        // 'sale_kind'
+      }, this.state.page)
 
-    this.setState({ orders, total: count })
+      console.log("orders", orders);
+
+      this.setState({ orders, total: count })
+    }catch(error){
+      console.error(error);
+    }
   }
 
   paginateTo(page) {
@@ -142,20 +148,20 @@ export default class Log extends React.Component {
     const noMorePages = page*ordersPerPage >= total
     return (
       <nav>
-        <ul className="pagination justify-content-center">
-          <li className={"page-item " + (page === 1 ? "disabled" : "")}>
-            <a className="page-link" href="#Log"
-              onClick={() => this.paginateTo(page - 1)} tabIndex="-1">
-              Previous
-            </a>
-          </li>
-          <li className={"page-item " + (noMorePages ? "disabled" : "")}>
-            <a className="page-link" href="#Log"
-              onClick={() => this.paginateTo(page + 1)}>
-              Next
-            </a>
-          </li>
-        </ul>
+        <div className="pagination pageButtons">
+          <button className="page-link" href="#Log" className="pageSwitch"
+            onClick={() => this.paginateTo(page - 1)} tabIndex="-1"
+            disabled={page===1}
+          >
+            <ArrowLeftShort />
+          </button>
+          <button className="page-link" className="pageSwitch"
+            onClick={() => this.paginateTo(page + 1)}
+            disabled={noMorePages}
+          >
+            <ArrowRightShort />
+          </button>
+        </div>
       </nav>
     )
   }
@@ -199,8 +205,6 @@ export default class Log extends React.Component {
 
   render() {
     const { orders } = this.state
-
-    document.body.style = 'background: var(--main-background-colour);'; // CHANGE BACKGROUND COLOR OF WHOLE PAGE
 
     return (
       <div className="py-3" id="Log">

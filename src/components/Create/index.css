@@ -1,17 +1,37 @@
+.createWholePage {
+  display: grid;
+  justify-self: center;
+  justify-content: left;
+  grid-template-columns: 1fr 3fr 1fr;
+  height: 100%;
+}
+
+/* html, body {
+  height: 100%;
+  background: var(--main-background-colour);
+}
+body {
+  background-repeat: no-repeat;
+}
+FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
+
 .createThing {
   /* border: red solid; */
-  padding-left: 80px;
+  display: grid;
+  justify-content: center;
+  grid-column: 2/3;
 }
 
 .createNewItem_text {
-    text-align: left;
+    /* text-align: left; */
 }
 
 
 .file_types {
     font-weight: normal;
-    text-align: left;
+    /* text-align: left; */
     padding-top: 20px;
+    justify-self: center;
     /* border: 1px purple solid;   */
   }
   
@@ -46,8 +66,12 @@
     font-size: 21px;
     margin-top: -8px;
   /* border: 3px red solid; */
+  
   }
 
+.asterisk {
+  color: red !important
+}  
 
 
 .name_textbox_size {
@@ -55,12 +79,15 @@
     font-size: 17px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.175);
+    border-color: rgba(95, 75, 75, 0.175);
+    border-radius: 0.3rem;
+    
   }
 
 .name_textbox_size::placeholder {
     font-size: 17px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 0.2rem;
 }   
 
 .tags{
@@ -95,12 +122,14 @@
     margin-bottom: 50px;
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
+    border-radius: 0.3rem;
 
 }
 
 .description_textbox::placeholder {
     font-size: 17px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding-left: 0.4rem;
 } 
 
 
@@ -115,13 +144,14 @@
     max-height: 460px;
     /* background: #35297a; */
     display: flex;
+    justify-self: center;
     /* border: solid darkgreen; */
   }
   
 
   .container {
     overflow: hidden;
-    width: 100%;
+    width: 40vw;
     max-width: 400px;
     /* max-height: 900px; */
     height: auto;
@@ -178,5 +208,7 @@
   .CreateButton {
     margin-top: -50px;
     margin-bottom: 5vh;
+    cursor: pointer;
     /* outline: springgreen solid; */
+    justify-self: center;
   }

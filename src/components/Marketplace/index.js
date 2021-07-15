@@ -50,7 +50,7 @@ export default class Marketplace extends React.Component {
             </a> example dapp
           </h6> */}
         </header>
-        <Sidebar />
+        {/*<Sidebar />*/}
         <div className="MarketplaceMain">
           <Log
             seaport={this.seaport}

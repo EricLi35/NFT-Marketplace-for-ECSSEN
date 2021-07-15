@@ -10,7 +10,7 @@
   --sidebar-inactive: #f6e9ef;
   --sidebar-active: #fff5f7;
 
-  --shadow-color: #88888822;
+  --shadow-color: #88888844;
 
   --main-background-colour: linear-gradient(45deg , pink, white, lightblue );; /* Added by Eric; July 8th */
 
@@ -18,9 +18,17 @@
   --failure-color: #f9616e;
 }
 
+html {
+  background: var(--main-background-colour);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
 .App {
   text-align: center;
   outline: purple transparent;
+  /* height: 100%;
+  width: 100%; */
 }
 
 .App-logo {
@@ -73,4 +81,31 @@
 .DonateTransactionDetails p{
     text-align: left;
     height: 1rem;
+}
+
+.pageButtons{
+  display: flex;
+  gap: 5rem;
+  margin: 1rem auto;
+  justify-content: center;
+}
+
+.pageSwitch{
+  border: none;
+  background: none;
+  border-radius: 500%;
+  box-shadow: 0 0 1rem 0.5rem var(--shadow-color);
+  height: 3rem;
+  width: 3rem;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.pageSwitch:hover{
+  box-shadow: 0 0 1rem 0.75rem var(--shadow-color);
+}
+
+.pageSwitch:disabled{
+  box-shadow: none;
+  color: var(--shadow-color);
 }

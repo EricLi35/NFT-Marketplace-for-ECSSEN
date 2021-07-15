@@ -122,6 +122,13 @@ a {
   border-radius: 0.5rem;
   flex-shrink: 1;
   margin-left: 30px;
+  /* border: red solid; */
+}
+
+.searchBar {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: lightgrey;
+
 }
 
 .navbar-login {
