@@ -19,6 +19,12 @@
   --failure-color: #f9616e;
 }
 
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 html {
   background: var(--main-background-colour);
   background-attachment: fixed;
