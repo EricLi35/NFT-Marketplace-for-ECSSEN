@@ -14,8 +14,9 @@ ul {
   padding: 0;
 }
 
-a {
-  color: var (--text-color);
+.navlink-items,
+.navlink-items:visited{
+  color: inherit;
 }
 
 /*
@@ -240,10 +241,7 @@ a {
 
 .icon-right{
   margin-left: auto;
-  /* border: blueviolet solid; */
 }
-
-
 
 .navv1 {
   text-decoration: none;

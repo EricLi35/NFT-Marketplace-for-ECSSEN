@@ -1,8 +1,10 @@
 
 .homepage {
-    margin-top: 8px;
+    margin-top: 20vh;
     /* border: 2px red solid; */
     display: grid;
+    grid-template-rows: repeat(3, min-content);
+    gap: 20vh;
 }
 
 .homepage-top{
@@ -35,9 +37,6 @@
     border: 2px orange transparent;
     margin-left: auto;
     margin-right: auto;
-
-
-
 }
 
 .top-button-left{
@@ -111,10 +110,8 @@
 
 .homepage-bottom {
     width: 84%;
-    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 500px; /* Very temporary */
     /* outline: red solid; */
 }
 

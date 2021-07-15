@@ -40,7 +40,7 @@ export default class AssetMetadata extends React.Component {
 
     return (
       <div className="frag">
-        <div className="card-container">
+        <div className="card-container" title={`${asset.name}, ${assetContractName}`}>
           <div className="img-container">
             <Link rel="noopener noreferrer" className="image-link text-center d-inline-block m-100" to={`/asset/${assetAddr}/${assetId}`}>
               <img

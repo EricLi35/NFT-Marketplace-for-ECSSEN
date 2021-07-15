@@ -40,7 +40,6 @@ function Home() {
                     <img className="catImg" src={require('./cat.png')} alt="Sale Icon"/>    
                 </div>
             </div>
-            <br/>
             <div className='homepage-middle'>
                 <h2>Create and sell your NFTs</h2>
                 <br/>
