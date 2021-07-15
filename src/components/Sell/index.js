@@ -171,7 +171,10 @@ function Sell() {
         const listing = await seaport.createSellOrder({
         asset,
         accountAddress,
-        startAmount: getSalePrice()})
+            startAmount: getSalePrice()
+        })
+
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
     }
 
     /*
@@ -194,6 +197,7 @@ function Sell() {
             endAmount: getEndPrice(),
             expirationTime: getExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your dutch auction has been posted";
     }
     */
 
