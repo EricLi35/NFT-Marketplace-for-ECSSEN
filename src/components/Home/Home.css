@@ -1,9 +1,10 @@
 
 .homepage {
-    margin-top: 8px;
+    margin-top: 20vh;
     /* border: 2px red solid; */
     display: grid;
-    grid-template-rows: 70vh 70vh 70vh;
+    grid-template-rows: repeat(3, min-content);
+    gap: 20vh;
 }
 
 .homepage-top{
