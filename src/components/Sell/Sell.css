@@ -61,6 +61,7 @@
     border: 1px solid blue;
     border-radius: 0.3rem;
     padding: 20px;
+    cursor: pointer;
 }
 
 .set-sell-price{
@@ -216,4 +217,19 @@ input {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
 
+}
+
+.expiration-date-right {
+    /* border: blue solid; */
+}
+
+
+#elogdate {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
+}
+
+#elogtime {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
 }

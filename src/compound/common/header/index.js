@@ -46,7 +46,7 @@ function Header(){
                 <div className="navbar-item" onClick={updateNavbar}>About</div>
              </div>
              <div className="navbar_search">
-                 <input type="text" placeholder="Search..." />
+                 <input className="searchBar" type="text" placeholder="Search..." />
              </div>
              <Login>
                  <Login_item icon={<LoginIcon />}>

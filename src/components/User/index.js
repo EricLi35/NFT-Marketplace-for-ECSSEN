@@ -6,22 +6,40 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
+import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import "./index.css";
 import {getCookie} from "../../constants";
 import fetch from "node-fetch"
 import AssetMetadata from "../common/assetInfo/AssetMetadata.js";
-import {Plus} from "react-bootstrap-icons";
+import {Plus, ArrowRightShort, ArrowLeftShort} from "react-bootstrap-icons";
 
 const User = () => {
   const API_URL = "https://rinkeby-api.opensea.io/api/v1";
 
   const [walletAddress, setWalletAddress] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
-  const [userAssets, setUserAssets] = useState([]);
+  const [myAccount, setMyAccount] = useState(true);
+  const [userAssets, setUserAssets] = useState(new Array(20));
+  const [assetPage, setAssetPage] = useState(0);
+  const [enableNext, setEnableNext] = useState(true);
+  const [enablePrevious, setEnablePrevious] = useState(false);
 
   useEffect(() => {
-    let userCookie = getCookie("uid");
+    getUrlAddress();
+  }, []);
+
+  async function getUrlAddress(){
+    let urlEnd = window.location.pathname.split('/').slice(-1);
+    if(urlEnd[0] !== "user"){
+      setWalletAddress(urlEnd[0]);
+      setLoginStatus(true);
+      setMyAccount(false);
+      fetchAssets(0, urlEnd[0]);
+      return;
+    }
+
+    let userCookie = await getCookie("uid");
 
     if(userCookie === undefined){
       window.location.reload(false);
@@ -36,24 +54,28 @@ const User = () => {
 
     setLoginStatus(true);
     setWalletAddress(userData.walletAddress);
-
-    if(walletAddress.length === 0) return;
-    fetchAssets();
-  });
+    fetchAssets(0, userData.walletAddress);
+  }
 
   /**
    * Fetches Assets the user has associated to their wallet if they have any.
    * These assets will be stored in a state variable.
    */
-  async function fetchAssets(){
+  function fetchAssets(page, wa){
+    wa = wa || walletAddress;
+    console.log(wa);
     let limit = 20;
-    let offset = userAssets.length;
+    let offset = limit * page;
 
-    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${walletAddress}`)
+    if(wa === undefined || wa === 0){return;}
+
+    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
     .then((resp) => resp.json())
     // .then((json) => console.log(json))
     .then((json) => updateAssets(json.assets))
     .catch((err) => console.error(err.message));
+
+    setEnablePrevious(page > 0);
   }
 
   /**
@@ -74,14 +96,35 @@ const User = () => {
   }
 
   async function updateAssets(assetList){
+    console.log(assetList);
+    let htmlList = []
+
     for(let index in assetList){
       let asset = assetList[index];
       let assetHTML = await renderAssetCard(asset);
-      userAssets.push(assetHTML);
-      setUserAssets(userAssets);
+
+      htmlList.push(assetHTML);
     }
-    console.log(userAssets);
-    ReactDOM.render(userAssets, document.querySelector(".UserAssets"));
+    setUserAssets(htmlList);
+
+    setEnableNext(htmlList.length === 20);
+  }
+
+  async function switchPage(increment){
+    if(increment + assetPage < 0){return;}
+    await setAssetPage(assetPage + increment);
+    fetchAssets(assetPage + increment);
+  }
+
+  function renderCreateLink(){
+    return(
+      <Link to="/Create">
+        <button className="UserCreateButton">
+          <Plus className="CreatePlus" />
+          <p>Mint a new Token </p>
+        </button>
+      </Link>
+    )
   }
 
   /**
@@ -103,15 +146,36 @@ const User = () => {
           </div>
         </div>
         <div className="UserAssetContainer">
-          <div><h2>Your Assets</h2></div>
-          <a href="/Create">
-            <button className="UserCreateButton">
-              <Plus className="UserCreatePlus" />
-              <p>Mint a new Token </p>
-            </button>
-          </a>
+          <h2>{
+            myAccount
+            ? "Your Assets"
+            : "Their Assets"
+          }</h2>
+          {
+            myAccount
+            ? renderCreateLink()
+            : <></>
+          }
           <div className="UserAssets">
             {userAssets}
+          </div>
+          <div className="pageButtons">
+            <button
+              className="pageSwitch"
+              id="prev"
+              onClick={enablePrevious? () => switchPage(-1) : () => {}}
+              disabled={!enablePrevious}
+              >
+                <ArrowLeftShort />
+            </button>
+            <button
+              className="pageSwitch"
+              id="next"
+              onClick={enableNext? () => switchPage(1) : () => {}}
+              disabled={!enableNext}
+            >
+              <ArrowRightShort />
+            </button>
           </div>
         </div>
       </div>
@@ -125,7 +189,7 @@ const User = () => {
     return(
       <div className="LoginError">
         <h1>You are not signed in at the moment</h1>
-        <h3>Please Sign-In <a href="/signin">here</a></h3>
+        <h3>Please Sign-In <Link to="/signin">here</Link></h3>
       </div>
     );
   }

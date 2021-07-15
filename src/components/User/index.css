@@ -1,6 +1,6 @@
 .UserContainer{
   min-height: 100%;
-  height: 95vh;
+  height: 100vh;
   width: 100%;
   /* border: red solid; */
 
@@ -65,13 +65,30 @@
   margin: 0 20vmin;
   margin-top: 5rem;
   text-align: start;
+  /* border: red solid; */
+  height: 60vh;
+}
+
+.UserAssetContainer h2 {
+  /* border: yellow solid; */
+}
+
+.UserAssets{
+  width: auto;
+  margin-top: 2rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem;
+
+  /* border: chartreuse solid; */
 }
 
 .UserCreateButton{
   display: flex;
   flex-direction: row;
+  
   padding: 1rem 3rem;
-
   background-color: var(--pink-gradient-start);
   background-image: var(--pink-gradient);
 
@@ -79,6 +96,10 @@
   border: none;
   border-radius: 999rem;
   cursor: pointer;
+
+  /* align-content: flex-end; */
+  /* justify-content: center; */
+  /* border: blue solid; */
 }
 
 .UserCreatePlus{
@@ -90,11 +111,4 @@
   margin: auto;
 }
 
-.UserAssets{
-  width: auto;
-  margin-top: 2rem;
 
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 2rem;
-}

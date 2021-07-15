@@ -6,6 +6,15 @@
   height: 100%;
 }
 
+/* html, body {
+  height: 100%;
+  background: var(--main-background-colour);
+}
+body {
+  background-repeat: no-repeat;
+}
+FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
+
 .createThing {
   /* border: red solid; */
   display: grid;
@@ -199,6 +208,7 @@
   .CreateButton {
     margin-top: -50px;
     margin-bottom: 5vh;
+    cursor: pointer;
     /* outline: springgreen solid; */
     justify-self: center;
   }

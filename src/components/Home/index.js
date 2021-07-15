@@ -36,8 +36,8 @@ function Home() {
                     </Route>
                 </div>
                 <div className="homepage-top-right">
-                    <h3>A temporary placeholder (Tobe the most recent published nft item in the marketplace)</h3>
-                    <img src={require('./cat.jpg')} width='500px' alt="Sale Icon"/>    
+                    {/* <h3>A temporary placeholder (Tobe the most recent published nft item in the marketplace)</h3> */}
+                    <img src={require('./cat.png')} width='500px' alt="Sale Icon"/>    
                 </div>
             </div>
             <br/>
@@ -46,24 +46,24 @@ function Home() {
                 <br/>
                 <div className='create-container'>
                     <div className='create-item'>
-                        <img src={require('./metamask_icon.png')} width='40px' alt="Metamask Icon"/>
+                        <img src={require('./metamask_icon.png')} width='50px' height='50px' alt="Metamask Icon"/>
                         <h4>Set up your wallet</h4>
                         <p>We only support MetaMask wallet at the moment</p>
                     </div>
-                    <div className='create-item'>
+                    {/* <div className='create-item'>
                         <img src={require('./collection.jpg')} width='50px' alt="Collection Icon"/>
                         <h4>Create your collection</h4>
                         <p>Click create and set up your collection. Add social links, a description, profile & banner images, and set a secondary sales fee.</p>
-                    </div>
+                    </div> */}
                     <div className='create-item'>
-                        <img src={require('./nft_icon.png')} width='50px' alt="Sale Icon"/>
+                        <img src={require('./nft_icon.png')} width='60px' height='60px' alt="Sale Icon"/>
                         <h4>Add your NFTs</h4>
                         <p>Upload your work(image, video, audio, or 3D art), add a title and description, 
                             and customize your NFTs with properties, stats, and unlockable content.
                         </p>
                     </div>
                     <div className='create-item'>
-                        <img src={require('./sale_icon.png')} width='50px' alt="Sale Icon"/>
+                        <img src={require('./sale_icon.png')} width='60px' height='60px' alt="Sale Icon"/>
                         <h4>List them for sale</h4>
                         <p>Choose between auctions, fixed-price listings, and declining-price listings. 
                             You choose how you want to sell or donate your NFTs, and we help you to do that.
