@@ -29,23 +29,24 @@
     border-radius: 1rem;
     background-color: var(--blue-gradient-start);
     background-image: var(--blue-gradient);
+    padding: 0.5rem;
 }
 
 .image-link{
     display: grid;
     place-items: center;
+    overflow: hidden;
 
     height: 100%;
 }
 
 .card-image{
-    max-height: calc(100% - 1rem);
-    max-width: calc(100% - 1rem);
-    object-fit: contain;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 
     border-radius: 1rem;
     image-rendering: auto;
-    margin: 0.5rem;
 }
 
 .tiny-img{
