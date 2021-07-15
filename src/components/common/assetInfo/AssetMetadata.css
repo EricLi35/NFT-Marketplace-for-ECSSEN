@@ -14,7 +14,7 @@
 
     display: grid;
     width: 20.25rem;;
-    height: 18rem;
+    height: 22rem;
     grid-template-columns: 4fr 0.75fr;
     /* margin-left: auto; */
     border-radius: 1rem;
