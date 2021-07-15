@@ -15,7 +15,6 @@ import { getCookie, smartContract } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 import ProgressBar from "../Progress_bar";
-import { validate } from 'uuid';
 function ElogDateTime({ selected, handleChange }) {
     const [date, setDate] = useState(selected && selected.split(" ")[0]);
     const [time, setTime] = useState(selected && selected.split(" ")[1]);
@@ -141,7 +140,7 @@ function Sell() {
     const [bid, setBid] = useState(null)
     const [reserved, setReserved] = useState(null)
     const [expireDate, setExpireDate] = useState(null)
-    const [message, setMessage] = useState("Invalid input");
+    const [message, setMessage] = useState("");
     // const[selectedDate, setSelectedDate] = useState(null)
     // const[datetime, setDatetime] = useState('')
 
@@ -266,14 +265,30 @@ function Sell() {
         return wethAddress;
     }
 
-    // function changeDateTime(ev) {
-    //     if (!ev.target['validity'].valid) return;
-    //     const dt= ev.target['value'] + ':00';
-    //     setDatetime(dt);
-    // }
+    function validateFixedPrice() {
+        setMessage("")
+        if (data === null){
+            return false;
+        }
+        if (data === ''){
+            return false;
+        }
+        if (data.includes('-')){
+            return false;
+        }
+        if (data.includes('+')){
+            return false;
+        }
+        return true
+    }
 
-    function handlePost() {
-
+    function handlePostFixedPrice() {
+        const isValid = validateFixedPrice();
+        if (isValid){
+            console.log("This Item will be sold") //call the sell function here
+        } else {
+            setMessage("The price you entered is invalid")
+        }
     }
 
     return (
@@ -329,7 +344,8 @@ function Sell() {
                                     <p className='price-description'>Will be on sale until you transfer this item or cancel it.</p>
                                 </div>
                                 <div className='set-sell-price-right'>
-                                    <input type="number" placeholder=" Amount" id="salePrice" onChange={changeData} />
+                                    <input type="number" min="0"
+                                    placeholder=" Amount" id="salePrice" onChange={changeData} />
                                 </div>
                             </div>
                         </div>
@@ -398,7 +414,7 @@ function Sell() {
                                 {message}
                                 <p className='listing-description'>Your item will be listed for {data}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
-                                <button className='post-button' onClick={() => handlePost()}>Post your listing</button>
+                                <button className='post-button' onClick={() => handlePostFixedPrice()}>Post your listing</button>
                             </div>
                         }
                         {
