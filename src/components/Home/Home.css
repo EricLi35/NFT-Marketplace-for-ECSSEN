@@ -3,6 +3,7 @@
     margin-top: 8px;
     /* border: 2px red solid; */
     display: grid;
+    grid-template-rows: 70vh 70vh 70vh;
 }
 
 .homepage-top{
