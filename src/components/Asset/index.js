@@ -182,7 +182,7 @@ const Asset = () => {
         }
         </div>
 
-        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="button"> Cancel Sell Listing</button>
+        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
       </span>
     );
   }
