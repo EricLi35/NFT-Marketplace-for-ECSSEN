@@ -14,7 +14,8 @@ import { nonEmptyArray } from 'check-types';
 function Header(){
     const updateNavbar = async (evt) => {
         console.log(evt.target.innerText);
-        document.querySelector(".navbar-active").classList.remove("navbar-active");
+        let activeElement = document.querySelector(".navbar-active")
+        if(activeElement !== null) activeElement.classList.remove("navbar-active");
         document.querySelectorAll(".navbar-item").forEach((item) => {
             if(item.innerText !== evt.target.innerText){
                 return;
