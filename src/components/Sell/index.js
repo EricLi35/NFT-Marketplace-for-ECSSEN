@@ -6,15 +6,14 @@
  * @since 2021.06.30
  */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { useEffect, useState, useRef } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, smartContract } from '../../constants';
+import { getCookie } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-import ProgressBar from "../Progress_bar";
 function ElogDateTime({selected, handleChange}){
     const [date, setDate] = useState(selected && selected.split(" ")[0]);
     const [time, setTime] = useState(selected && selected.split(" ")[1]);
@@ -80,7 +79,6 @@ function Sell() {
     const [tokenCollection, setTokenCollection] = useState("");
     const [imgUrl, setImgUrl] = useState("");
     const [tokenOwnerId, setTokenOwnerId] = useState("");
-    const [chosenCharity, setChosenCharity] = useState("");
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
   
@@ -172,9 +170,10 @@ function Sell() {
         const listing = await seaport.createSellOrder({
         asset,
         accountAddress,
-        startAmount: getSalePrice()})
+            startAmount: getSalePrice()
+        })
 
-        document.getElementById("sellButton").innerHTML = "NFT listed for sale";
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
     }
 
     /*
@@ -197,11 +196,14 @@ function Sell() {
             endAmount: getEndPrice(),
             expirationTime: getExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your dutch auction has been posted";
     }
     */
 
     async function makeAscendingAuction() {
         const seaport = await getOpenSeaPort()
+        //Testing some weird stuff with the provider.  
+        const provider = await detectEthereumProvider()
 
         let urlParts = window.location.pathname.split('/');
         const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
@@ -219,6 +221,7 @@ function Sell() {
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
         });
+        document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
     }
 
     async function getOpenSeaPort(){
@@ -231,10 +234,6 @@ function Sell() {
     function getSalePrice(){
         return Number(document.getElementById("salePrice").value);
     }
-    
-    /* function getExpirationTime() {
-        return Number(Math.round(new Date(document.getElementById("expirationTime").value).getTime() / 1000));
-    } */
 
     function setExpirationTime() {
         //console.log(document.getElementById("elogdate").value + "T" + document.getElementById("elogtime").value);
