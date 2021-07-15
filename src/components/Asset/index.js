@@ -326,6 +326,8 @@ const Asset = () => {
         token_id,
       });
 
+      if (order.r === null || order.s === null || order.v === null){ //check if sell order is auction; if auction, then r s v = null
+
         var from = order.maker;
         var message = order.hash;
         var params = [from, message];
@@ -358,6 +360,7 @@ const Asset = () => {
         order.s = s;
         order.v = v_decimal;
 
+        }
       setProgress(50);
 
       console.info({ order, accountAddress });
