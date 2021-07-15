@@ -211,4 +211,25 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
     cursor: pointer;
     /* outline: springgreen solid; */
     justify-self: center;
+
+    display: flex;
+    flex-direction: row;
+
+    padding: 1rem 3rem;
+    background-color: var(--pink-gradient-start);
+    background-image: var(--pink-gradient);
+  
+    color: white;
+    border: none;
+    border-radius: 999rem;
+    cursor: pointer;
+  }
+
+  .CreatePlus{
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .CreateButton p{
+    margin: auto;
   }
