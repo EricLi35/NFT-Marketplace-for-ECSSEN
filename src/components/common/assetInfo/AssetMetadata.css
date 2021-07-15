@@ -41,7 +41,10 @@
 .card-image{
     max-height: calc(100% - 1rem);
     max-width: calc(100% - 1rem);
+    object-fit: contain;
     width: 100%;
+
+    border-radius: 1rem;
     image-rendering: auto;
     margin: 0.5rem;
 }
