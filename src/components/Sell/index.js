@@ -306,6 +306,8 @@ function Sell() {
 
     function validateReservedGreaterThanBid(){
         setMessage("")
+        console.log(bid)
+        console.log(reserved)
         if (bid >= reserved){
             setMessage("The reserved price must be greater than the start price.")
             return false;
