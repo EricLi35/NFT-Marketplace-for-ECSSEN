@@ -81,17 +81,25 @@
   margin-top: 2rem;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(auto-fill, minmax(20.25rem, 1fr));
   gap: 2rem;
+  place-items: center;
 
   /* border: chartreuse solid; */
 }
 
+.CreateLink{
+  width: max-content;
+  display: block;
+}
+
 .UserCreateButton{
-  /* display: flex;
-  flex-direction: row; */
+  display: flex;
+  flex-direction: row;
   
-  padding: 1rem 2.5rem 1rem 2.5rem;
+  width: max-content;
+  padding: 1rem 3rem;
+
   background-color: var(--pink-gradient-start);
   background-image: var(--pink-gradient);
 
@@ -101,7 +109,7 @@
   cursor: pointer;
 
   /* align-content: flex-end; */
-  /* justify-content: center; */
+  justify-content: center;
   /* border: blue solid; */
   /* border: lightgreen solid; */
   position: relative;
@@ -122,12 +130,6 @@
 }
 
 .UserCreateButton p{
-  /* margin: auto; */
-  /* font-weight: bold; */
-
-
-  display: inline-block ;
-  font-size: 20px;
-  margin-left: 10px;
-  margin-right: -9px;
+  margin: auto;
+  display: inline;
 }

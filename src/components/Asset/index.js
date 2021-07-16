@@ -14,21 +14,17 @@ import "./index.css"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie } from "../../constants";
+import { getCookie, API_URL, ETHERSCAN_URL } from "../../constants";
 import ProgressBar from "../Progress_bar";
 //import ethUtil from "ethereumjs-util";
 //import sigUtil from "eth-sig-util";
 
 const Asset = () => {
-  
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
-
   const [tokenName, setTokenName] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
   const [tokenCollection, setTokenCollection] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [tokenOwnerId, setTokenOwnerId] = useState("");
-  const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
@@ -171,7 +167,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
@@ -179,11 +175,6 @@ const Asset = () => {
         <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
       </span>
     );
-  }
-
-  function updateChosenCharity(evt){
-    setChosenCharity(evt.target.value);
-    // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
   }
 
   function renderDonateToggle(){
@@ -452,7 +443,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
