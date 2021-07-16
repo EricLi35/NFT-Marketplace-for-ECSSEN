@@ -205,8 +205,8 @@ const Create = () => {
         {/*
           <span style= {{color:"blue" }} > Markdown </span>
           syntax is supported.
-          </p>
         */}
+        </p>
         <textarea className="description_textbox" name="comment[body]" rows="1" cols="50" wrap="physical" id="descriptionField" placeholder="Provide a detailed description of your item."></textarea>
 
         </div>
