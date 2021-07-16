@@ -5,7 +5,7 @@ import "./index.css";
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie } from "../../constants";
+import { getCookie, ETHERSCAN_URL } from "../../constants";
 import { func } from "prop-types";
 
 import ProgressBar from "../Progress_bar";
@@ -240,7 +240,7 @@ const Donate = () => {
 }
 {
   transactionHash !== ""
-  ? <p>Your transaction is: {transactionHash}</p>
+  ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
   : <p></p>
 }
 </div>
