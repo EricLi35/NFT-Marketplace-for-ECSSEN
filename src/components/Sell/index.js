@@ -14,8 +14,6 @@ import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
-
-import ProgressBar from "../Progress_bar";
 function ElogDateTime({ selected, handleChange }) {
     const [date, setDate] = useState(selected && selected.split(" ")[0]);
     const [time, setTime] = useState(selected && selected.split(" ")[1]);
@@ -40,6 +38,7 @@ function ElogDateTime({ selected, handleChange }) {
             newStr = new String("").concat(date || "0000-00-00", " ", value || "00:00");
         }
         handleChange(newStr);
+        console.log(newStr)
     }
 
     return (
@@ -311,7 +310,7 @@ function Sell() {
 
     function validateReservedGreaterThanBid(){
         setMsg("")
-        if (bid < reserved){
+        if (Number(bid) < Number(reserved)){
             return true;
         }
         setMsg("The reserved price must be greater than the start price.")
@@ -329,17 +328,24 @@ function Sell() {
             }
         }
     }
+    const [todayDate, setTodayDate] = useState('')
+    const [todayTime, setTodayTime] = useState('')
 
     function getCurrentDate(){
         var today = new Date(),
         date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        
-        const [currentDate, setCurrentDate] = useState('')
-        setCurrentDate(date)
+        var today = new Date(),
+        time = today.getHours() + ':' + today.getMinutes;
 
-        return (
-            <div>{currentDate}</div>
-        )
+        setTodayDate(date)
+        setTodayTime(time)
+
+        // console.log(today)
+        // console.log(date)
+        console.log(todayDate)
+        console.log(todayTime)
+        // console.log(expireDate)
+        // console.log(todayDate >= expireDate)
     }
 
     function compareDates(){
@@ -457,10 +463,12 @@ function Sell() {
                             method === 'set' &&
 
                             <div>
-                                <p className='listing-description'>Your item will be listed for {data}.</p>
+                                <p className='listing-description'>Your item will be listed for {data}.
+                                </p>
                                 <p className='listing-error-message'>{message}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
                                 <button className='post-button' onClick={() => handlePostFixedPrice()}>Post your listing</button>
+                                {/* <button onClick={() => getCurrentDate()}>Testing</button> */}
                             </div>
                         }
                         {
