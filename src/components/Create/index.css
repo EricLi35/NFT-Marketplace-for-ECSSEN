@@ -132,14 +132,6 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
     padding-left: 0.4rem;
 } 
 
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
-  
   .App2 {
     max-height: 460px;
     /* background: #35297a; */
@@ -206,12 +198,9 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
 
 
   .CreateButton {
-    margin-top: -50px;
-    margin-bottom: 5vh;
     cursor: pointer;
     /* outline: springgreen solid; */
     justify-self: center;
-
     display: flex;
     flex-direction: row;
 

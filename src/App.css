@@ -1,4 +1,5 @@
 :root{
+  font-family: 'Poppins', sans-serif;
   --pink-gradient-start: #fb61ba;
   --pink-gradient-end: #ff839d;
   --blue-gradient-start: #459bdb;
@@ -16,6 +17,16 @@
 
   --success-color: #6ef961;
   --failure-color: #f9616e;
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3{
+  font-family: "Rubik", sans-serif;
 }
 
 html {
@@ -59,7 +70,7 @@ html {
 }
 
 .LinkList{
-  
+  display: none;
 }
 
 @keyframes App-logo-spin {

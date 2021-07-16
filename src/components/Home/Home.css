@@ -1,8 +1,10 @@
 
 .homepage {
-    margin-top: 8px;
+    margin-top: 20vh;
     /* border: 2px red solid; */
     display: grid;
+    grid-template-rows: repeat(3, min-content);
+    gap: 20vh;
 }
 
 .homepage-top{
@@ -16,10 +18,12 @@
 }
 
 .homepage-top-left{
+    width: 432.391px;
+    height: 345;
     background-color: transparent;
     font-size: 35px;
-    margin-right: 60px;
-    border: 2px blue transparent;
+    margin-right: 100px;
+    /* border: blue solid; */
     align-items: center;
     margin-top: auto;
     margin-bottom: auto;
@@ -33,9 +37,6 @@
     border: 2px orange transparent;
     margin-left: auto;
     margin-right: auto;
-
-
-
 }
 
 .top-button-left{
@@ -47,6 +48,16 @@
     padding: 15px 40px 15px 40px;
     border: 2px lightgreen transparent;
     cursor: pointer;
+}
+
+.ExploreButton {
+    color: black;
+    text-decoration: none;
+}
+
+.CreateButton {
+    color: black;
+    text-decoration: none;
 }
 
 .top-button-right{
@@ -64,6 +75,13 @@
     margin-top: auto;
     margin-bottom: auto;
 }
+
+
+.catImg {
+    width: 45vw;
+    /* height: 500px; */
+}
+
 
 .homepage-middle{
     width: 90%;
@@ -92,10 +110,8 @@
 
 .homepage-bottom {
     width: 84%;
-    margin-top: 80px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 500px; /* Very temporary */
     /* outline: red solid; */
 }
 
@@ -109,7 +125,8 @@
     border: 1px solid black;
     border-radius: 0.5rem;
     display: grid;
-    height: 120px;
+    height: auto;
+    /* border: blue solid; */
 }
 
 .categories h3 {
@@ -134,6 +151,7 @@
     padding: 5px;
     cursor: pointer;
     /* outline: hotpink solid; */
+    margin-top: 4px;
     margin-bottom: 5px;
     align-items: end;
     width: max-content;
