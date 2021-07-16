@@ -28,7 +28,6 @@ const Asset = () => {
   const [tokenCollection, setTokenCollection] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [tokenOwnerId, setTokenOwnerId] = useState("");
-  const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
@@ -179,11 +178,6 @@ const Asset = () => {
         <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
       </span>
     );
-  }
-
-  function updateChosenCharity(evt){
-    setChosenCharity(evt.target.value);
-    // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
   }
 
   function renderDonateToggle(){
