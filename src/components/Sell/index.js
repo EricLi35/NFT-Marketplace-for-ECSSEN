@@ -208,6 +208,8 @@ function Sell() {
     */
 
     async function makeAscendingAuction() {
+
+        setProgress(25);
         const seaport = await getOpenSeaPort()
         //Testing some weird stuff with the provider.  
         const provider = await detectEthereumProvider()
@@ -220,6 +222,7 @@ function Sell() {
 
         let asset = { tokenId, tokenAddress };
 
+        setProgress(50)
         const EnglishAuctionSellOrder = await seaport.createSellOrder({
             asset,
             accountAddress,
@@ -228,7 +231,12 @@ function Sell() {
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
         });
+
+        setProgress(75);
         document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
+        console.log(EnglishAuctionSellOrder);
+        setProgress(100);
+        setProgressBg("var(--success-color)");
     }
 
     async function getOpenSeaPort() {
