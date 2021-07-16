@@ -5,7 +5,7 @@ import "./index.css";
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie, ETHERSCAN_URL } from "../../constants";
+import { getCookie, ETHERSCAN_URL, API_URL } from "../../constants";
 import { func } from "prop-types";
 
 import ProgressBar from "../Progress_bar";
@@ -17,8 +17,6 @@ let charityAddrs = {
   }
 
 const Donate = () => {
-
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
 
   const [tokenName, setTokenName] = useState("");
   const [tokenCollection, setTokenCollection] = useState("");
