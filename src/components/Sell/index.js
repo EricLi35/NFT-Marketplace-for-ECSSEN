@@ -51,6 +51,7 @@ function ElogDateTime({ selected, handleChange }) {
                     value={date}
                     onChange={_handleChange}
                     type="date"
+                    min="2000-01-01"
                 />
             </div>
             <div className="auction-time">
@@ -346,6 +347,22 @@ function Sell() {
                 makeAscendingAuction();
             }
         }
+    }
+
+    function getCurrentDate(){
+        var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        
+        const [currentDate, setCurrentDate] = useState('')
+        setCurrentDate(date)
+
+        return (
+            <div>{currentDate}</div>
+        )
+    }
+
+    function compareDates(){
+        
     }
 
     return (
