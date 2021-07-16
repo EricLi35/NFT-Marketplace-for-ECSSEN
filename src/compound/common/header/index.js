@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LoginIcon } from './login.svg';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
@@ -13,7 +13,8 @@ import './Header.css';
 function Header(){
     const updateNavbar = async (evt) => {
         console.log(evt.target.innerText);
-        document.querySelector(".navbar-active").classList.remove("navbar-active");
+        let activeElement = document.querySelector(".navbar-active")
+        if(activeElement !== null) activeElement.classList.remove("navbar-active");
         document.querySelectorAll(".navbar-item").forEach((item) => {
             if(item.innerText !== evt.target.innerText){
                 return;
@@ -21,6 +22,21 @@ function Header(){
             item.classList.add("navbar-active");
         });
     }
+
+    function setCurrent(){
+      let currentPath = window.location.pathname.substring(1);
+      if(currentPath === "") currentPath = "home";
+
+      document.querySelectorAll(".navbar-item").forEach((item) => {
+        if(item.innerText.toUpperCase() !== currentPath.toUpperCase()) return;
+        item.classList.add("navbar-active");
+      });
+    }
+
+    useEffect(() => {
+      setCurrent();
+    },[])
+
     return (
         <section className = "navbar">
 
@@ -32,12 +48,18 @@ function Header(){
             </div>
 
             <div className = "navbar-item-container">
-                <div className="navbar-item navbar-active" onClick={updateNavbar}>
+                <div 
+                  className="navbar-item"
+                  onClick={updateNavbar}
+                >
                     <NavLink as={Link} to={"/home"} className="navlink-items">
                         Home
                     </NavLink>
                 </div>
-                <div className="navbar-item" onClick={updateNavbar}>
+                <div
+                  className="navbar-item"
+                  onClick={updateNavbar}
+                >
                     <NavLink as={Link} to={"/marketplace"} className="navlink-items">
                         Marketplace
                     </NavLink>
@@ -45,15 +67,17 @@ function Header(){
                 <div className="navbar-item" onClick={updateNavbar}>About</div>
              </div>
              <div className="navbar_search">
+                 <label className="searchLabel">
                  <input className="searchBar" type="text" placeholder="Search..." />
+                 </label>
              </div>
              <Login>
                  <Login_item icon={<LoginIcon />}>
                      <DropdownMenu />
                  </Login_item>
              </Login>
-         </section>
-     )
+        </section>
+    )
  }  
 
  function Login(props) {
@@ -91,16 +115,28 @@ function DropdownMenu(){
     return (
         <div className="dropdown">
             <DropdownItem>
-                <NavLink as={Link} to={"/Signin"}>
+                <NavLink className="navv1" as={Link} to={"/Signin"}>
+                    <h3>
                     Sign In
+                    </h3>
                 </NavLink>
             </DropdownItem>
+
             <DropdownItem>
-                <NavLink as={Link} to={"/user"}>
+                <NavLink className="navv2" as={Link} to={"/user"}>
+                    <h3>
                     My NFTs
+                    </h3>
                 </NavLink>
             </DropdownItem>
-            <DropdownItem>Log off</DropdownItem>
+            
+            <DropdownItem className="navv3">
+            <NavLink className="navv3" as={Link} to={"#"}>
+                    <h3>
+                    Log Off
+                    </h3>
+                </NavLink>
+                </DropdownItem>
         </div>
     )
 }

@@ -132,14 +132,6 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
     padding-left: 0.4rem;
 } 
 
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-  }
-  
   .App2 {
     max-height: 460px;
     /* background: #35297a; */
@@ -206,9 +198,27 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
 
 
   .CreateButton {
-    margin-top: -50px;
-    margin-bottom: 5vh;
     cursor: pointer;
     /* outline: springgreen solid; */
     justify-self: center;
+    display: flex;
+    flex-direction: row;
+
+    padding: 1rem 3rem;
+    background-color: var(--pink-gradient-start);
+    background-image: var(--pink-gradient);
+  
+    color: white;
+    border: none;
+    border-radius: 999rem;
+    cursor: pointer;
+  }
+
+  .CreatePlus{
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .CreateButton p{
+    margin: auto;
   }

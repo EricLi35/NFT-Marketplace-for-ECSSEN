@@ -149,6 +149,8 @@ h2 {
     font-weight: bold;
     font-size: 18px;
     cursor: pointer;
+    width: 73.016px;
+    height: 33px;
 }
 
 .donateButtonAsset {
@@ -159,6 +161,16 @@ h2 {
 }
 
 .sellButtonAsset {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+    cursor: pointer;
+    /* border: red solid; */
+    width: 73.016px;
+    height: 33px;
+}
+
+.cancelSellButton {
     padding: 4px;
     font-weight: bold;
     font-size: 18px;
