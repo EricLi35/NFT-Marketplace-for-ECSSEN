@@ -134,8 +134,9 @@ function Sell() {
     const [reserved, setReserved] = useState(null)
     const [expireDate, setExpireDate] = useState(null)
     const [message, setMessage] = useState("")
-    const [bidMessage, setBidMessage] = useState("")
-    const [reserveMessage, setReserveMessage] = useState("")
+    const [bidMessage, setBidMessage] = useState(null)
+    const [reserveMessage, setReserveMessage] = useState(null)
+    const [msg, setMsg] = useState("")
     // const[selectedDate, setSelectedDate] = useState(null)
     // const[datetime, setDatetime] = useState('')
 
@@ -263,15 +264,19 @@ function Sell() {
     function validateFixedPrice() {
         setMessage("")
         if (data === null){
+            setMessage("Input price cannot be null.")
             return false;
         }
         if (data === ''){
+            setMessage("Input price cannot be null.")
             return false;
         }
         if (data.includes('-')){
+            setMessage("The price you entered is invalid.")
             return false;
         }
         if (data.includes('+')){
+            setMessage("The price you entered is invalid.")
             return false;
         }
         return true
@@ -281,15 +286,14 @@ function Sell() {
         const isValid = validateFixedPrice();
         if (isValid){
             console.log("This Item will be sold") //call the sell function here
-        } else {
-            setMessage("The price you entered is invalid")
+            makeSellOrder();
         }
     }
 
     function validateBid(){
         setBidMessage("")
         if ((bid === null) || (bid === '') || (bid.includes('+')) || (bid.includes('-'))){
-            setBidMessage("Invalid Minimum Bid input")
+            setBidMessage("Invalid Minimum Bid input.")
             return false;
         }
         return true;
@@ -298,21 +302,19 @@ function Sell() {
     function validateReserved(){
         setReserveMessage("")
         if ((reserved === null) || (reserved === '') || (reserved.includes('+')) || (reserved.includes('-'))){
-            setReserveMessage("Invalid reserved price input")
+            setReserveMessage("Invalid Reserved Price input.")
             return false;
         }
         return true;
     }
 
     function validateReservedGreaterThanBid(){
-        setMessage("")
-        console.log(bid)
-        console.log(reserved)
-        if (bid >= reserved){
-            setMessage("The reserved price must be greater than the start price.")
-            return false;
+        setMsg("")
+        if (bid < reserved){
+            return true;
         }
-        return true;
+        setMsg("The reserved price must be greater than the start price.")
+        return false;
     }
 
     function handlePostBid(){
@@ -321,7 +323,8 @@ function Sell() {
         if (bidIsValid && reservedIsValid){
             const auctionIsValid = validateReservedGreaterThanBid();
             if (auctionIsValid){
-                console.log("This item will be on bid")
+                console.log("This item will be on auction")
+                makeAscendingAuction();
             }
         }
     }
@@ -437,17 +440,8 @@ function Sell() {
                             method === 'set' &&
 
                             <div>
-                                {
-                                // let sellDescription = ({data}===null) ?
-                                //     "Invalid price." : 
-                                //     "Your item will be listed for ${data}"
-
-                                //     /* ({data}===null) ?
-                                //         (<p className='error-msg'>Invalid price.</p>) : 
-                                //         (<p className='listing-description'>Your item will be listed for {data}</p)> */
-                                }
-                                {message}
-                                <p className='listing-description'>Your item will be listed for {data}</p>
+                                <p className='listing-description'>Your item will be listed for {data}.</p>
+                                <p className='listing-error-message'>{message}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
                                 <button className='post-button' onClick={() => handlePostFixedPrice()}>Post your listing</button>
                             </div>
@@ -461,10 +455,10 @@ function Sell() {
                                         "Your item will be listed for ${bid}"
                                     }  */}
                                 <p className='listing-description'>Your item will be auctioned.
-                                The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
-                                {bidMessage}
-                                {reserveMessage}
-                                {message}
+                                The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}.</p>
+                                <p className='listing-error-message'>{bidMessage}</p>
+                                <p className='listing-error-message'>{reserveMessage}</p>
+                                <p className='listing-error-message'>{msg}</p>
                                 {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
                                 <button className='post-button' onClick={() => handlePostBid()}>Post your listing</button>
                             </div>
