@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Plus} from "react-bootstrap-icons";
 import "./index.css";
 import * as Mint from "./mint";
-import { getCookie } from '../../constants';
+import { getCookie, ETHERSCAN_URL } from '../../constants';
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import ProgressBar from "../Progress_bar";
@@ -221,7 +221,7 @@ const Create = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
