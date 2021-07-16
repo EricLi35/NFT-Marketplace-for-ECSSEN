@@ -195,7 +195,6 @@ const User = () => {
 
   return(
     <div className="UserContainer">
-      <h2>User</h2>
       {
         loginStatus? displayUserInfo() : displayLoginError()
       }
