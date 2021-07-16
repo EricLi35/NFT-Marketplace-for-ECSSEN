@@ -81,6 +81,11 @@ function Sell() {
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
 
+    // progress bar info
+    const [progress, setProgress] = useState(0);
+    const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
+    const [transactionHash, setTransactionHash] = useState("");
+
     /**
      * Uses React effects perform one-time actions.
      *
@@ -460,6 +465,18 @@ function Sell() {
                                 <p className='listing-error-message'>{reserveMessage}</p>
                                 <p className='listing-error-message'>{msg}</p>
                                 {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
+                                <div className="TransactionDetails">
+                                {
+                                  progress > 0
+                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
+                                  : <></>
+                                }
+                                {
+                                  transactionHash !== ""
+                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  : <p></p>
+                                }
+                                </div>
                                 <button className='post-button' onClick={() => handlePostBid()}>Post your listing</button>
                             </div>
                         }
