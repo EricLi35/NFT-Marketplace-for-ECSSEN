@@ -223,6 +223,8 @@ function Sell() {
         let asset = { tokenId, tokenAddress };
 
         setProgress(50)
+
+        try{
         const EnglishAuctionSellOrder = await seaport.createSellOrder({
             asset,
             accountAddress,
@@ -235,8 +237,14 @@ function Sell() {
         setProgress(75);
         document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
         console.log(EnglishAuctionSellOrder);
+        setTransactionHash(EnglishAuctionSellOrder.hash);
         setProgress(100);
         setProgressBg("var(--success-color)");
+        }catch(err){
+          console.error(err);
+          setProgress(100);
+          setProgressBg("var(--failure-color)");
+        }
     }
 
     async function getOpenSeaPort() {
