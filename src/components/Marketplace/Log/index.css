@@ -25,21 +25,27 @@
     /* border-width: 1.5px; */
 }
 
+.log-row{
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
 .btn-group_ml-4 button {
     background: rgba(0, 0, 0, 0.03);
     border-color: rgba(0, 0, 0, 0.175);
     padding: 5px;
     cursor: pointer;
     font-weight: bold;
+
+    width: 5rem;
+    border-radius: 0.3rem;
 }
-
-
-
 
 .btn-group_ml-4 {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
     column-gap: 0.5rem;
 }
 
