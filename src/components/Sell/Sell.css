@@ -67,7 +67,12 @@
 .set-sell-price{
     margin-top: 30px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
+}
+
+.set-sell-price-left{
+    grid-column: 1 / 2;
+    justify-content: start;
 }
 
 .price{
@@ -89,9 +94,18 @@
 input {
     height: 80%;
     width: 50%;
+    padding-top: 0;
+    padding-left: 0.8rem;   
     margin-top: 6px;
+    margin-bottom: 50px;
+
     font-size: 15px;
-    border-radius: 1rem grey;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    border-radius: 1rem;
+    line-height: 1em; 
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.175);
 }
 
 .sellpage-top-summary{

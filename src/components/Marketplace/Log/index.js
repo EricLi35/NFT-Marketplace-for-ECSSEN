@@ -166,6 +166,21 @@ export default class Log extends React.Component {
     )
   }
 
+  colorToggle(id) {
+    const toggleButton = document.getElementById(id);
+    const styles = window.getComputedStyle(toggleButton);
+    const backgroundColor = styles.getPropertyValue("background");
+    
+    if (backgroundColor == "#459bdb") {
+      document.getElementById(id).style.background = "#6f12e0";
+      
+    } 
+    if (backgroundColor == "#6f12e0") {
+      document.getElementById(id).style.background = "#459bdb";
+    }
+    console.log("backgroundColor", document.getElementById(id).style.background);
+  }
+
   renderFilters() {
     const { onlyByMe, onlyForMe, onlyBundles } = this.state
     const sellSide = this.state.side === OrderSide.Sell
@@ -176,10 +191,14 @@ export default class Log extends React.Component {
         <div className="mb-3_ml-4">
           Filter orderbook:
           <div className="btn-group_ml-4" role="group">
-            <button type="button" className={"btn btn-outline-primary " + (sellSide ? "active" : "")} data-toggle="button" onClick={() => this.toggleSide(OrderSide.Sell)}>
+            <button type="button" id="AuctionsButton" className={"btn btn-outline-primary " + (sellSide ? "active" : "")} data-toggle="button" 
+              onClick={() => {this.toggleSide(OrderSide.Sell); 
+                              this.colorToggle('AuctionsButton')}}>
               Auctions
             </button>
-            <button type="button" className={"btn btn-outline-success " + (buySide ? "active" : "")} data-toggle="button" onClick={() => this.toggleSide(OrderSide.Buy)}>
+            <button type="button" id="BidsButton" className={"btn btn-outline-success " + (buySide ? "active" : "")} data-toggle="button" 
+              onClick={() => {this.toggleSide(OrderSide.Buy);  
+                              this.colorToggle('BidsButton')}}>
               Bids
             </button>
           </div>
