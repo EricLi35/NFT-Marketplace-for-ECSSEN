@@ -11,7 +11,7 @@ import { useEffect, useState, useRef } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie } from '../../constants';
+import { getCookie, API_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 
@@ -71,8 +71,6 @@ function setPriceErrorMsg() {
 }
 
 function Sell() {
-
-    const API_URL = "https://rinkeby-api.opensea.io/api/v1";
 
     const [tokenName, setTokenName] = useState("");
     const [tokenCollection, setTokenCollection] = useState("");
