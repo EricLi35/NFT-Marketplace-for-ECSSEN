@@ -14,14 +14,13 @@ import "./index.css"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie, ETHERSCAN_URL } from "../../constants";
+import { getCookie, API_URL, ETHERSCAN_URL } from "../../constants";
 import ProgressBar from "../Progress_bar";
 //import ethUtil from "ethereumjs-util";
 //import sigUtil from "eth-sig-util";
 
 const Asset = () => {
   
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
 
   const [tokenName, setTokenName] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
