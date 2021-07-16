@@ -21,7 +21,12 @@
 .allCharitiesButton {
     /* background-color: #3498DB; */
     /* color: white; */
-    background: rgba(0, 0, 0, 0.03);
+    background-color: #459bdb;
+    background-image: var(--blue-gradient);
+    font-weight: bold;
+  
+    width: 6rem;
+    border-radius: 0.3rem;
     border-color: rgba(0, 0, 0, 0.175);
     padding: 14px;
     font-size: 16px;
@@ -30,7 +35,13 @@
     /* border: lime solid; */
 }
   
-  .dropbtn:hover, .dropbtn:focus {
+  .allCharitiesButton:hover {
+    background-image: #459bdb;
+    background-color: #2980B9;    
+  } 
+  
+  .allCharitiesButton:focus {
+    background-image: #459bdb;
     background-color: #2980B9;
   }
   
@@ -69,7 +80,7 @@
   .dropdown-content_eric a {
     color: black;
     /* padding: 8px 50px 8px 50px; */
-    
+
     min-width: max-content;
     text-align: center;
     padding-top: 8px;
@@ -112,7 +123,19 @@
   .donateButton {
       /* background-color: #3498DB; */
       /* color: white; */
-      background: rgba(0, 0, 0, 0.03);
+      padding: 4px;
+      font-weight: bold;
+      font-size: 18px;
+      width: 5rem;
+      height: 3rem;
+  
+      border-radius: 1rem;
+      margin-left: 1rem;
+  
+      cursor: pointer;    
+      background-image: var(--pink-gradient);
+      background-color: var(--pink-gradient-start);
+      transition-duration: 0.2s;
       border-color: rgba(0, 0, 0, 0.175);
       padding: 10px;
       font-size: 13px;
@@ -132,6 +155,12 @@
       /* bottom: 50px;  */
     }
   
+  .donateButton:hover {
+      background-image: var(--pink-gradient-start);
+      background-color: lightpink;
+  }
+  
+
   .tyAndInfo {
     margin-top: 50px;
     /* outline: 2px red solid; */

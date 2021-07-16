@@ -132,7 +132,7 @@ const Asset = () => {
     // ensure that the bid is greater than the current highest bid?
     return(
       <div>
-        <input type="number" id="bidPrice" placeholder="BID HERE"/>
+        <input type="number" id="bidPrice" placeholder="BID HERE" className="bidPriceInput"/>
         <button className="placeBidButton" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
       </div>
     )
