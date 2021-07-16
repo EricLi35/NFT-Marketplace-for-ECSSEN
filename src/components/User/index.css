@@ -87,10 +87,16 @@
   /* border: chartreuse solid; */
 }
 
+.CreateLink{
+  width: max-content;
+  display: block;
+}
+
 .UserCreateButton{
-  /* display: flex;
-  flex-direction: row; */
+  display: flex;
+  flex-direction: row;
   
+  width: max-content;
   padding: 1rem 3rem;
   background-color: var(--pink-gradient-start);
   background-image: var(--pink-gradient);
@@ -101,7 +107,7 @@
   cursor: pointer;
 
   /* align-content: flex-end; */
-  /* justify-content: center; */
+  justify-content: center;
   /* border: blue solid; */
 }
 

@@ -118,7 +118,7 @@ const User = () => {
 
   function renderCreateLink(){
     return(
-      <Link to="/Create">
+      <Link to="/Create" className="CreateLink">
         <button className="UserCreateButton">
           <Plus className="CreatePlus" />
           <p>Mint a new Token </p>
