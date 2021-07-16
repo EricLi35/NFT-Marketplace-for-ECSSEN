@@ -69,13 +69,6 @@ function setPriceErrorMsg() {
     return <p>Invalid start price.</p>
 }
 
-// function isValidInputSetPrice(input){
-//     if (input === null){
-//         return <setPriceErrorMsg />;
-//     }
-//     return <p>Your item will be listed for {data}</p>
-// }
-
 function Sell() {
 
     const API_URL = "https://rinkeby-api.opensea.io/api/v1";
@@ -140,7 +133,9 @@ function Sell() {
     const [bid, setBid] = useState(null)
     const [reserved, setReserved] = useState(null)
     const [expireDate, setExpireDate] = useState(null)
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState("")
+    const [bidMessage, setBidMessage] = useState("")
+    const [reserveMessage, setReserveMessage] = useState("")
     // const[selectedDate, setSelectedDate] = useState(null)
     // const[datetime, setDatetime] = useState('')
 
@@ -291,6 +286,44 @@ function Sell() {
         }
     }
 
+    function validateBid(){
+        setBidMessage("")
+        if ((bid === null) || (bid === '') || (bid.includes('+')) || (bid.includes('-'))){
+            setBidMessage("Invalid Minimum Bid input")
+            return false;
+        }
+        return true;
+    }
+
+    function validateReserved(){
+        setReserveMessage("")
+        if ((reserved === null) || (reserved === '') || (reserved.includes('+')) || (reserved.includes('-'))){
+            setReserveMessage("Invalid reserved price input")
+            return false;
+        }
+        return true;
+    }
+
+    function validateReservedGreaterThanBid(){
+        setMessage("")
+        if (bid >= reserved){
+            setMessage("The reserved price must be greater than the start price.")
+            return false;
+        }
+        return true;
+    }
+
+    function handlePostBid(){
+        const bidIsValid = validateBid();
+        const reservedIsValid = validateReserved();
+        if (bidIsValid && reservedIsValid){
+            const auctionIsValid = validateReservedGreaterThanBid();
+            if (auctionIsValid){
+                console.log("This item will be on bid")
+            }
+        }
+    }
+
     return (
         <section className='sellPage'>
             <div className="sellTokenInfo">
@@ -427,7 +460,11 @@ function Sell() {
                                     }  */}
                                 <p className='listing-description'>Your item will be auctioned.
                                 The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}</p>
-                                <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button>
+                                {bidMessage}
+                                {reserveMessage}
+                                {message}
+                                {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
+                                <button className='post-button' onClick={() => handlePostBid()}>Post your listing</button>
                             </div>
                         }
                     </div>
