@@ -216,6 +216,7 @@ function Sell() {
 
         let asset = { tokenId, tokenAddress };
 
+  
         const EnglishAuctionSellOrder = await seaport.createSellOrder({
             asset,
             accountAddress,
@@ -223,6 +224,7 @@ function Sell() {
             startAmount: getMinBid(),
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
+            englishAuctionReservePrice: getReservePrice()
         });
         document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
     }
@@ -232,6 +234,10 @@ function Sell() {
         return new OpenSeaPort(provider, {
             networkName: Network.Rinkeby
         });
+    }
+
+    function getReservePrice() {
+        return Number(document.getElementById("reserve-p").value);
     }
 
     function getSalePrice() {
