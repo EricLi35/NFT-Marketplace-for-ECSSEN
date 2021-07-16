@@ -9,13 +9,12 @@ import ReactDOM from "react-dom";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 import "./index.css";
-import {getCookie} from "../../constants";
+import {getCookie, API_URL} from "../../constants";
 import fetch from "node-fetch"
 import AssetMetadata from "../common/assetInfo/AssetMetadata.js";
 import {Plus, ArrowRightShort, ArrowLeftShort} from "react-bootstrap-icons";
 
 const User = () => {
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
 
   const [walletAddress, setWalletAddress] = useState("");
   const [loginStatus, setLoginStatus] = useState(false);
