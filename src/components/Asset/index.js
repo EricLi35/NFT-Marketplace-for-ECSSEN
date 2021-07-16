@@ -20,8 +20,6 @@ import ProgressBar from "../Progress_bar";
 //import sigUtil from "eth-sig-util";
 
 const Asset = () => {
-  
-
   const [tokenName, setTokenName] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
   const [tokenCollection, setTokenCollection] = useState("");
