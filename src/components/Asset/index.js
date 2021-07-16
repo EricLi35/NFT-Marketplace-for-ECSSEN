@@ -462,7 +462,7 @@ const Asset = () => {
           <div className="tokenDescription">
             <p>{tokenDescription}</p>
           </div>
-          <img className="AssetImage" src={imgUrl} alt={"Asset Image"} onLoad={scalePhoto}/>
+          <img src={imgUrl} alt={"Asset Image"} onLoad={scalePhoto}/>
           <div className="priceField">
             {tokenPrice === -1
               ? <p><i>This is not currently listed for sale</i></p>
