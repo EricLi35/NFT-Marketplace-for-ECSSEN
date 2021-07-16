@@ -171,7 +171,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
@@ -452,7 +452,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
