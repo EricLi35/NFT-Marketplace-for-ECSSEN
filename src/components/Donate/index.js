@@ -210,7 +210,7 @@ const Donate = () => {
 <div className="tyAndInfo">
 
 <div className="nftInfo">
-  <h3 className="nftName">NFT NAME HERE{tokenName}</h3>
+  <h3 className="nftName">{tokenName}</h3>
   <img className="nftImg" src={imgUrl}>
   </img>
 </div>

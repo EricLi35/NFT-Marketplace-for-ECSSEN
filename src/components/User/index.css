@@ -66,7 +66,7 @@
 
 .UserAssetContainer{
   margin: 0 20vmin;
-  margin-top: 5rem;
+  margin-top: 4rem;
   text-align: start;
   /* border: red solid; */
   height: 60vh;
@@ -99,6 +99,7 @@
   
   width: max-content;
   padding: 1rem 3rem;
+
   background-color: var(--pink-gradient-start);
   background-image: var(--pink-gradient);
 
@@ -110,12 +111,22 @@
   /* align-content: flex-end; */
   justify-content: center;
   /* border: blue solid; */
+  /* border: lightgreen solid; */
+  position: relative;
+  margin-top: 10px;
+
 }
 
-.UserCreatePlus{
+.CreatePlus{
   font-weight: bold;
-  font-size: 1.5rem;
-  display: inline;
+  font-size: 33px;
+  display: inline-block;
+  /* margin-top: 10px; */
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  /* padding-top: 10px; */
+  /* margin-top: 5px; */
 }
 
 .UserCreateButton p{
