@@ -202,9 +202,11 @@ const Create = () => {
       
         <p className="description_text">
         The description will be included on the item's detail page underneath its image.
-        <span style= {{color:"blue" }} > Markdown </span>
-        syntax is supported.
-        </p>
+        {/*
+          <span style= {{color:"blue" }} > Markdown </span>
+          syntax is supported.
+          </p>
+        */}
         <textarea className="description_textbox" name="comment[body]" rows="1" cols="50" wrap="physical" id="descriptionField" placeholder="Provide a detailed description of your item."></textarea>
 
         </div>
