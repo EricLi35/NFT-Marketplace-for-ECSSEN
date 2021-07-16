@@ -28,7 +28,7 @@ function Home() {
                             </NavLink>
                         </button>
                         <button className='top-button-right'>
-                            <NavLink as={Link} to={"/Create"} className="CreateButton">
+                            <NavLink as={Link} to={"/Create"} className="CreateButtonHome">
                                 Create
                             </NavLink>
                         </button>
@@ -47,7 +47,7 @@ function Home() {
                     <div className='create-item'>
                         <img src={require('./metamask_icon.png')} width='270px' height='270px' alt="Metamask Icon"/>
                         <h4>Set up your wallet</h4>
-                        <p>We only support MetaMask wallet at the moment</p>
+                        <p>We only support MetaMask wallet at the moment.</p>
                     </div>
                     {/* <div className='create-item'>
                         <img src={require('./collection.jpg')} width='50px' alt="Collection Icon"/>
@@ -57,7 +57,7 @@ function Home() {
                     <div className='create-item'>
                         <img src={require('./nft_icon.png')} width='270px' height='270px' alt="Sale Icon"/>
                         <h4>Add your NFTs</h4>
-                        <p>Upload your work(image, video, audio, or 3D art), add a title and description, 
+                        <p>Upload your work (image, video, audio, or 3D art), add a title and description, 
                             and customize your NFTs with properties, stats, and unlockable content.
                         </p>
                     </div>
