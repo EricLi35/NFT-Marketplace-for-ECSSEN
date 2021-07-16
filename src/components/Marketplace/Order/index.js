@@ -1,12 +1,12 @@
 import React from 'react'
 import moment from 'moment'
 import PropTypes from 'prop-types'
-import Account from '../../common/Account'
+//import Account from '../../common/Account'
 import AssetMetadata from '../../common/assetInfo/AssetMetadata'
 import BundleMetadata from '../../common/assetInfo/BundleMetadata'
 import styled from 'styled-components';
 import { connectWallet } from '../../../constants';
-import { OrderSide } from 'opensea-js/lib/types';
+//import { OrderSide } from 'opensea-js/lib/types';
 import SalePrice from '../../common/SalePrice';
 
 const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
