@@ -455,7 +455,6 @@ const Asset = () => {
 
   return(
     <div className="AssetContainer">
-      <h2>Asset page</h2>
         <div className="AssetContent">
           <h1 className="tokenName">{tokenName}</h1>
           <p className="tokenCollection"><i>{tokenCollection}</i></p>
