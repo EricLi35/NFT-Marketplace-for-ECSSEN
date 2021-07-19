@@ -47,10 +47,6 @@ const Donate = () => {
     setImgUrl(tokenData.image_url);
     setSchemaName(tokenData.asset_contract.schema_name);
 
-    if(tokenData.orders.length > 0){
-      setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
-    }
-
     console.log(tokenData);
   }
 
