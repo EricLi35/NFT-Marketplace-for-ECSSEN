@@ -113,6 +113,7 @@ const Create = () => {
             setTransactionHash(success);
             setDisableButton(false);
           }).catch((err) => {
+            console.error(err);
             setProgress(100)
             setProgressBg("var(--failure-color)");
             setDisableButton(false);
