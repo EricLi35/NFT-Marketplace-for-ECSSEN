@@ -103,6 +103,7 @@ const Create = () => {
 
             if(success === null){
               setProgressBg("var(--failure-color)");
+              console.error("Mint failed on mint API");
               return;
             }
 
