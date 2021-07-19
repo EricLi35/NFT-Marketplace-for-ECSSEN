@@ -22,9 +22,9 @@
     /* background-color: #3498DB; */
     /* color: white; */
     background-color: #459bdb;
-    background-image: var(--blue-gradient);
+    /* background-image: var(--blue-gradient); */
     font-weight: bold;
-  
+    color: rgb(87, 0, 82);
     width: 6rem;
     border-radius: 0.3rem;
     border-color: rgba(0, 0, 0, 0.175);
@@ -33,6 +33,7 @@
     /* border: none; */
     cursor: pointer;
     /* border: lime solid; */
+    transition-duration: 0.2s;
 }
   
   .allCharitiesButton:hover {
@@ -125,8 +126,9 @@
       /* color: white; */
       padding: 4px;
       font-weight: bold;
-      font-size: 18px;
-      width: 5rem;
+      font-size: 1rem;
+      text-align: center;
+      width: 6rem;
       height: 3rem;
   
       border-radius: 1rem;
@@ -138,7 +140,6 @@
       transition-duration: 0.2s;
       border-color: rgba(0, 0, 0, 0.175);
       padding: 10px;
-      font-size: 13px;
       cursor: pointer;
 
       /* margin-top: 10%; */
