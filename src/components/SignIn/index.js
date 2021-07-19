@@ -115,7 +115,7 @@ const SignIn = () => { // Change the name after
       <div className="wholeThing">
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
-          Sign in to your wallet!
+          Sign in to your wallet
         </h2>
 
       <div className="wallet-page">

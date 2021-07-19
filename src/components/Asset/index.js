@@ -14,21 +14,17 @@ import "./index.css"
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie } from "../../constants";
+import { getCookie, API_URL, ETHERSCAN_URL } from "../../constants";
 import ProgressBar from "../Progress_bar";
 //import ethUtil from "ethereumjs-util";
 //import sigUtil from "eth-sig-util";
 
 const Asset = () => {
-  
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
-
   const [tokenName, setTokenName] = useState("");
   const [tokenDescription, setTokenDescription] = useState("");
   const [tokenCollection, setTokenCollection] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [tokenOwnerId, setTokenOwnerId] = useState("");
-  const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
   const [isOnSale, setSaleState] = useState(false);
   const [tokenPrice, setTokenPrice] = useState(-1);
@@ -168,46 +164,46 @@ const Asset = () => {
     }
   }
 
-    async function makeBuyOffer() {
-        setProgress(33);
-        const seaport = await getOpenSeaPort()
+  async function makeBuyOffer() {
+      setProgress(33);
+      const seaport = await getOpenSeaPort()
 
-        let userInfo = JSON.parse(getCookie("uid"));
-        const accountAddress = userInfo["walletAddress"];
+      let userInfo = JSON.parse(getCookie("uid"));
+      const accountAddress = userInfo["walletAddress"];
 
-        let urlParts = window.location.pathname.split('/');
-        //console.log(urlParts);
-        const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
+      let urlParts = window.location.pathname.split('/');
+      //console.log(urlParts);
+      const [tokenAddress, tokenId] = urlParts.splice(-2); //fetch token address + token ID from URL
 
-        console.log(tokenAddress);
-        console.log(tokenId);
+      console.log(tokenAddress);
+      console.log(tokenId);
 
-        let asset = await seaport.api.getAsset({
-            tokenAddress, 
-            tokenId
-        })
+      let asset = await seaport.api.getAsset({
+          tokenAddress, 
+          tokenId
+      })
 
-        setProgress(66)
+      setProgress(66)
 
-        try {
-            const offer = await seaport.createBuyOrder({
-                asset,
-                accountAddress,
-                startAmount: Number(document.getElementById("bidPrice").value)
-            })
+      try {
+          const offer = await seaport.createBuyOrder({
+              asset,
+              accountAddress,
+              startAmount: Number(document.getElementById("bidPrice").value)
+          })
 
-            setProgress(100);
-            document.getElementById("bidButton").innerHTML = "Offer has been placed!";
+          setProgress(100);
+          document.getElementById("bidButton").innerHTML = "Offer has been placed!";
 
-            setProgressBg("var(--success-color)");
+          setProgressBg("var(--success-color)");
 
-        }catch (err) {
-        setProgress(100);
-        setProgressBg("var(--failure-color)");
-        console.error(err);
-        return;
-        }
-    }
+      }catch (err) {
+      setProgress(100);
+      setProgressBg("var(--failure-color)");
+      console.error(err);
+      return;
+      }
+  }
 
   async function cancelOrder(){
 
@@ -447,7 +443,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>
@@ -459,7 +455,6 @@ const Asset = () => {
 
   return(
     <div className="AssetContainer">
-      <h2>Asset page</h2>
         <div className="AssetContent">
           <h1 className="tokenName">{tokenName}</h1>
           <p className="tokenCollection"><i>{tokenCollection}</i></p>
@@ -467,7 +462,7 @@ const Asset = () => {
           <div className="tokenDescription">
             <p>{tokenDescription}</p>
           </div>
-          <img className="AssetImage" src={imgUrl} alt={"Asset Image"} onLoad={scalePhoto}/>
+          <img src={imgUrl} alt={"Asset Image"} onLoad={scalePhoto}/>
           <div className="priceField">
             {tokenPrice === -1
               ? <p><i>This is not currently listed for sale</i></p>

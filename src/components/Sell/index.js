@@ -11,7 +11,7 @@ import { useEffect, useState, useRef } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie } from '../../constants';
+import { getCookie, API_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 
 
@@ -51,6 +51,7 @@ function ElogDateTime({ selected, handleChange }) {
                     value={date}
                     onChange={_handleChange}
                     type="date"
+                    min="2000-01-01"
                 />
             </div>
             <div className="auction-time">
@@ -72,8 +73,6 @@ function setPriceErrorMsg() {
 
 function Sell() {
 
-    const API_URL = "https://rinkeby-api.opensea.io/api/v1";
-
     const [tokenName, setTokenName] = useState("");
     const [tokenCollection, setTokenCollection] = useState("");
     const [imgUrl, setImgUrl] = useState("");
@@ -81,18 +80,10 @@ function Sell() {
     const [schemaName, setSchemaName] = useState("");
     const [tokenPrice, setTokenPrice] = useState(-1);
 
-    const [data, setData] = useState(null)
-    const [method, setMethod] = useState('set')
-    const [bid, setBid] = useState(null)
-    const [reserved, setReserved] = useState(null)
-    const [expireDate, setExpireDate] = useState(null)
-    const [message, setMessage] = useState("")
-    const [bidMessage, setBidMessage] = useState(null)
-    const [reserveMessage, setReserveMessage] = useState(null)
-    const [msg, setMsg] = useState("")
-    // const[selectedDate, setSelectedDate] = useState(null)
-    // const[datetime, setDatetime] = useState('')
-
+    // progress bar info
+    const [progress, setProgress] = useState(0);
+    const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
+    const [transactionHash, setTransactionHash] = useState("");
 
     /**
      * Uses React effects perform one-time actions.
@@ -100,8 +91,8 @@ function Sell() {
      * - Adds a load event listener to fetch the details of the connected NFT
      */
     useEffect(() => {
-        window.addEventListener("load", getDetails);
-    });
+        getDetails();
+    }, []);
 
     /**
      * Gets the details of the connected NFT, found within the url.
@@ -204,6 +195,8 @@ function Sell() {
     */
 
     async function makeAscendingAuction() {
+
+        setProgress(25);
         const seaport = await getOpenSeaPort()
         //Testing some weird stuff with the provider.  
         const provider = await detectEthereumProvider()
@@ -216,7 +209,9 @@ function Sell() {
 
         let asset = { tokenId, tokenAddress };
 
-  
+        setProgress(50)
+
+        try{
         const EnglishAuctionSellOrder = await seaport.createSellOrder({
             asset,
             accountAddress,
@@ -226,7 +221,18 @@ function Sell() {
             expirationTime: setExpirationTime(),
             englishAuctionReservePrice: getReservePrice()
         });
+
+        setProgress(75);
         document.getElementsByClassName("post-button")[0].innerHTML = "Your auction has been set up";
+        console.log(EnglishAuctionSellOrder);
+        setTransactionHash(EnglishAuctionSellOrder.hash);
+        setProgress(100);
+        setProgressBg("var(--success-color)");
+        }catch(err){
+          console.error(err);
+          setProgress(100);
+          setProgressBg("var(--failure-color)");
+        }
     }
 
     async function getOpenSeaPort() {
@@ -334,6 +340,22 @@ function Sell() {
                 makeAscendingAuction();
             }
         }
+    }
+
+    function getCurrentDate(){
+        var today = new Date(),
+        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        
+        const [currentDate, setCurrentDate] = useState('')
+        setCurrentDate(date)
+
+        return (
+            <div>{currentDate}</div>
+        )
+    }
+
+    function compareDates(){
+        
     }
 
     return (
@@ -467,6 +489,18 @@ function Sell() {
                                 <p className='listing-error-message'>{reserveMessage}</p>
                                 <p className='listing-error-message'>{msg}</p>
                                 {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
+                                <div className="TransactionDetails">
+                                {
+                                  progress > 0
+                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
+                                  : <></>
+                                }
+                                {
+                                  transactionHash !== ""
+                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  : <p></p>
+                                }
+                                </div>
                                 <button className='post-button' onClick={() => handlePostBid()}>Post your listing</button>
                             </div>
                         }
