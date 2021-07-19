@@ -81,6 +81,7 @@ const Create = () => {
           setProgress(75);
           if(xhr.status === 400){
             console.error(JSON.parse(xhr.response));
+            setProgress(100);
             setProgressBg("var(--failure-color)");
             return;
           }
@@ -103,6 +104,7 @@ const Create = () => {
 
             if(success === null){
               setProgressBg("var(--failure-color)");
+              console.error("Mint API ran into errors");
               return;
             }
 
@@ -111,6 +113,7 @@ const Create = () => {
             setTransactionHash(success);
             setDisableButton(false);
           }).catch((err) => {
+            console.error(err);
             setProgress(100)
             setProgressBg("var(--failure-color)");
             setDisableButton(false);
@@ -140,7 +143,7 @@ const Create = () => {
 
         <div className="file_types">
         {/* <h4> */}
-        <strong className = "file_descrip">Use an image as your NFT!</strong>
+        <strong className = "file_descrip">Use an image as your NFT</strong>
         <div className="file_descrip_detailed">
         File types supported: JPG, PNG, JPEG
         </div>
