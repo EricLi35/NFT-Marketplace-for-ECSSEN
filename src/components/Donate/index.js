@@ -28,20 +28,8 @@ const Donate = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
-  /*
-  function addSmartContractListener(){
-    smartContract.events.Approval({}, (err, data) => {
-      if(err){
-        console.error(err);
-        return;
-      } 
-      console.log(data);
-    })
-  }//*/
-
   useEffect(() => {
     getDetails();
-    // addSmartContractListener();
   }, []);
 
   async function getDetails(){
