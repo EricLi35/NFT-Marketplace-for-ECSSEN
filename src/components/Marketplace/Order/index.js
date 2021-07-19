@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 //import Account from '../../common/Account'
 import AssetMetadata from '../../common/assetInfo/AssetMetadata'
 import BundleMetadata from '../../common/assetInfo/BundleMetadata'
-import styled from 'styled-components';
 import { connectWallet } from '../../../constants';
 //import { OrderSide } from 'opensea-js/lib/types';
 import SalePrice from '../../common/SalePrice';
