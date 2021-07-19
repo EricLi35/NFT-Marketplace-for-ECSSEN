@@ -10,10 +10,11 @@ import SalePrice from '../../common/SalePrice';
 
 export default class Order extends React.Component {
 
+  /*
   state = {
     errorMessage: null,
     creatingOrder: false
-  }
+  }*/
 
   static propTypes = {
     currentAccount: PropTypes.object,
@@ -24,14 +25,16 @@ export default class Order extends React.Component {
     accountAddress: PropTypes.string
   }
 
+  /*
   onError(error) {
     // Ideally, you'd handle this error at a higher-level component
     // using props or Redux
     this.setState({ errorMessage: error.message })
     setTimeout(() => this.setState({errorMessage: null}), 3000)
     throw error
-  }
+  }*/
 
+  /*
   async fulfillOrder() {
     const { order, accountAddress } = this.props
     if (!accountAddress) {
@@ -45,8 +48,9 @@ export default class Order extends React.Component {
     } finally {
       this.setState({ creatingOrder: false })
     }
-  }
+  }*/
 
+  /*
   renderBuyButton(canAccept = true) {
     const { creatingOrder } = this.state
     const { accountAddress, order } = this.props
@@ -69,8 +73,9 @@ export default class Order extends React.Component {
 
       </button>
     )
-  }
+  }*/
 
+  /*
   renderAcceptOfferButton(canAccept = true) {
     const { creatingOrder } = this.state
     const { accountAddress, order } = this.props
@@ -94,8 +99,9 @@ export default class Order extends React.Component {
 
       </button>
     )
-  }
+  }*/
 
+  /*
   renderExpirationBadge() {
     const expirationTime = parseFloat(this.props.order.expirationTime)
 
@@ -112,10 +118,10 @@ export default class Order extends React.Component {
         {timeLeft.humanize()}
       </span>
     )
-  }
+  }*/
 
   render() {
-    const { errorMessage } = this.state
+    // const { errorMessage } = this.state
     const { order, accountAddress } = this.props
     // const { makerAccount, listingTime, asset, assetBundle } = order
     const {asset, assetBundle} = order;
