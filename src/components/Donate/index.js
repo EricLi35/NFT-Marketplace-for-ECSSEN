@@ -19,12 +19,9 @@ let charityAddrs = {
 const Donate = () => {
 
   const [tokenName, setTokenName] = useState("");
-  const [tokenCollection, setTokenCollection] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [tokenOwnerId, setTokenOwnerId] = useState("");
   const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
-  const [tokenPrice, setTokenPrice] = useState(-1);
 
   // progress bar info
   const [progress, setProgress] = useState(0);
