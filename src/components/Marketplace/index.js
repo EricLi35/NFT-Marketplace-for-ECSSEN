@@ -1,9 +1,9 @@
 import React from 'react';
-import styled from 'styled-components';
+//import styled from 'styled-components';
 import Log from './Log'
 import "./index.css";
 import { OpenSeaPort, Network } from 'opensea-js';
-import Sidebar from "./Sidebar";
+//import Sidebar from "./Sidebar";
 import { web3Provider, onNetworkUpdate, OPENSEA_JS_URL, GITHUB_URL } from '../../constants';
 
 
