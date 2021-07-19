@@ -121,14 +121,6 @@ export default class Order extends React.Component {
     // const { makerAccount, listingTime, asset, assetBundle } = order
     const {asset, assetBundle} = order;
 
-    // const owner = asset
-    //   ? asset.owner
-    //   : assetBundle.assets[0].owner
-
-    // const ts = listingTime.toNumber() * 1000
-    // const timeLabel = moment(ts).local().fromNow()
-    // const isOwner = accountAddress && accountAddress.toLowerCase() === owner.address.toLowerCase()
-
     return (
       <div>
         {asset
