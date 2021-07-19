@@ -9,18 +9,6 @@ import { connectWallet } from '../../../constants';
 //import { OrderSide } from 'opensea-js/lib/types';
 import SalePrice from '../../common/SalePrice';
 
-const Card = styled.div.attrs({ className: "card mx-2 mb-4" })`
-  /*min-width: 200px;
-  img {
-    height: 120px;
-    max-width: 100%;
-  }
-  img.small {
-    max-width: 50%;
-    height: 60px;
-  }*/
-`
-
 export default class Order extends React.Component {
 
   state = {
