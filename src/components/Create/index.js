@@ -81,6 +81,7 @@ const Create = () => {
           setProgress(75);
           if(xhr.status === 400){
             console.error(JSON.parse(xhr.response));
+            setProgress(100);
             setProgressBg("var(--failure-color)");
             return;
           }
@@ -103,7 +104,7 @@ const Create = () => {
 
             if(success === null){
               setProgressBg("var(--failure-color)");
-              console.error("Mint failed on mint API");
+              console.error("Mint API ran into errors");
               return;
             }
 
