@@ -10,8 +10,6 @@
 import React from 'react'
 import "./Home.css"
 import {NavLink, Link} from "react-router-dom";
-import Create from '../Create';
-import Marketplace from "../Marketplace";
 
 function Home() {
     return (
