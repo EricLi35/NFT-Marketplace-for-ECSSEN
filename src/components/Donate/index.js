@@ -44,10 +44,8 @@ const Donate = () => {
 
   async function updateDetails(tokenData){
     setTokenName(tokenData.name)
-    setTokenCollection(tokenData.collection.name);
     setImgUrl(tokenData.image_url);
     setSchemaName(tokenData.asset_contract.schema_name);
-    setTokenOwnerId(tokenData.top_ownerships[0].owner.address);
 
     if(tokenData.orders.length > 0){
       setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
