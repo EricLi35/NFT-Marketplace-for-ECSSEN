@@ -112,6 +112,7 @@ async function getTransferInformation(token, transaction) {
 };
 
 export async function mint(formbody, toAddress) {
+  console.log("minting process started for a NFT to", toAddress);
 
   const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
