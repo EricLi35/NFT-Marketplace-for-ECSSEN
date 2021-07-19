@@ -142,38 +142,12 @@ export default class Order extends React.Component {
     // const isOwner = accountAddress && accountAddress.toLowerCase() === owner.address.toLowerCase()
 
     return (
-      <Card>
-        
+      <div>
         {asset
           ? <AssetMetadata asset={asset} />
           : <BundleMetadata bundle={assetBundle} />
         }
-      {/*
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            Offered by <Account account={makerAccount} />
-          </li>
-          { errorMessage
-            ? <div className="alert alert-warning mb-0" role="alert">
-                {errorMessage}
-              </div>
-            : <li className="list-group-item">
-                {order.side === OrderSide.Buy
-                  ? this.renderAcceptOfferButton(isOwner)
-                  : null
-                }
-                {order.side === OrderSide.Sell
-                  ? this.renderBuyButton(!isOwner)
-                  : null
-                }
-              </li>
-          }
-        </ul>
-        <div className="card-footer">
-          <small className="text-muted">Posted {timeLabel}</small>
-        </div>
-      */}
-      </Card>
+      </div>
     )
   }
 }
