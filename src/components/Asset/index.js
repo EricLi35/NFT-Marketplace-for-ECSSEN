@@ -339,12 +339,22 @@ const Asset = () => {
 
     //return result;
   }
+
+  function renderLoginToggle(){
+    return(
+      <span>
+        <Link to="/Signin">
+          <button className="loginButtonAsset" id="loginButton" type="button"></button>
+        </Link>
+      </span>
+    );
+  }
   
   function renderBuyToggle(){
     return(
       <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
         Buy
-        </button>
+      </button>
     );
   }
 
