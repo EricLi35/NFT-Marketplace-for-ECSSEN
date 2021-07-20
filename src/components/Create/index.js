@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {Plus} from "react-bootstrap-icons";
 import "./index.css";
 import * as Mint from "./mint";
-import { getCookie } from '../../constants';
+import { getCookie, ETHERSCAN_URL } from '../../constants';
 import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import ProgressBar from "../Progress_bar";
@@ -81,6 +81,7 @@ const Create = () => {
           setProgress(75);
           if(xhr.status === 400){
             console.error(JSON.parse(xhr.response));
+            setProgress(100);
             setProgressBg("var(--failure-color)");
             return;
           }
@@ -103,6 +104,7 @@ const Create = () => {
 
             if(success === null){
               setProgressBg("var(--failure-color)");
+              console.error("Mint API ran into errors");
               return;
             }
 
@@ -111,6 +113,7 @@ const Create = () => {
             setTransactionHash(success);
             setDisableButton(false);
           }).catch((err) => {
+            console.error(err);
             setProgress(100)
             setProgressBg("var(--failure-color)");
             setDisableButton(false);
@@ -140,7 +143,7 @@ const Create = () => {
 
         <div className="file_types">
         {/* <h4> */}
-        <strong className = "file_descrip">Use an image as your NFT!</strong>
+        <strong className = "file_descrip">Use an image as your NFT</strong>
         <div className="file_descrip_detailed">
         File types supported: JPG, PNG, JPEG
         </div>
@@ -202,8 +205,10 @@ const Create = () => {
       
         <p className="description_text">
         The description will be included on the item's detail page underneath its image.
-        <span style= {{color:"blue" }} > Markdown </span>
-        syntax is supported.
+        {/*
+          <span style= {{color:"blue" }} > Markdown </span>
+          syntax is supported.
+        */}
         </p>
         <textarea className="description_textbox" name="comment[body]" rows="1" cols="50" wrap="physical" id="descriptionField" placeholder="Provide a detailed description of your item."></textarea>
 
@@ -219,7 +224,7 @@ const Create = () => {
         }
         {
           transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>

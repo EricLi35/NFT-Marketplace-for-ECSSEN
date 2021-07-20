@@ -5,7 +5,7 @@ import "./index.css";
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
-import { getCookie } from "../../constants";
+import { getCookie, ETHERSCAN_URL, API_URL } from "../../constants";
 import { func } from "prop-types";
 
 import ProgressBar from "../Progress_bar";
@@ -18,35 +18,18 @@ let charityAddrs = {
 
 const Donate = () => {
 
-  const API_URL = "https://rinkeby-api.opensea.io/api/v1";
-
   const [tokenName, setTokenName] = useState("");
-  const [tokenCollection, setTokenCollection] = useState("");
   const [imgUrl, setImgUrl] = useState("");
-  const [tokenOwnerId, setTokenOwnerId] = useState("");
   const [chosenCharity, setChosenCharity] = useState("");
   const [schemaName, setSchemaName] = useState("");
-  const [tokenPrice, setTokenPrice] = useState(-1);
 
   // progress bar info
   const [progress, setProgress] = useState(0);
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
-  /*
-  function addSmartContractListener(){
-    smartContract.events.Approval({}, (err, data) => {
-      if(err){
-        console.error(err);
-        return;
-      } 
-      console.log(data);
-    })
-  }//*/
-
   useEffect(() => {
     getDetails();
-    // addSmartContractListener();
   }, []);
 
   async function getDetails(){
@@ -61,14 +44,8 @@ const Donate = () => {
 
   async function updateDetails(tokenData){
     setTokenName(tokenData.name)
-    setTokenCollection(tokenData.collection.name);
     setImgUrl(tokenData.image_url);
     setSchemaName(tokenData.asset_contract.schema_name);
-    setTokenOwnerId(tokenData.top_ownerships[0].owner.address);
-
-    if(tokenData.orders.length > 0){
-      setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
-    }
 
     console.log(tokenData);
   }
@@ -212,7 +189,7 @@ const Donate = () => {
 <div className="tyAndInfo">
 
 <div className="nftInfo">
-  <h3 className="nftName">NFT NAME HERE{tokenName}</h3>
+  <h3 className="nftName">{tokenName}</h3>
   <img className="nftImg" src={imgUrl}>
   </img>
 </div>
@@ -240,7 +217,7 @@ const Donate = () => {
 }
 {
   transactionHash !== ""
-  ? <p>Your transaction is: {transactionHash}</p>
+  ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
   : <p></p>
 }
 </div>
