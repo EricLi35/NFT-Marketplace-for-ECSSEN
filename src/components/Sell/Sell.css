@@ -91,6 +91,7 @@
 .price-description{
     display: flex;
     width: 110%;
+    text-align: left;
 }
 
 .set-sell-price-right{
@@ -189,6 +190,7 @@ input {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
 }
 
 #salePrice {
@@ -227,6 +229,7 @@ input {
 
 .minimum-bid-description{
     display: flex;
+    text-align: left;
 }
 
 .set-minimum-bid-right {
@@ -262,6 +265,7 @@ input {
 
 .reserve-price-description {
     display: flex;
+    text-align: left;
 }
 
 .reserve-price-right{
