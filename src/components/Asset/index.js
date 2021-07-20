@@ -433,6 +433,14 @@ const Asset = () => {
       isOwner = true;
     }
 
+    if(!loginStatus){
+      return(
+        <div className="AssetButtonContainer">
+          {renderLoginToggle()}
+        </div>
+      );
+    }
+
     if(isOwner){ 
        if(isOnSale){
         return (
