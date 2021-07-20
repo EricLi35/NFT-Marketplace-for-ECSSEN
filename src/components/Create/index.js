@@ -15,6 +15,7 @@ const Create = () => {
     const [progress, setProgress] = useState(0);
     const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
     const [transactionHash, setTransactionHash] = useState("");
+    const [tokenId, setTokenId] = useState("");
     const [disableButton, setDisableButton] = useState(false);
     const [loginStatus, setLoginStatus] = useState(true);
 
@@ -145,7 +146,8 @@ const Create = () => {
 
             setProgressBg("var(--success-color)")
             console.log(success);
-            setTransactionHash(success);
+            setTransactionHash(success.transactionHash);
+            setTokenId(success.tokenId);
             setDisableButton(false);
           }).catch((err) => {
             console.error(err);
