@@ -344,7 +344,7 @@ const Asset = () => {
     return(
       <span>
         <Link to="/Signin">
-          <button className="loginButtonAsset" id="loginButton" type="button"></button>
+          <button className="loginButtonAsset" id="loginButton" type="button">Login to Purchase</button>
         </Link>
       </span>
     );
