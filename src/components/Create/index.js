@@ -168,8 +168,7 @@ const Create = () => {
       evt.preventDefault();
     }
 
-    return (
-      <div className="createWholePage">
+    const renderCreateBody() => {
       <div className = "createThing">
  
         <div className = "createNewItem_text">
@@ -185,70 +184,70 @@ const Create = () => {
         {/* </h4> */}
         </div>
 
-      <div className="App2">
-        <div className="container" onDrop={handleImageChange} onDragOver={dragOverHandler}>
-          {error && <p className="errorMsg">File not supported</p>}
-          <div className="imgPreview"
-          style= {{background: imgPreview ? `url("${imgPreview}")no-repeat center/cover` : "transparent"}}
-          >
-            {!imgPreview && (
-              <>
-              <p></p>
-              <label htmlFor="fileUpload" className="customFileUpload">
-                Drag & drop file
-                <div>
-                  or <span className="fileTypeDescription">browse media on your device</span>
-                </div>  
-              </label>
-              <input type="file" id="fileUpload" onChange={handleImageChange} />
-              </>
+        <div className="App2">
+          <div className="container" onDrop={handleImageChange} onDragOver={dragOverHandler}>
+            {error && <p className="errorMsg">File not supported</p>}
+            <div className="imgPreview"
+            style= {{background: imgPreview ? `url("${imgPreview}")no-repeat center/cover` : "transparent"}}
+            >
+              {!imgPreview && (
+                <>
+                <p></p>
+                <label htmlFor="fileUpload" className="customFileUpload">
+                  Drag & drop file
+                  <div>
+                    or <span className="fileTypeDescription">browse media on your device</span>
+                  </div>  
+                </label>
+                <input type="file" id="fileUpload" onChange={handleImageChange} />
+                </>
+              )}
+            </div>
+            {imgPreview && (
+              <button className="removeButton" onClick={() => setImgPreview(null)}>Remove image</button>
             )}
           </div>
-          {imgPreview && (
-            <button className="removeButton" onClick={() => setImgPreview(null)}>Remove image</button>
-          )}
         </div>
-      </div>
 
-      <form>
-        <br></br><br></br>
-        <div className = "name">
-        {/* <div className = "name_text"> */}
-        <strong>Name <span className="asterisk">*</span></strong> <br></br>
-        {/* </div> */}
+        <form>
+          <br></br><br></br>
+          <div className = "name">
+          {/* <div className = "name_text"> */}
+          <strong>Name <span className="asterisk">*</span></strong> <br></br>
+          {/* </div> */}
 
-        {/* <div className = "name_textbox"> */}
-        <input className="name_textbox_size" id="nameField" type="text" placeholder="Item Name"></input>
-        {/* </div> */}
+          {/* <div className = "name_textbox"> */}
+          <input className="name_textbox_size" id="nameField" type="text" placeholder="Item Name"></input>
+          {/* </div> */}
+          
+          </div>
+
+          <br />
+
+          <div className="tags">
+            <strong>Item tags</strong>
+            <p>Tags should be separated by commas (,)</p>
+            <input className="name_textbox_size" type="text" placeholder="Art, Abstract, Colourful, ..." />
+          </div>
+
+          <br />
+          
+          {/* <h4 className = "description"> */}
+          <div className = "description">
+          <strong>Description</strong><br></br>
+
         
-        </div>
+          <p className="description_text">
+          The description will be included on the item's detail page underneath its image.
+          {/*
+            <span style= {{color:"blue" }} > Markdown </span>
+            syntax is supported.
+          */}
+          </p>
+          <textarea className="description_textbox" name="comment[body]" rows="1" cols="50" wrap="physical" id="descriptionField" placeholder="Provide a detailed description of your item."></textarea>
 
-        <br />
-
-        <div className="tags">
-          <strong>Item tags</strong>
-          <p>Tags should be separated by commas (,)</p>
-          <input className="name_textbox_size" type="text" placeholder="Art, Abstract, Colourful, ..." />
-        </div>
-
-        <br />
-        
-        {/* <h4 className = "description"> */}
-        <div className = "description">
-        <strong>Description</strong><br></br>
-
-      
-        <p className="description_text">
-        The description will be included on the item's detail page underneath its image.
-        {/*
-          <span style= {{color:"blue" }} > Markdown </span>
-          syntax is supported.
-        */}
-        </p>
-        <textarea className="description_textbox" name="comment[body]" rows="1" cols="50" wrap="physical" id="descriptionField" placeholder="Provide a detailed description of your item."></textarea>
-
-        </div>
-        {/* </h4> */}
+          </div>
+          {/* </h4> */}
 
         </form>
         <div className="DonateTransactionDetails">
@@ -267,9 +266,13 @@ const Create = () => {
           <Plus className="CreatePlus" />
           <p>Create Token</p>
         </button>
-    </div>
-  </div>
-  );
+      </div>
+      }
+
+    return (
+      <div className="createWholePage">
+      </div>
+    );
   
 };
 
