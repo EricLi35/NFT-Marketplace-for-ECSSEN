@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+  import React, {useState} from "react";
 import {Plus} from "react-bootstrap-icons";
 import "./index.css";
 import * as Mint from "./mint";
@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 import { v4 as uuidv4 } from 'uuid';
 import ProgressBar from "../Progress_bar";
 
-const Create = () => {  
+const Create = () => {
     const [imgPreview, setImgPreview] = useState(null);
     const [uploadFile, setUploadFile] = useState(null);
     const [error, setError] = useState(false);

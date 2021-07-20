@@ -11,6 +11,8 @@ import User from "./components/User";
 import Donate from './components/Donate';
 import Sell from "./components/Sell"
 import Progress_bar from "./components/Progress_bar"
+import LogOff from "./components/LogOff"
+
 import './App.css';
 
 import {getCookie} from "./constants.js";
@@ -126,6 +128,9 @@ function App(){
             <li>
               <Link to="/Progress_bar">Progress_bar</Link>
             </li>
+            <li>
+              <Link to="/LogOff">LogOff</Link>
+            </li>
           </ul>
           <Route exact path="/" component={Home} />
           <Route path="/home" component={Home} />
@@ -137,6 +142,8 @@ function App(){
           <Route path="/donate/*" component={Donate}/>
           <Route path="/sell/*" component={Sell} />
           <Route path="/Progress_bar" component={Progress_bar} />
+          <Route path="/LogOff" component={LogOff}/>
+
         </div>
       </Router>
     </div>

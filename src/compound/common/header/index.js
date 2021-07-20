@@ -131,12 +131,12 @@ function DropdownMenu(){
             </DropdownItem>
             
             <DropdownItem className="navv3">
-            <NavLink className="navv3" as={Link} to={"#"}>
+                <NavLink className="navv3" as={Link} to={"/LogOff"}>
                     <h3>
                     Log Off
                     </h3>
                 </NavLink>
-                </DropdownItem>
+            </DropdownItem>
         </div>
     )
 }
