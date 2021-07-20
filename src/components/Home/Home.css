@@ -90,6 +90,7 @@
 .catImg {
     width: 45vw;
     /* height: 500px; */
+    box-shadow: 0 2.5rem 0.5rem -2rem var(--shadow-color);
 }
 
 
