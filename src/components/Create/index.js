@@ -168,6 +168,15 @@ const Create = () => {
       evt.preventDefault();
     }
 
+    function displayLoginError(){
+      return(
+        <div className="LoginError">
+          <h1>You are not signed in at the moment</h1>
+          <h3>Please Sign-In <Link to="/signin">here</Link></h3>
+        </div>
+      );
+    }
+
     const renderCreateBody = () => {
       return(
         <div className = "createThing">
