@@ -6,6 +6,7 @@
  */
 
 import React from "react";
+import "./DefiLink.css";
 
 const DefiLink = () => {
   return(
