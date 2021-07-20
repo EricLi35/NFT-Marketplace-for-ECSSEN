@@ -10,6 +10,19 @@ export const loadCurrentMessage = async () => {
     //return message;
 };
 
+export const disconnectWallet = async () => {
+
+    const addressArray = await window.ethereum.request({
+        method: "eth_requestAccounts",
+    });
+    
+    const obj = {
+        status: "",
+        address: "",
+    };
+    return obj;
+}
+
 // This function will connect the user's Metamask to dApp
 export const connectWallet = async () => {
     if (window.ethereum){

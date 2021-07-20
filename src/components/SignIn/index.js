@@ -17,6 +17,7 @@ import {
 	connectWallet,
 	updateMessage,
 	getCurrentWalletConnected,
+  disconnectWallet,
 } from "./interact.js";
 
 const SignIn = () => { // Change the name after
@@ -96,10 +97,17 @@ const SignIn = () => { // Change the name after
     This function will be called to connect the user's Metamask wallet to frontend
     */
     const connectWalletPressed = async () => {
-      const walletResponse = await connectWallet();
+      // const walletResponse = await connectWallet();
+      setStatus("");
+      setWallet("");
+    };
+
+
+    const disconnectWalletPressed = async () => {
+      const walletResponse = await disconnectWallet();
       setStatus(walletResponse.status);
       setWallet(walletResponse.address);
-    };
+    }
 
     /*
     This function will be called when the user wants to update the message stored
@@ -130,7 +138,10 @@ const SignIn = () => { // Change the name after
 				String(walletAddress).substring(38)) : (
 				<span>Connect Wallet</span>
 			)}
-		</button>
+		  </button>
+      <button id="walletButton" onClick={disconnectWalletPressed}>
+        Log out
+      </button>
     
         {/* Took this out because we're just using metamask as the wallet right now
         <div id="different-wallet" className="different-wallet">
