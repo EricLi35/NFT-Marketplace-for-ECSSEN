@@ -17,3 +17,5 @@ const DefiLink = () => {
     </div>
   )
 }
+
+export default DefiLink;
