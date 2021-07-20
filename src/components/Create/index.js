@@ -168,7 +168,7 @@ const Create = () => {
       evt.preventDefault();
     }
 
-    const renderCreateBody() => {
+    const renderCreateBody = () => {
       <div className = "createThing">
  
         <div className = "createNewItem_text">
