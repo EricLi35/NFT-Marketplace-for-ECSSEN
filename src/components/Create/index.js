@@ -96,6 +96,7 @@ const Create = () => {
             console.error(JSON.parse(xhr.response));
             setProgress(100);
             setProgressBg("var(--failure-color)");
+            onMintFail(address);
             return;
           }
           let response = JSON.parse(xhr.response)
@@ -118,6 +119,7 @@ const Create = () => {
             if(success === null){
               setProgressBg("var(--failure-color)");
               console.error("Mint API ran into errors");
+              onMintFail(address);
               return;
             }
 
@@ -130,6 +132,7 @@ const Create = () => {
             setProgress(100)
             setProgressBg("var(--failure-color)");
             setDisableButton(false);
+            onMintFail(address);
           });
         }
 
