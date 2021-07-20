@@ -15,7 +15,22 @@ const Create = () => {
     const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
     const [transactionHash, setTransactionHash] = useState("");
     const [disableButton, setDisableButton] = useState(false);
+    const [loginStatus, setLoginStatus] = useState(true);
   
+    const checkLoginStatus = () => {
+      let userCookie = getCookie("uid");
+
+      if(userCookie === null){
+        setLoginStatus(false);
+        return;
+      }
+
+      let userInfo = JSON.parse(userCookie);
+      if(userInfo.walletAddress === ""){
+        setLoginStatus(false);
+      }
+    }
+
     const handleImageChange = (e) => {
       e.preventDefault();
       let selected = undefined;
