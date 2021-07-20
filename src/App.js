@@ -87,7 +87,7 @@ function App(){
   useEffect(() => {
     getCurrentWalletConnected();
     addWalletListener();
-  });
+  }, []);
 
   // document.body.style = 'background: var(--main-background-colour);'; 
   // CHANGE BACKGROUND COLOR OF WHOLE PAGE
