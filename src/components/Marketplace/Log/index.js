@@ -28,16 +28,6 @@ export default class Log extends React.Component {
 
   async fetchData() {
 
-    //temp solution! how to filter specifically for giveNFT collection, AND for nft's that are on sale?
-    //throws error for i > 300, looks like we are being throttled? unsure if it is realistic to iterate through all NFT's like I have done here.
-    /* var token_ids = [];
-    for (var i = 0; i < 200; i++)  {
-      token_ids[i] = i;
-    }
-    console.log(token_ids); */
-
-
-    //future permanent solution; however, this request is currently being rate-limited. I believe using an API key can fix this (perhaps can be used when we move to mainnet).
     //fetch sell orders => take token_ids from orders => pass to getOrders() function along with asset_contract_address
 
     const fetch = require('node-fetch'); 
