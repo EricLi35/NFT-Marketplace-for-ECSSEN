@@ -13,6 +13,7 @@ import './Sell.css';
 import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, onNetworkUpdate, API_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
+import ProgressBar from "../Progress_bar";
 
 function ElogDateTime({ selected, handleChange }) {
     // const [date, setDate] = useState(selected && selected.split(" ")[0]);
@@ -98,6 +99,8 @@ function Sell() {
     const [bidMessage, setBidMessage] = useState(null)                                                                 
     const [reserveMessage, setReserveMessage] = useState(null)                                                         
     const [msg, setMsg] = useState("")
+    const [dateMsg, setDateMsg] = useState("")
+    const [todayDateTime, setTodayDateTime] = useState('')
 
     // progress bar info
     const [progress, setProgress] = useState(0);
