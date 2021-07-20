@@ -53,6 +53,19 @@ const Create = () => {
       }
     };
 
+    /**
+     * Handles the situation if the minting process fails to complete for 
+     * any reason.
+     *
+     * Since a file is still uploaded, even if a mint fails, to reduce storage
+     * usage, this function will delete the hosted image.
+     */
+    async function onMintFail(address){
+        fetch(address, {method: "DELETE"})
+        .then((response) => {response !== '1'? console.error("Error in clearing static file:", response) : console.log("successfully cleared");})
+        .catch((err) => console.error("Error in connecting to static file:", err));
+    }
+
     async function createNFT(){
         setDisableButton(true);
         setProgress(1);
