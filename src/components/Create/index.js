@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 import {Plus} from "react-bootstrap-icons";
 import "./index.css";
 import * as Mint from "./mint";
@@ -278,10 +279,13 @@ const Create = () => {
           </button>
         </div>
       );
-      }
+    }
 
     return (
       <div className="createWholePage">
+        {
+          loginStatus ? renderCreateBody() : displayLoginError()
+        }
       </div>
     );
   
