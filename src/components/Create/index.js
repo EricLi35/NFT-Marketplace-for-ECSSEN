@@ -9,6 +9,8 @@ import { v4 as uuidv4 } from 'uuid';
 import ProgressBar from "../Progress_bar";
 
 const Create = () => {  
+    const CONTRACT_ADDR = "0x5f0ea95e05af06499b4f91a772f781816122dd54"
+
     const [imgPreview, setImgPreview] = useState(null);
     const [uploadFile, setUploadFile] = useState(null);
     const [error, setError] = useState(false);
@@ -171,6 +173,23 @@ const Create = () => {
       evt.preventDefault();
     }
 
+    const renderCreateButton = () => {
+      return(
+        <button className="CreateButton" onClick={() => createNFT()} disabled={disableButton}>
+          <Plus className="CreatePlus" />
+          <p>Create Token</p>
+        </button>
+      );
+    }
+
+    const renderLinkButton = () => {
+      return(
+        <Link to={`/asset/${CONTRACT_ADDR}/${tokenId}`}>
+          <button className="Linkbutton">View NFT</button>
+        </Link>
+      );
+    }
+
     function displayLoginError(){
       return(
         <div className="LoginError">
@@ -275,10 +294,13 @@ const Create = () => {
             : <p></p>
           }
           </div>
-          <button className="CreateButton" onClick={() => createNFT()} disabled={disableButton}>
-            <Plus className="CreatePlus" />
-            <p>Create Token</p>
-          </button>
+          <div className="ButtonContainer">
+          {
+            tokenId === ""
+            ? renderCreateButton()
+            : renderLinkButton()
+          }
+          </div>
         </div>
       );
     }
