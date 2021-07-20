@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Plus} from "react-bootstrap-icons";
 import "./index.css";
 import * as Mint from "./mint";
@@ -16,6 +16,10 @@ const Create = () => {
     const [transactionHash, setTransactionHash] = useState("");
     const [disableButton, setDisableButton] = useState(false);
     const [loginStatus, setLoginStatus] = useState(true);
+
+    useEffect(() => {
+      checkLoginStatus();
+    }, []);
   
     const checkLoginStatus = () => {
       let userCookie = getCookie("uid");
