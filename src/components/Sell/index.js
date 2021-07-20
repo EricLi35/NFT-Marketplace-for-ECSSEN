@@ -139,7 +139,7 @@ function Sell() {
     }
 
     const [data, setData] = useState(null)
-    const [method, setMethod] = useState('bid')
+    const [method, setMethod] = useState('set')
     const [bid, setBid] = useState(null)
     const [reserved, setReserved] = useState(null)
     const [expireDate, setExpireDate] = useState("")
@@ -332,16 +332,8 @@ function Sell() {
     function validateDate(){
         setDateMsg("")
         getCurrentDate();
-        console.log(todayDateTime)
-        console.log(expireDate)
-        if ((expireDate === null) || (expireDate === '') || (expireDate==='0000-00-00 00:00')){
-            console.log(expireDate)
-            setDateMsg("Enter the Expiration Date.")
-            return false;
-        }
-        if (expireDate<= todayDateTime){
-            setDateMsg("Expiration time must be at least 1 minute fron now.")
-            console.log("Expiration")
+        if ((expireDate === null) || (expireDate === '') || (expireDate==='0000-00-00 00:00') || (expireDate <= todayDateTime)){
+            setDateMsg("Expiration time must be at least 2 minute from now.")
             return false;
         }
         return true;
@@ -363,7 +355,7 @@ function Sell() {
     function getCurrentDate(){
         var current = new Date()
         var today = new Date()
-        today.setTime(current.getTime() + (1*60*1000));
+        today.setTime(current.getTime() + (2*60*1000));
 
         if (today.getMonth() < 9){
             var currentDate = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -463,9 +455,6 @@ function Sell() {
                                     <p className='expiration-date-description'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                 </div>
                                 <div className='expiration-date-right'>
-                                    {/* <input type="datetime-local" className="expiration-date-time"
-                                            value={(datetime || '').toString().substring(0, 16)}
-                                            onChange={changeDateTime} /> */}
                                     <ElogDateTime handleChange={(val) => {
                                         setExpireDate(val);
                                     }} />
@@ -496,11 +485,6 @@ function Sell() {
                         {
                             method === 'bid' &&
                             <div>
-                                {/* { 
-                                    let bidDescription = ({bid}===null) ?
-                                        "Invalid price." : 
-                                        "Your item will be listed for ${bid}"
-                                    }  */}
                                 <p className='listing-description'>Your item will be auctioned.
                                 The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}.</p>
                                 <p className='listing-error-message'>{bidMessage}</p>
@@ -509,7 +493,6 @@ function Sell() {
                                 <p className='listing-error-message'>{msg}</p>
                                 {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
                                 <button className='post-button' onClick={() => handlePostBid()}>Post your listing</button>
-                                {/* <button className='post-button' onClick={() => justTesting()}>Post your listing</button> */}
                             </div>
                         }
                     </div>
