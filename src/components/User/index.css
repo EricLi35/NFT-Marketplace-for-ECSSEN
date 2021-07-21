@@ -1,10 +1,13 @@
 .UserContainer{
-  margin-top: 3rem;
   min-height: 100%;
   height: 100vh;
   width: 100%;
   /* border: red solid; */
 
+}
+
+.UserInfoContainer{
+  margin-top: 3rem;
 }
 
 .UserStyleContainer{
