@@ -7,6 +7,7 @@ import Marketplace from "./components/Marketplace";
 import SignIn from './components/SignIn';
 import Asset from "./components/Asset";
 import Create from './components/Create';
+import DefiLink from "./components/DefiLink";
 import User from "./components/User";
 import Donate from './components/Donate';
 import Sell from "./components/Sell"
@@ -40,7 +41,7 @@ function App(){
     let expiryDate = new Date();
     expiryDate.setDate(new Date().getDate() + 1);
 
-    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax;`;
+    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path='/';`;
 
     // console.log(JSON.parse(getCookie("uid"))); // DEBUG
   }
@@ -87,7 +88,7 @@ function App(){
   useEffect(() => {
     getCurrentWalletConnected();
     addWalletListener();
-  });
+  }, []);
 
   // document.body.style = 'background: var(--main-background-colour);'; 
   // CHANGE BACKGROUND COLOR OF WHOLE PAGE
@@ -133,6 +134,7 @@ function App(){
           <Route path="/signin" component={SignIn}/>
           <Route path="/asset/*" component={Asset} />
           <Route path="/create" component={Create}/>
+          <Route path="/defi" component={DefiLink}/>
           <Route path="/user*" component={User} />
           <Route path="/donate/*" component={Donate}/>
           <Route path="/sell/*" component={Sell} />

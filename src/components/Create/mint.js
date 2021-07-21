@@ -145,7 +145,10 @@ export async function mint(formbody, toAddress) {
       await passJson(tokenId, formbody);
       console.log("Minted token from factory. Transaction: " + result.transactionHash + "\ntoken ID: " + tokenId);
       provider.engine.stop();
-      return result.transactionHash;
+      return {
+        transactionHash: result.transactionHash, 
+        tokenId
+      };
     }
 
   } else if (NFT_CONTRACT_ADDRESS) {
@@ -169,7 +172,10 @@ export async function mint(formbody, toAddress) {
       await passJson(id, formbody);	
       console.log("Minted token to you. Transaction: " + result.transactionHash + "\n token ID: " + id);
       provider.engine.stop();
-      return result.transactionHash;
+      return {
+        transactionHash: result.transactionHash, 
+        tokenId: id
+      };
     }
   } else {
     console.error(
