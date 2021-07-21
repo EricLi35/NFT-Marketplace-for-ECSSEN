@@ -22,9 +22,7 @@ function Sell() {
     const [tokenName, setTokenName] = useState("");
     const [tokenCollection, setTokenCollection] = useState("");
     const [imgUrl, setImgUrl] = useState("");
-    const [tokenOwnerId, setTokenOwnerId] = useState("");
     const [schemaName, setSchemaName] = useState("");
-    const [tokenPrice, setTokenPrice] = useState(-1);
 
     const [data, setData] = useState(null)
     const [method, setMethod] = useState('set')                                                                        
@@ -81,11 +79,6 @@ function Sell() {
         setTokenCollection(tokenData.collection.name);
         setImgUrl(tokenData.image_url);
         setSchemaName(tokenData.asset_contract.schema_name);
-        setTokenOwnerId(tokenData.top_ownerships[0].owner.address);
-
-        if (tokenData.orders.length > 0) {
-            setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
-        }
 
         console.log(tokenData);
     }
