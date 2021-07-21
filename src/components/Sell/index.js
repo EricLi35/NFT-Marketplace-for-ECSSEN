@@ -24,17 +24,17 @@ function Sell() {
     const [imgUrl, setImgUrl] = useState("");
     const [schemaName, setSchemaName] = useState("");
 
-    const [data, setData] = useState(null)
-    const [method, setMethod] = useState('set')                                                                        
-    const [bid, setBid] = useState(null)                                                                               
-    const [reserved, setReserved] = useState(null)                                                                     
-    const [expireDate, setExpireDate] = useState(null)                                                                 
-    const [message, setMessage] = useState("")                                                                         
-    const [bidMessage, setBidMessage] = useState(null)                                                                 
-    const [reserveMessage, setReserveMessage] = useState(null)                                                         
-    const [msg, setMsg] = useState("")
-    const [dateMsg, setDateMsg] = useState("")
-    const [todayDateTime, setTodayDateTime] = useState('')
+    const [data, setData] = useState(null);
+    const [method, setMethod] = useState('set');
+    const [bid, setBid] = useState(null);
+    const [reserved, setReserved] = useState(null);
+    const [expireDate, setExpireDate] = useState(null);
+    const [message, setMessage] = useState("");
+    const [bidMessage, setBidMessage] = useState(null);
+    const [reserveMessage, setReserveMessage] = useState(null);
+    const [msg, setMsg] = useState("");
+    const [dateMsg, setDateMsg] = useState("");
+    const [todayDateTime, setTodayDateTime] = useState('');
 
     // progress bar info
     const [progress, setProgress] = useState(0);
