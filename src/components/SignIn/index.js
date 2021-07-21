@@ -112,7 +112,7 @@ const SignIn = () => { // Change the name after
 
     // The UI of the sign-in page
     return (
-      <div className="wholeThing">
+      <div className="signInWholeThing">
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
           Sign in to your wallet
@@ -122,6 +122,13 @@ const SignIn = () => { // Change the name after
         <div id="img-div" className="img-div">
           <img src="https://cdn.worldvectorlogo.com/logos/metamask.svg" id="metamask-img" alt="Your very own NFT Wallet" className="metamask-img">
           </img>
+          <label for="metamask-img">
+          <h3 className="metamaskQuestion">
+          <a href="https://docs.metamask.io/guide" target="_blank">
+            What is MetaMask?
+          </a> 
+        </h3> 
+          </label>
         </div>
 
       <button id="walletButton" onClick={connectWalletPressed}>
@@ -143,11 +150,6 @@ const SignIn = () => { // Change the name after
         </div>
         */}
 
-        <h3 className="metamaskQuestion">
-          <a href="https://docs.metamask.io/guide" target="_blank">
-            What is MetaMask?
-          </a> 
-        </h3> 
       </div>
       </main>
       </div>

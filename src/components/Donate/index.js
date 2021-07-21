@@ -161,7 +161,7 @@ const Donate = () => {
   }
 
   return(
-    <div className="wholeThing">
+    <div className="donateWholeThing">
      <h1>
         Donate Your NFT Here!
     </h1>
