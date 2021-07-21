@@ -7,6 +7,8 @@
 
 import React from "react";
 import "./DefiLink.css";
+import coinImage from "./coin_isolated.png";
+import boxImage from "./box_isolated.png";
 
 const DefiLink = () => {
   return(
