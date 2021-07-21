@@ -24,7 +24,7 @@ function Sell() {
     const [imgUrl, setImgUrl] = useState("");
     const [schemaName, setSchemaName] = useState("");
 
-    const [data, setData] = useState(null);
+    const [fixedPrice, setFixedPrice] = useState(null);
     const [method, setMethod] = useState('set');
     const [bid, setBid] = useState(null);
     const [reserved, setReserved] = useState(null);
@@ -84,7 +84,7 @@ function Sell() {
     }
 
     function changeData(val) {
-        setData(val.target.value);
+        setFixedPrice(val.target.value);
     }
 
     function changeSellMethod(val) {
@@ -227,19 +227,19 @@ function Sell() {
 
     function validateFixedPrice() {
         setMessage("")
-        if (data === null){
+        if (fixedPrice === null){
             setMessage("Input price cannot be null.")
             return false;
         }
-        if (data === ''){
+        if (fixedPrice === ''){
             setMessage("Input price cannot be null.")
             return false;
         }
-        if (data.includes('-')){
+        if (fixedPrice.includes('-')){
             setMessage("The price you entered is invalid.")
             return false;
         }
-        if (data.includes('+')){
+        if (fixedPrice.includes('+')){
             setMessage("The price you entered is invalid.")
             return false;
         }
@@ -427,7 +427,7 @@ function Sell() {
                             method === 'set' &&
 
                             <div>
-                                <p className='listing-description'>Your item will be listed for {data}.
+                                <p className='listing-description'>Your item will be listed for {fixedPrice}.
                                 </p>
                                 <p className='listing-error-message'>{message}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
