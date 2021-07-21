@@ -7,13 +7,14 @@
  */
 
 import React from 'react';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
 import { getCookie, onNetworkUpdate, API_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 import ProgressBar from "../Progress_bar";
+import ElogDateTime from "./ElogDateTime";
 
 
 function Sell() {

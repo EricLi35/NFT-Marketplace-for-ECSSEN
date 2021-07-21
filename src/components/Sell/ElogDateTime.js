@@ -6,7 +6,7 @@
  */
 
 import React from "react";
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function ElogDateTime({ selected, handleChange }) {
     // const [date, setDate] = useState(selected && selected.split(" ")[0]);
