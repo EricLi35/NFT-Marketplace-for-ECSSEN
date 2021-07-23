@@ -7,7 +7,6 @@ import env from "react-dotenv";
 import {createAlchemyWeb3} from "@alch/alchemy-web3"
 const contractABI = require("./token_abi.json");
 const contractAddress = "0x5f0ea95e05af06499b4f91a772f781816122dd54";
-const alchemyKey = "wss://eth-rinkeby.ws.alchemyapi.io/v2/EPfi3xKz223ZXgjDYC2hQnb5lK1DLs39"
 const web3 = createAlchemyWeb3(alchemyKey);
 
 export const smartContract = new web3.eth.Contract(contractABI, contractAddress);
