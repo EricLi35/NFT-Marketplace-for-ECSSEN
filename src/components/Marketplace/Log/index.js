@@ -36,6 +36,7 @@ export default class Log extends React.Component {
     const options = {method: 'GET', headers: {Accept: 'application/json'}};
     var token_ids = [];
 
+    //*
     try {
 
       await fetch(url, options)
@@ -53,9 +54,11 @@ export default class Log extends React.Component {
         console.log("token_ids", token_ids);
 
       } catch(error) {}
+    //*/
 
     const { accountAddress } = this.props
 
+    /*
     try{
       const { orders, count } = await this.props.seaport.api.getOrders({
         maker: this.state.onlyByMe ? accountAddress : undefined,
@@ -76,6 +79,7 @@ export default class Log extends React.Component {
     }catch(error){
       console.error(error);
     }
+    //*/
   }
 
   paginateTo(page) {
