@@ -197,7 +197,7 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
   }
 
 
-  .CreateButton {
+  .CreateButton, .LinkButton {
     cursor: pointer;
     /* outline: springgreen solid; */
     justify-self: center;
@@ -219,6 +219,6 @@ FIXES GRADIENT BLOCKING WHEN YOU ZOOM OUT */
     font-size: 1.5rem;
   }
 
-  .CreateButton p{
+  .CreateButton p, .LinkButton p{
     margin: auto;
   }
