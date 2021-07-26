@@ -36,7 +36,7 @@ const Donate = () => {
     let urlParts = window.location.pathname.split('/');
     const [collectionAddr, tokenID] = urlParts.splice(-2);
 
-    fetch(`${API_URL}/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
+    fetch(`${API_URL}/api/v1/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
       .then((res) => res.json())
       .then((json) => updateDetails(json))
       .catch((err) => console.error(err));

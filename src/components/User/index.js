@@ -68,7 +68,7 @@ const User = () => {
 
     if(wa === undefined || wa === 0){return;}
 
-    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
+    fetch(`${API_URL}/api/v1/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
     .then((resp) => resp.json())
     // .then((json) => console.log(json))
     .then((json) => updateAssets(json.assets))
