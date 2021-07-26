@@ -19,7 +19,7 @@ export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
 export const GITHUB_URL = "https://github.com/BCharity-Net/nft-frontend"
 export const DEFAULT_DECIMALS = 18
-export const API_URL = NETWORK !== "mainnet" ? "https://rinkeby-api.opensea.io/api/v1" : "https://api.opensea.io/api/v1";
+export const API_URL = NETWORK !== "mainnet" ? "https://rinkeby-api.opensea.io" : "https://api.opensea.io";
 export const ETHERSCAN_URL = NETWORK !== "mainnet" ? "https://rinkeby.etherscan.io" : "https://etherscan.io";
 export let web3Provider = typeof web3 !== 'undefined'
   ? window.web3.currentProvider
