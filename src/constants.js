@@ -12,12 +12,15 @@ const web3 = createAlchemyWeb3(alchemyKey);
 export const smartContract = new web3.eth.Contract(contractABI, contractAddress);
 // */
 
+export const NETWORK = process.env.REACT_APP_NETWORK;
+console.log(NETWORK);
+
 export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
 export const GITHUB_URL = "https://github.com/BCharity-Net/nft-frontend"
 export const DEFAULT_DECIMALS = 18
-export const API_URL = "https://rinkeby-api.opensea.io/api/v1";
-export const ETHERSCAN_URL = "https://rinkeby.etherscan.io"
+export const API_URL = NETWORK !== "mainnet" ? "https://rinkeby-api.opensea.io/api/v1" : "https://api.opensea.io/api/v1";
+export const ETHERSCAN_URL = NETWORK !== "mainnet" ? "https://rinkeby.etherscan.io" : "https://etherscan.io";
 export let web3Provider = typeof web3 !== 'undefined'
   ? window.web3.currentProvider
   : new Web3.providers.HttpProvider('https://mainnet.infura.io')
