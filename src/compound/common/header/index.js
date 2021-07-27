@@ -143,8 +143,11 @@ function Header(){
              </div>
              */}
              <Login>
-                 <Login_item icon={<LoginIcon />}>
-                 </Login_item>
+              {
+                userWallet === ""
+                  ? showLoginButton()
+                  : showUserButton()
+              }
              </Login>
         </section>
     )
