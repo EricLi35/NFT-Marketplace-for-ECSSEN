@@ -15,14 +15,20 @@ import './Header.css';
 function Header(){
     const [userWallet, setUserWallet] = useState("");
 
-    function updateUser(){
-      let userJson = getCookie("uid");
-      if(userJson === undefined){
-        return;
+    /*
+    This function sets up a listener that detects changes in the user's Metamask
+    wallet state, such as when the user disconnects their wallet or switch addresses
+    */
+    function addWalletListener() {
+      if (window.ethereum) {
+        window.ethereum.on("accountsChanged", (accounts) => {
+          if (accounts.length > 0) {
+            setUserWallet(accounts[0]);
+          } else {
+            setUserWallet("");
+          }
+        });
       }
-
-      let userData = JSON.parse(userJson);
-      setUserWallet(userData.walletAddress);
     }
 
     const updateNavbar = async (evt) => {
@@ -42,8 +48,6 @@ function Header(){
             }
             item.classList.add("navbar-active");
         });
-
-        updateUser();
     }
 
     function setCurrent(){
@@ -59,7 +63,17 @@ function Header(){
 
     useEffect(() => {
       setCurrent();
-      updateUser();
+      addWalletListener();
+
+      // Check for current wallet if connected
+
+      let userJson = getCookie("uid");
+      if(userJson === undefined){
+        return;
+      }
+
+      let userData = JSON.parse(userJson);
+      setUserWallet(userData.walletAddress);
     },[])
 
     return (
