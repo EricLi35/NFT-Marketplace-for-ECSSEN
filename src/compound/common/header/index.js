@@ -125,7 +125,7 @@ function Header(){
   function DropdownMenu(){
 
       function handleLogout(){
-        document.cookie = "uid={\"walletAddress\"=\"\"}; path=/"
+        document.cookie = "uid={\"walletAddress\":\"\"}; path=/"
         window.localStorage.removeItem("logged-in");
         setUserWallet("");
       }
