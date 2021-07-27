@@ -100,10 +100,12 @@ ul {
   font-style: none;
   font-size: 1.5em;
   background: linear-gradient(70deg, var(--blue-gradient-start) 15%, var(--blue-gradient-end));
-  padding: 17px 35px;
+  padding: 17px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;  transform: translateY(-12px);
   border-radius: 0.5rem;
   flex-shrink: 1;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .navbar_search input{
