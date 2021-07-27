@@ -42,9 +42,9 @@ function Header(){
 
             <div className = "navbar_logo">
                 <img src="./bcharity_logo.png"alt="bcharity_logo"></img>
-            </div>
-            <div className="navbar_bcharity">
-                BCHARITY
+                <p className="navbar_bcharity">
+                    BCHARITY
+                </p>
             </div>
 
             <div className = "navbar-item-container">
