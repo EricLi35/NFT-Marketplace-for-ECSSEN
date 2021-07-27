@@ -126,6 +126,21 @@ const User = () => {
     )
   }
 
+  function renderAssetList(){
+    return(
+      <div>
+        {
+          myAccount
+          ? renderCreateLink()
+          : <></>
+        }
+        <div className="UserAssets">
+          {userAssets}
+        </div>
+      </div>
+    )
+  }
+
   /**
    * Displays everything about the user, if they are signed in at the moment
    */
@@ -150,14 +165,7 @@ const User = () => {
             ? "Your Assets"
             : "Their Assets"
           }</h2>
-          {
-            myAccount
-            ? renderCreateLink()
-            : <></>
-          }
-          <div className="UserAssets">
-            {userAssets}
-          </div>
+          {renderAssetList()}
           <div className="pageButtons">
             <button
               className="pageSwitch"
