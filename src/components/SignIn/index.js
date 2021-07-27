@@ -99,6 +99,7 @@ const SignIn = () => { // Change the name after
       const walletResponse = await connectWallet();
       setStatus(walletResponse.status);
       setWallet(walletResponse.address);
+      window.localStorage.setItem("logged-in", true);
     };
 
     /*

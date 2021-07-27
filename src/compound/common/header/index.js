@@ -22,7 +22,7 @@ function Header(){
     function addWalletListener() {
       if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts) => {
-          if (accounts.length > 0) {
+          if (accounts.length > 0 && window.localStorage.getItem("logged-in") !== null){
             setUserWallet(accounts[0]);
           } else {
             setUserWallet("");
@@ -66,7 +66,7 @@ function Header(){
       addWalletListener();
 
       // Check for current wallet if connected
-
+      if(window.localStorage.getItem("logged-in") !== null) return;
       let userJson = getCookie("uid");
       if(userJson === undefined){
         return;

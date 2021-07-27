@@ -53,7 +53,7 @@ function App(){
   function addWalletListener(){
     if(window.ethereum){
       window.ethereum.on("accountsChanged", (accounts) => {
-        if(accounts.length > 0){
+        if(accounts.length > 0 && window.localStorage.getItem("logged-in") !== null){
           saveUserInfo({walletAddress: accounts[0]});
           return;
         }
@@ -72,7 +72,7 @@ function App(){
         const addressArray = await window.ethereum.request({
           method: "eth_accounts"
         });
-        if(addressArray.length > 0){
+        if(addressArray.length > 0 && window.localStorage.getItem("logged-in") !== null){
           saveUserInfo({walletAddress: addressArray[0]});
           return;
         }
