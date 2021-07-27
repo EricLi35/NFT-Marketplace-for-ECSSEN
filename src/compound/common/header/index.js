@@ -209,16 +209,13 @@ function DropdownMenu(){
                     </h3>
                 </NavLink>
             </DropdownItem>
-            
-            {/*
             <DropdownItem>
             <NavLink className="dropnav" as={Link} to={"#"}>
                     <h3>
                     Log Off
                     </h3>
                 </NavLink>
-                </DropdownItem>
-            */}
+            </DropdownItem>
         </div>
     )
 }
