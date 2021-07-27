@@ -184,6 +184,11 @@ function Login_item(props){
 
 function DropdownMenu(){
 
+    function handleLogout(){
+      document.cookie = "uid={\"walletAddress\"=\"\"}; path=/"
+      window.localStorage.removeItem("logged-in");
+    }
+
     function DropdownItem(props){
         return (
             <a href="#" className="menu-item">
@@ -210,7 +215,7 @@ function DropdownMenu(){
                 </NavLink>
             </DropdownItem>
             <DropdownItem>
-            <NavLink className="dropnav" as={Link} to={"#"}>
+            <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
                     <h3>
                     Log Off
                     </h3>
