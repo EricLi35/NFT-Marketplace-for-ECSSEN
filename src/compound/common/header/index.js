@@ -13,11 +13,16 @@ import './Header.css';
 
 function Header(){
     const updateNavbar = async (evt) => {
-        console.log(evt.target.innerText);
+        let focusElement = evt.target;
+        if(focusElement.href === undefined){
+          focusElement = focusElement.parentElement;
+        }
+
+        console.log(focusElement.href);
         let activeElement = document.querySelector(".navbar-active")
         if(activeElement !== null) activeElement.classList.remove("navbar-active");
         document.querySelectorAll(".navbar-item").forEach((item) => {
-            if(item.innerText !== evt.target.innerText){
+            if(item.firstChild.href !== focusElement.href){
                 return;
             }
             item.classList.add("navbar-active");
