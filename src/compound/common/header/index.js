@@ -55,7 +55,7 @@ function Header(){
                 >
                     <NavLink as={Link} to={"/home"} className="navlink-items">
                       <House />
-                      <p>
+                      <p className="navlink-text">
                         Home
                       </p>
                     </NavLink>
@@ -66,7 +66,7 @@ function Header(){
                 >
                     <NavLink as={Link} to={"/marketplace"} className="navlink-items">
                       <ShopWindow />
-                        <p>
+                        <p className="navlink-text">
                           Marketplace
                         </p>
                     </NavLink>
@@ -74,7 +74,7 @@ function Header(){
                 <div className="navbar-item" onClick={updateNavbar}>
                   <NavLink as={Link} to={"/defi"} className="navlink-items">
                     <Coin />
-                    <p>
+                    <p className="navlink-text">
                       DeFi
                     </p>
                   </NavLink>
