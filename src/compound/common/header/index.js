@@ -100,6 +100,72 @@ function Header(){
       )
     }
 
+   function Login(props) {
+      return (
+          <div className="login-section">
+              <ul className="login-div">{ props.children }</ul>
+          </div>
+      );
+  }
+
+  function Login_item(props){
+
+      const [open, setOpen] = useState(false);
+
+      return (
+          <li className="login-item">
+              <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+                  {props.children}
+              </a>
+              {open && DropdownMenu()}
+          </li>
+      )
+  }
+
+  function DropdownMenu(){
+
+      function handleLogout(){
+        document.cookie = "uid={\"walletAddress\"=\"\"}; path=/"
+        window.localStorage.removeItem("logged-in");
+        setUserWallet("");
+      }
+
+      function DropdownItem(props){
+          return (
+              <a href="#" className="menu-item">
+                  {props.children}
+              </a>
+          );
+      }
+
+    return (
+        <div className="dropdown">
+            <DropdownItem>
+                <NavLink className="dropnav" as={Link} to={"/Signin"}>
+                    <h3>
+                    Sign In
+                    </h3>
+                </NavLink>
+            </DropdownItem>
+
+            <DropdownItem>
+                <NavLink className="dropnav" as={Link} to={"/user"}>
+                    <h3>
+                    My NFTs
+                    </h3>
+                </NavLink>
+            </DropdownItem>
+            <DropdownItem>
+            <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
+                    <h3>
+                    Log Off
+                    </h3>
+                </NavLink>
+            </DropdownItem>
+        </div>
+    )
+}
+
     return (
         <section className = "navbar">
 
@@ -160,71 +226,6 @@ function Header(){
     )
  }  
 
- function Login(props) {
-    return (
-        <div className="login-section">
-            <ul className="login-div">{ props.children }</ul>
-        </div>
-    );
-}
-
-function Login_item(props){
-
-    const [open, setOpen] = useState(false);
-
-    return (
-        <li className="login-item">
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-                {props.children}
-            </a>
-            {open && DropdownMenu()}
-        </li>
-    )
-}
-
-function DropdownMenu(){
-
-    function handleLogout(){
-      document.cookie = "uid={\"walletAddress\"=\"\"}; path=/"
-      window.localStorage.removeItem("logged-in");
-      setUserWallet("");
-    }
-
-    function DropdownItem(props){
-        return (
-            <a href="#" className="menu-item">
-                {props.children}
-            </a>
-        );
-    }
-
-    return (
-        <div className="dropdown">
-            <DropdownItem>
-                <NavLink className="dropnav" as={Link} to={"/Signin"}>
-                    <h3>
-                    Sign In
-                    </h3>
-                </NavLink>
-            </DropdownItem>
-
-            <DropdownItem>
-                <NavLink className="dropnav" as={Link} to={"/user"}>
-                    <h3>
-                    My NFTs
-                    </h3>
-                </NavLink>
-            </DropdownItem>
-            <DropdownItem>
-            <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
-                    <h3>
-                    Log Off
-                    </h3>
-                </NavLink>
-            </DropdownItem>
-        </div>
-    )
-}
 
 export default Header;
 
