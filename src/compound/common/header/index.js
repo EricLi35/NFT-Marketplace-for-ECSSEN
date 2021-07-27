@@ -30,11 +30,11 @@ function Header(){
     }
 
     function setCurrent(){
-      let currentPath = window.location.pathname.substring(1);
-      if(currentPath === "") currentPath = "home";
+      let currentPath = window.location.hostname;
+      if(currentPath === "/") currentPath = "/home";
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
-        if(item.innerText.toUpperCase() !== currentPath.toUpperCase()) return;
+        if(item.firstChild.href.toUpperCase() !== currentPath.toUpperCase()) return;
         item.classList.add("navbar-active");
       });
     }
