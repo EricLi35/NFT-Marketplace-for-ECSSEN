@@ -38,7 +38,7 @@ ul {
 */
 .navbar {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 2fr 1fr;
   margin-top: 10px;
   justify-content: space-between;
   align-items: center;
@@ -64,6 +64,12 @@ ul {
 .navbar_bcharity {
   line-height: 100%;
   font-size: min(5vw, 3rem);
+}
+
+@media only screen and (max-device-width : 1150px){
+  .navbar_bcharity{
+    display: none;
+  }
 }
 
 .navbar-item-container{
