@@ -65,18 +65,15 @@ ul {
 }
 
 .navbar-item-container{
-  display:flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;  border-radius: 0.5rem;
-  margin-left: 6.5vw;
   height: 70px;
   background-color: transparent;
   /* margin-left: 150px; */
   border-radius: 0.5rem;
   flex-shrink: 1;
-  margin-left: 6.5vw;
   outline: yellow transparent;
 }
 
