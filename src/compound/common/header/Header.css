@@ -286,7 +286,7 @@ ul {
   border-radius: 999rem;
   border:none;
   /*background: none;*/
-  /*box-shadow: 0 0 1rem 0.5rem var(--shadow-color);*/
+  box-shadow: 0 0.5rem 1rem 0.25rem var(--shadow-color);
   background-color: var(--blue-gradient-start);
   background-image: var(--blue-gradient);
   color: white;
