@@ -14,11 +14,13 @@ import './Header.css';
 function Header(){
     const updateNavbar = async (evt) => {
         let focusElement = evt.target;
-        if(focusElement.href === undefined){
+        let counter = 0;
+        while(focusElement.href === undefined && counter < 5){
           focusElement = focusElement.parentElement;
+          counter++;
         }
 
-        console.log(focusElement.href);
+        console.log(focusElement);
         let activeElement = document.querySelector(".navbar-active")
         if(activeElement !== null) activeElement.classList.remove("navbar-active");
         document.querySelectorAll(".navbar-item").forEach((item) => {
