@@ -214,25 +214,29 @@ ul {
 }
 
 .dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   z-index: 2;
   
   position: absolute;
   top: 65px;
     
   box-sizing: border-box;
-  /* height: 80px;
-  width: 82px; */
 
-  /* transform: translateX(-43%); */
+  width: 20rem;
+  height: auto;
+  transform: translateX(-43%);
 
   border: var(--border);
   border-radius: var(--border-radius);
   /* overflow: hidden; */
   /* border: 1px gold solid; */
 
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.8);
   /* border-color: rgba(0, 0, 0, 0.175); */
 
+  box-shadow: 0 0.5rem 1rem 0.5rem var(--shadow-color);
   /* font-size: 30px; */
 }
 
