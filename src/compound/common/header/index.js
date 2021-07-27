@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { ReactComponent as LoginIcon } from './login.svg';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import { House, ShopWindow, Coin } from "react-bootstrap-icons";
+import { getCookie } from "../../../constants";
 /* import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
@@ -12,6 +13,18 @@ import './bcharity_logo.png';
 import './Header.css';
 
 function Header(){
+    const [userWallet, setUserWallet] = useState("");
+
+    function updateUser(){
+      let userJson = getCookie("uid");
+      if(userJson === undefined){
+        return;
+      }
+
+      let userData = JSON.parse(userJson);
+      setUserWallet(userData.walletAddress);
+    }
+
     const updateNavbar = async (evt) => {
         let focusElement = evt.target;
         let counter = 0;
@@ -29,6 +42,8 @@ function Header(){
             }
             item.classList.add("navbar-active");
         });
+
+        updateUser();
     }
 
     function setCurrent(){
@@ -44,6 +59,7 @@ function Header(){
 
     useEffect(() => {
       setCurrent();
+      updateUser();
     },[])
 
     return (
