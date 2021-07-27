@@ -19,6 +19,7 @@ import {
 	updateMessage,
 	getCurrentWalletConnected,
 } from "./interact.js";
+import {saveUserInfo} from "../../constants";
 
 const SignIn = () => { // Change the name after
     //state variables
@@ -97,10 +98,11 @@ const SignIn = () => { // Change the name after
     This function will be called to connect the user's Metamask wallet to frontend
     */
     const connectWalletPressed = async () => {
+      window.localStorage.setItem("logged-in", true);
       const walletResponse = await connectWallet();
       setStatus(walletResponse.status);
       setWallet(walletResponse.address);
-      window.localStorage.setItem("logged-in", true);
+      saveUserInfo({walletAddress: walletResponse.address});
     };
 
     /*
