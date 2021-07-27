@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LoginIcon } from './login.svg';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import { House, ShopWindow, Link45Deg } from "react-bootstrap-icons";
 /* import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
@@ -53,7 +54,10 @@ function Header(){
                   onClick={updateNavbar}
                 >
                     <NavLink as={Link} to={"/home"} className="navlink-items">
+                      <House />
+                      <p>
                         Home
+                      </p>
                     </NavLink>
                 </div>
                 <div
