@@ -12,6 +12,7 @@
 import React from "react";
 import "./index.css"
 import { useEffect, useState } from "react";
+import {Redirect} from "react-router";
 import {
 	//oursmartcontract
 	connectWallet,
@@ -110,6 +111,10 @@ const SignIn = () => { // Change the name after
       const { status } = await updateMessage(walletAddress, newMessage);
       setStatus(status);
     }; */
+
+    if(window.localStorage.getItem("logged-in") !== null){
+      return(<Redirect to={"/user"} />)
+    }
 
     // The UI of the sign-in page
     return (
