@@ -74,7 +74,7 @@ const SignIn = () => { // Change the name after
       if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts) => {
           if (accounts.length > 0) {
-            setWallet(accounts[0]);
+            setWallet(accounts[0] && window.localStorage.getItem("logged-in") !== null);
             setStatus("Write a message in the text-field above.");
           } else {
             setWallet("");

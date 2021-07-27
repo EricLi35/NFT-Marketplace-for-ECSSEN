@@ -66,7 +66,7 @@ function Header(){
       addWalletListener();
 
       // Check for current wallet if connected
-      if(window.localStorage.getItem("logged-in") !== null) return;
+      if(window.localStorage.getItem("logged-in") === null) return;
       let userJson = getCookie("uid");
       if(userJson === undefined){
         return;
