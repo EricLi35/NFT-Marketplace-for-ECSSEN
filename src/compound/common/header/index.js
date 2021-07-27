@@ -33,7 +33,7 @@ function Header(){
 
     function setCurrent(){
       let currentPath = window.location.toLocaleString();
-      if(currentPath === "/") currentPath += "home";
+      if(currentPath === `${window.location.origin}/`) currentPath += "home";
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
         console.log(currentPath, item.firstChild.href);
