@@ -136,6 +136,7 @@ function DropdownMenu(){
                 </NavLink>
             </DropdownItem>
             
+            {/*
             <DropdownItem className="navv3">
             <NavLink className="navv3" as={Link} to={"#"}>
                     <h3>
@@ -143,6 +144,7 @@ function DropdownMenu(){
                     </h3>
                 </NavLink>
                 </DropdownItem>
+            */}
         </div>
     )
 }
