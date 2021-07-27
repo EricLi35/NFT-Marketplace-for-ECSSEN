@@ -53,6 +53,7 @@ ul {
   margin-left: 1rem;
   margin-right: 10px;
   outline: blue transparent;
+  align-items: center;
 }
 
 .navbar_logo img {
@@ -61,7 +62,8 @@ ul {
 }
 
 .navbar_bcharity {
-  font-size: 3rem; 
+  line-height: 100%;
+  font-size: min(5vw, 3rem);
 }
 
 .navbar-item-container{
