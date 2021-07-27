@@ -264,34 +264,9 @@ ul {
   /* border: blueviolet solid; */
 }
 
-.navv1 {
-  text-decoration: none;
-  /* border: 1px blueviolet solid; */
-}
-
-.navv1 h3 {
+.dropnav {
   color: black;
   font-weight: normal;
-}
-
-
-.navv2 {
   text-decoration: none;
-}
-
-.navv2 h3{
-  color: black;
-  font-weight: normal;
-}
-
-
-.navv3 {
-  text-decoration: none;
-  /* border: red solid; */
-}
-
-.navv3 h3{
-  color: black;
-  font-weight: normal;
-  /* border: red solid; */
+  width: 100%;
 }

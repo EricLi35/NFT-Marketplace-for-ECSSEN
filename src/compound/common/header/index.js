@@ -137,7 +137,7 @@ function DropdownMenu(){
     return (
         <div className="dropdown">
             <DropdownItem>
-                <NavLink className="navv1" as={Link} to={"/Signin"}>
+                <NavLink className="dropnav" as={Link} to={"/Signin"}>
                     <h3>
                     Sign In
                     </h3>
@@ -145,7 +145,7 @@ function DropdownMenu(){
             </DropdownItem>
 
             <DropdownItem>
-                <NavLink className="navv2" as={Link} to={"/user"}>
+                <NavLink className="dropnav" as={Link} to={"/user"}>
                     <h3>
                     My NFTs
                     </h3>
@@ -153,8 +153,8 @@ function DropdownMenu(){
             </DropdownItem>
             
             {/*
-            <DropdownItem className="navv3">
-            <NavLink className="navv3" as={Link} to={"#"}>
+            <DropdownItem>
+            <NavLink className="dropnav" as={Link} to={"#"}>
                     <h3>
                     Log Off
                     </h3>
