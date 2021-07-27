@@ -14,7 +14,7 @@ import Sell from "./components/Sell"
 import Progress_bar from "./components/Progress_bar"
 import './App.css';
 
-import {getCookie} from "./constants.js";
+import {getCookie, saveUserInfo} from "./constants.js";
 
 function App(){
   

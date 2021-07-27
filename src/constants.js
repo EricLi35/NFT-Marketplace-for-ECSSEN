@@ -73,6 +73,35 @@ export async function promisify(inner) {
   )
 }
 
+
+/**
+ * Saves the user's information in a cookie that persists througout the entire website.
+ *
+ * @param userInfo The user's information in a javascript object. This will be 
+ * stringified and be saved in a cookie.
+ *
+ * The userInfo object should be formatted as so:
+ * {
+ *   walletAddress, // must be non-empty, otherwise the cookie is deleted.
+ * }
+ *
+ * Information should now be assessible via the getCookie function in
+ * ./constants via getCookie("uid");
+ *
+ * note: the value of the cookie should be parsed as a JSON object
+ */
+export function saveUserInfo(userInfo){
+
+  let userString = JSON.stringify(userInfo);
+  // cookie expires in 24hr
+  let expiryDate = new Date();
+  expiryDate.setDate(new Date().getDate() + 1);
+
+  document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path=/`;
+
+  // console.log(JSON.parse(getCookie("uid"))); // DEBUG
+}
+
 /**
  * returns the cookie with the given name, or undefined if not found
  */
