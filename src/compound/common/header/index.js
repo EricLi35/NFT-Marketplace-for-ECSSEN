@@ -90,7 +90,7 @@ function Header(){
     }
 
     function showUserButton(){
-      let walletShorten = `${userWallet.substring(0,4)}...${userWallet.substring(11, 14)}`;
+      let walletShorten = `${userWallet.substring(0,4)}...${userWallet.substring(39, 42)}`;
       return(
         <Login_item>
           <button className="userHeaderButton">
