@@ -116,7 +116,7 @@ function Sell() {
 
         try{
 
-          setProgess(75);
+          setProgress(75);
           const listing = await seaport.createSellOrder({
               asset,
               accountAddress,
