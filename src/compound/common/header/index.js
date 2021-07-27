@@ -79,7 +79,6 @@ function Header(){
              */}
              <Login>
                  <Login_item icon={<LoginIcon />}>
-                     <DropdownMenu />
                  </Login_item>
              </Login>
         </section>
@@ -103,7 +102,7 @@ function Login_item(props){
             <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
                 {props.icon}
             </a>
-            {open && props.children}
+            {open && DropdownMenu()}
         </li>
     )
 }
