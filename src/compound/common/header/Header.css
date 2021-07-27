@@ -37,8 +37,8 @@ ul {
 }
 */
 .navbar {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   margin-top: 10px;
   justify-content: space-between;
   align-items: center;
