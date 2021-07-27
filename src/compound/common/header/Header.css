@@ -96,16 +96,11 @@ ul {
 }
 
 .navbar-item.navbar-active{
-  margin-left: 15px;
-  margin-right: 25px;
   color: white;
   font-style: none;
   font-size: 1.5em;
   background: linear-gradient(70deg, var(--blue-gradient-start) 15%, var(--blue-gradient-end));
-  padding-top: 17px;
-  padding-bottom: 17px;
-  padding-right: 35px;
-  padding-left: 35px;
+  padding: 17px 35px;
   box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;  transform: translateY(-12px);
   border-radius: 0.5rem;
   flex-shrink: 1;
