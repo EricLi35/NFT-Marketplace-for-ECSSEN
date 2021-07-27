@@ -32,10 +32,11 @@ function Header(){
     }
 
     function setCurrent(){
-      let currentPath = window.location.hostname;
-      if(currentPath === "/") currentPath = "/home";
+      let currentPath = window.location.toLocaleString();
+      if(currentPath === "/") currentPath += "home";
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
+        console.log(currentPath, item.firstChild.href);
         if(item.firstChild.href.toUpperCase() !== currentPath.toUpperCase()) return;
         item.classList.add("navbar-active");
       });
