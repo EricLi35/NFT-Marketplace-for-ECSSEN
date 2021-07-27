@@ -444,6 +444,18 @@ function Sell() {
                                 </p>
                                 <p className='listing-error-message'>{message}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
+                                <div className="TransactionDetails">
+                                {
+                                  progress > 0
+                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
+                                  : <></>
+                                }
+                                {
+                                  transactionHash !== ""
+                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  : <p></p>
+                                }
+                                </div>
                                 <button className='post-button' onClick={() => handlePostFixedPrice()}>Post your listing</button>
                             </div>
                         }
