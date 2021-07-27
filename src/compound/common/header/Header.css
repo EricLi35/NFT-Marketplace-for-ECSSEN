@@ -285,8 +285,11 @@ ul {
 
   border-radius: 999rem;
   border:none;
-  background: none;
-  box-shadow: 0 0 1rem 0.5rem var(--shadow-color);
+  /*background: none;*/
+  /*box-shadow: 0 0 1rem 0.5rem var(--shadow-color);*/
+  background-color: var(--blue-gradient-start);
+  background-image: var(--blue-gradient);
+  color: white;
 
   font-size: 1.1rem;
   font-family: "Rubik", sans-serif;
