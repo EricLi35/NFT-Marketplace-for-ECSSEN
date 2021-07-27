@@ -25,7 +25,7 @@ ul {
   width: 100%;
 }
 
-@media only screen and (max-device-width: 750px){
+@media only screen and (max-device-width: 1100px){
   .navlink-text{
     display: none;
   }
