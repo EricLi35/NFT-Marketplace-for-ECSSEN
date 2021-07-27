@@ -50,7 +50,7 @@ ul {
 .navbar_logo {
   display: flex;
   flex-shrink: 1;
-  margin-left: 15px;
+  margin-left: 1rem;
   margin-right: 10px;
   outline: blue transparent;
 }
@@ -160,6 +160,7 @@ ul {
 .login-section {
   width: 100%;
   height: 70px;
+  padding-right: 1rem;
 }
 
 .login-div {
@@ -174,7 +175,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  
 }
 
 .icon-button{
