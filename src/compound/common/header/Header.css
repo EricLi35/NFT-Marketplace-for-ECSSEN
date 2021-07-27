@@ -273,6 +273,11 @@ ul {
   width: 100%;
 }
 
+.signInLink,
+.icon-button{
+  text-decoration: none;
+}
+
 .userHeaderButton{
   width: 100%;
   padding: 1rem min(5vmin, 3rem);
