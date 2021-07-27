@@ -90,8 +90,13 @@ function Header(){
     }
 
     function showUserButton(){
+      let walletShorten = `${userWallet.substring(0,4)}...${userWallet.substring(11, 14)}`;
       return(
-        <Login_item icon={<LoginIcon />}/>
+        <Login_item>
+          <button className="userHeaderButton">
+            {walletShorten}
+          </button>
+        </Login_item>
       )
     }
 
@@ -170,7 +175,7 @@ function Login_item(props){
     return (
         <li className="login-item">
             <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-                {props.icon}
+                {props.children}
             </a>
             {open && DropdownMenu()}
         </li>

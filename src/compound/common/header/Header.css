@@ -185,6 +185,7 @@ ul {
   justify-content: flex-end;
 }
 
+/*
 .login-item{
   width: 40px;
   display: flex;
@@ -212,6 +213,7 @@ ul {
 .icon-button:hover {
   filter: brightness(1.2);
 }
+*/
 
 .dropdown {
   display: flex;
