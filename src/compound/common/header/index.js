@@ -76,6 +76,23 @@ function Header(){
       setUserWallet(userData.walletAddress);
     },[])
 
+    function showLoginButton(){
+      return(
+        <Link to="/signin" className="signInLink">
+          <button className="userHeaderButton">
+            
+            Connect
+          </button>
+        </Link>
+      )
+    }
+
+    function showUserButton(){
+      return(
+        <Login_item icon={<LoginIcon />}/>
+      )
+    }
+
     return (
         <section className = "navbar">
 
