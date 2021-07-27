@@ -41,7 +41,7 @@ function App(){
     let expiryDate = new Date();
     expiryDate.setDate(new Date().getDate() + 1);
 
-    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path='/';`;
+    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path=/`;
 
     // console.log(JSON.parse(getCookie("uid"))); // DEBUG
   }
