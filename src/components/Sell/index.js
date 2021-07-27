@@ -101,6 +101,7 @@ function Sell() {
 
     async function makeSellOrder() {
 
+        setProgress(25);
         const seaport = await getOpenSeaPort()
 
         let urlParts = window.location.pathname.split('/');
@@ -111,14 +112,26 @@ function Sell() {
 
         let asset = { tokenId, tokenAddress };
         // if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
+        setProgress(50);
 
-        const listing = await seaport.createSellOrder({
-            asset,
-            accountAddress,
-            startAmount: getSalePrice()
-        })
+        try{
 
-        document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
+          setProgess(75);
+          const listing = await seaport.createSellOrder({
+              asset,
+              accountAddress,
+              startAmount: getSalePrice()
+          });
+
+          setProgress(100);
+          document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
+          setTransactionHash(listing.hash);
+          setProgressBg("var(--success-color)");
+        }catch(err){
+          console.error(err);
+          setProgress(100);
+          setProgressBg("var(--failure-color)");
+        }
     }
 
     /*
