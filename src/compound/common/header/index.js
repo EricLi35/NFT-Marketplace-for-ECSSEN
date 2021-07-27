@@ -70,11 +70,13 @@ function Header(){
                   </NavLink>
                 </div>
              </div>
+            {/*
              <div className="navbar_search">
                  <label className="searchLabel">
                  <input className="searchBar" type="text" placeholder="Search..." />
                  </label>
              </div>
+             */}
              <Login>
                  <Login_item icon={<LoginIcon />}>
                      <DropdownMenu />
