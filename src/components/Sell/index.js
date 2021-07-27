@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, onNetworkUpdate, API_URL } from '../../constants';
+import { getCookie, onNetworkUpdate, API_URL, ETHERSCAN_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
 import ProgressBar from "../Progress_bar";
 import ElogDateTime from "./ElogDateTime";
@@ -452,7 +452,7 @@ function Sell() {
                                 }
                                 {
                                   transactionHash !== ""
-                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
                                   : <p></p>
                                 }
                                 </div>
@@ -477,7 +477,7 @@ function Sell() {
                                 }
                                 {
                                   transactionHash !== ""
-                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
                                   : <p></p>
                                 }
                                 </div>

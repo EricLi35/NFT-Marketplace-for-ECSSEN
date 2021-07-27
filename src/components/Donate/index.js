@@ -217,7 +217,7 @@ const Donate = () => {
 }
 {
   transactionHash !== ""
-  ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+  ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
   : <p></p>
 }
 </div>
