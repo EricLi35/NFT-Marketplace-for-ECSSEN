@@ -10,8 +10,9 @@ import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
 import User from "../../../components/User"; 
 import './bcharity_logo.png';
-import './Header.css';
 import { nonEmptyArray } from 'check-types';
+*/
+import './Header.css';
 
 function Header(){
     const [userWallet, setUserWallet] = useState("");
