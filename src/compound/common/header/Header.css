@@ -185,14 +185,14 @@ ul {
   justify-content: flex-end;
 }
 
-/*
+
 .login-item{
-  width: 40px;
+  height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
 }
 
+/*
 .icon-button{
   width: 40px;
   height: 40px;
@@ -285,7 +285,7 @@ ul {
 
 .userHeaderButton{
   width: 100%;
-  padding: 1rem min(5vmin, 3rem);
+  padding: 1rem min(3vmin, 3rem);
   height: 80%;
   margin: 10% 0;
 
