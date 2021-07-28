@@ -145,3 +145,7 @@ html {
 .chainWarning a{
   color: inherit;
 }
+
+.chainWarning.hidden{
+  display: none;
+}
