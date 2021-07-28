@@ -21,7 +21,7 @@ const NETWORK_IDS = {
   "polygon_mumbai" : 80001
 };
 
-export const NETWORK_ID = NETWORK_IDS[NETWORK] || 1;
+export const NETWORK_ID = NETWORK_IDS[NETWORK] || 4;
 
 export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
