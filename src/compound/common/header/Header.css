@@ -222,13 +222,14 @@ ul {
   z-index: 2;
   
   position: absolute;
-  top: 65px;
+  top: 4.5rem;
+  right: 1rem;
     
   box-sizing: border-box;
 
-  width: 20rem;
+  width: min(25vmin, 12rem);
   height: auto;
-  transform: translateX(-43%);
+  padding: 2rem 0;
 
   border: var(--border);
   border-radius: var(--border-radius);

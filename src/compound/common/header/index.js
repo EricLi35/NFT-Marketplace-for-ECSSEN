@@ -153,6 +153,7 @@ function Header(){
 
     return (
         <div className="dropdown">
+          {/*
             <DropdownItem>
                 <NavLink className="dropnav" as={Link} to={"/Signin"}>
                     <h3>
@@ -168,6 +169,7 @@ function Header(){
                     </h3>
                 </NavLink>
             </DropdownItem>
+            */}
             <DropdownItem>
             <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
                     <h3>
