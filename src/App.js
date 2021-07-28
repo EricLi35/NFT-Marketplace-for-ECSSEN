@@ -53,7 +53,7 @@ function App(){
    * This function will display a prompt with a button to ask Metamask to
    * switch networks.
    */
-  function promptChainUpdate(chain){
+  function promptChainWarning(chain){
     if(!window.ethereum) return;
     chain = chain || window.ethereum.networkVersion;
     if(checkChain(chain)) return;
@@ -69,7 +69,7 @@ function App(){
     if(!window.ethereum) return;
     window.ethereum.on("chainChanged", (chain) => {
       console.log(chain);
-      promptChainUpdate(Number(chain));
+      promptChainWarning(Number(chain));
     });
   }
 
@@ -115,7 +115,7 @@ function App(){
   useEffect(() => {
     getCurrentWalletConnected();
     addWalletListener();
-    promptChainUpdate();
+    promptChainWarning();
     addChainListener();
   }, []);
 
