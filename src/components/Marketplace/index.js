@@ -1,11 +1,11 @@
 import React from 'react';
-//import styled from 'styled-components';
+import styled from 'styled-components';
 import Log from './Log'
 import "./index.css";
 import { OpenSeaPort, Network } from 'opensea-js';
+
 //import Sidebar from "./Sidebar";
 import { NETWORK, web3Provider, onNetworkUpdate, OPENSEA_JS_URL, GITHUB_URL } from '../../constants';
-
 
 export default class Marketplace extends React.Component {
 

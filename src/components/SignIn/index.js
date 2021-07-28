@@ -8,7 +8,7 @@
  * @since 2021.06.22.0
  */
    
-
+import { string } from "prop-types";
 import React from "react";
 import "./index.css"
 import { useEffect, useState } from "react";
@@ -17,6 +17,7 @@ import {
 	//oursmartcontract
 	connectWallet,
 	updateMessage,
+	loadCurrentMessage,
 	getCurrentWalletConnected,
 } from "./interact.js";
 import {saveUserInfo} from "../../constants";
@@ -25,6 +26,8 @@ const SignIn = () => { // Change the name after
     //state variables
     const [walletAddress, setWallet] = useState("");
     const [status, setStatus] = useState("");
+    const [message, setMessage] = useState("No connection to the network."); //default message
+    const [newMessage, setNewMessage] = useState("");
 
     /*
     This is a React hook that is called after your compoent is rendered.
@@ -53,9 +56,9 @@ const SignIn = () => { // Change the name after
     This function sets up a listener that will watch for the smart contract's
     updateMessages event and update the UI when the information is chaaned in 
     the smart contract
-    
+    */
     function addSmartContractListener() {
-      
+      /*
       ourSmartContract.events.updatedMessages({}, (error, data) => {
         if (error){
           setStatus("😥 " + error.message)
@@ -65,7 +68,8 @@ const SignIn = () => { // Change the name after
           setStatus(" Your message has been updated!");
         }
       });
-    } */
+      */
+    }
 
     /*
     This function sets up a listener that detects changes in the user's Metamask
@@ -108,11 +112,11 @@ const SignIn = () => { // Change the name after
     /*
     This function will be called when the user wants to update the message stored
     in the smart contract
-    
+    */
     const onUpdatePressed = async () => {
       const { status } = await updateMessage(walletAddress, newMessage);
       setStatus(status);
-    }; */
+    };
 
     function redirectRefresh(path){
       window.history.pushState({}, "", path);
@@ -168,5 +172,4 @@ const SignIn = () => { // Change the name after
       )
   };
 
- 
-export default SignIn;
+ export default SignIn;

@@ -83,6 +83,18 @@ function Sell() {
         console.log(tokenData);
     }
 
+    const [data, setData] = useState(null)
+    const [method, setMethod] = useState('set')
+    const [bid, setBid] = useState(null)
+    const [reserved, setReserved] = useState(null)
+    const [expireDate, setExpireDate] = useState(null)
+    const [message, setMessage] = useState("")
+    const [bidMessage, setBidMessage] = useState(null)
+    const [reserveMessage, setReserveMessage] = useState(null)
+    const [msg, setMsg] = useState("")
+    // const[selectedDate, setSelectedDate] = useState(null)
+    // const[datetime, setDatetime] = useState('')
+
     function changeData(val) {
         setFixedPrice(val.target.value);
     }
@@ -183,7 +195,6 @@ function Sell() {
             startAmount: getMinBid(),
             waitForHighestBid: true,
             expirationTime: setExpirationTime(),
-            englishAuctionReservePrice: getReservePrice()
         });
 
         setProgress(75);
@@ -204,10 +215,6 @@ function Sell() {
         return new OpenSeaPort(provider, {
             networkName: Network.Rinkeby
         });
-    }
-
-    function getReservePrice() {
-        return Number(document.getElementById("reserve-p").value);
     }
 
     function getSalePrice() {

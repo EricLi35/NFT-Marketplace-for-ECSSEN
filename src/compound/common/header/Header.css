@@ -9,6 +9,7 @@
 }
 
 ul {
+  /* border: red solid; */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -51,6 +52,7 @@ ul {
 .navbar {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+
   margin-top: 10px;
   justify-content: space-between;
   align-items: center;

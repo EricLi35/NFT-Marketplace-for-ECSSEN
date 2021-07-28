@@ -33,6 +33,7 @@ html {
   background: var(--main-background-colour);
   background-attachment: fixed;
   background-repeat: no-repeat;
+
 }
 
 .App {

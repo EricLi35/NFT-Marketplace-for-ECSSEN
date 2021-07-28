@@ -8,9 +8,10 @@ import { getCookie } from "../../../constants";
 /* import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
-import User from "../../../components/User"; */
+import User from "../../../components/User"; 
 import './bcharity_logo.png';
 import './Header.css';
+import { nonEmptyArray } from 'check-types';
 
 function Header(){
     const [userWallet, setUserWallet] = useState("");
@@ -240,7 +241,6 @@ function Header(){
         </section>
     )
  }  
-
 
 export default Header;
 

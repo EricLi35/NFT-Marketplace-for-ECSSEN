@@ -1,3 +1,4 @@
+
 import React, {useState, useEffect} from "react";
 import {Link} from "react-router-dom";
 import {Plus} from "react-bootstrap-icons";
@@ -10,7 +11,7 @@ import ProgressBar from "../Progress_bar";
 
 const Create = () => {  
     const CONTRACT_ADDR = "0x5f0ea95e05af06499b4f91a772f781816122dd54"
-
+    
     const [imgPreview, setImgPreview] = useState(null);
     const [uploadFile, setUploadFile] = useState(null);
     const [error, setError] = useState(false);
