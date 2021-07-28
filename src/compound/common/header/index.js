@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LoginIcon } from './login.svg';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
-import { House, ShopWindow, Coin, PersonCircle } from "react-bootstrap-icons";
+import { House, ShopWindow, Coin, PersonCircle, Stars } from "react-bootstrap-icons";
 import { getCookie } from "../../../constants";
 /* import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
@@ -94,7 +94,7 @@ function Header(){
       return(
         <div className="loggedInButtons">
           <button className="userHeaderButton">
-            <House />
+            <Stars />
             <p className="signInText">
               My NFTs
             </p>
