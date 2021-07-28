@@ -128,5 +128,5 @@ export function getCookie(name){
  */
 export function checkChain(){
   if(!window.ethereum) return false;
-  return window.ethereum.networkVersion === NETWORK_ID;
+  return window.ethereum.networkVersion == NETWORK_ID;
 }
