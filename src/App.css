@@ -147,6 +147,10 @@ html {
   text-decoration: underline;
 }
 
+.chainWarning a:hover{
+  cursor: pointer;
+}
+
 .chainWarning.hidden{
   display: none;
 }
