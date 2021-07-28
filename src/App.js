@@ -77,6 +77,16 @@ function App(){
   }
 
   /**
+   * Calls metamask to update the current chain.
+   */
+  function callChainUpdate(){
+    window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{chainId: `0x${NETWORK_ID.toString(16)}`}]
+    })
+  }
+
+  /**
    * Adds a wallet listener to check whenever the wallet address in the page 
    * changes, this includes switching wallets or disconnecting wallets
    */
@@ -175,7 +185,7 @@ function App(){
         <div className={"chainWarning hidden"}>
           <p>
             You're currently connected to the incorrect chain.
-            Please click <a>here</a> to connect to the {NETWORK.toUpperCase()} chain.
+            Please click <a onClick={callChainUpdate}>here</a> to connect to the {NETWORK.toUpperCase()} chain.
           </p>
         </div>
       </Router>
