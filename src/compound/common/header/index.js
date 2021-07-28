@@ -78,7 +78,7 @@ function Header(){
 
     function showLoginButton(){
       return(
-        <Link to="/signin" className="signInLink">
+        <Link to="/signin" className="headerLink">
           <button className="userHeaderButton">
             <PersonCircle />
             <p className="signInText">

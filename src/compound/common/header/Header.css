@@ -273,13 +273,14 @@ ul {
   width: 100%;
 }
 
-.signInLink,
+.headerLink,
 .icon-button{
   text-decoration: none;
 }
 
 .icon-button:hover,
-.userHeaderButton:hover{
+.userHeaderButton:hover,
+.headerLink:hover{
   cursor: pointer;
 }
 
