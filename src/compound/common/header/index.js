@@ -93,12 +93,14 @@ function Header(){
       let walletShorten = `${userWallet.substring(0,4)}...${userWallet.substring(39, 42)}`;
       return(
         <div className="loggedInButtons">
-          <button className="userHeaderButton">
-            <Stars />
-            <p className="signInText">
-              My NFTs
-            </p>
-          </button>
+          <Link to="/user" className="headerLink">
+            <button className="userHeaderButton">
+              <Stars />
+              <p className="signInText">
+                My NFTs
+              </p>
+            </button>
+          </Link>
           <Login_item>
             <button className="userHeaderButton">
               <PersonCircle />
