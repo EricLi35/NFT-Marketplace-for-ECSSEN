@@ -14,7 +14,7 @@ import Sell from "./components/Sell"
 import Progress_bar from "./components/Progress_bar"
 import './App.css';
 
-import {getCookie, saveUserInfo} from "./constants.js";
+import {getCookie, saveUserInfo, checkChain, NETWORK, NETWORK_ID} from "./constants.js";
 
 function App(){
   
@@ -44,6 +44,20 @@ function App(){
     document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path=/`;
 
     // console.log(JSON.parse(getCookie("uid"))); // DEBUG
+  }
+
+  /**
+   * Prompts the user to switch their connected chain if they are currently
+   * connected to the incorrect chain for the website.
+   *
+   * This function will display a prompt with a button to ask Metamask to
+   * switch networks.
+   */
+  function promptChainUpdate(){
+    if(!window.ethereum) return;
+    if(checkChain()) return;
+
+    alert(`you need to connect to the ${NETWORK.toUpperCase()} network to use this site`);
   }
 
   /**
@@ -88,6 +102,7 @@ function App(){
   useEffect(() => {
     getCurrentWalletConnected();
     addWalletListener();
+    promptChainUpdate();
   }, []);
 
   // document.body.style = 'background: var(--main-background-colour);'; 
