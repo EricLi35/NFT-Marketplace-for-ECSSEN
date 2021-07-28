@@ -286,7 +286,6 @@ ul {
 .userHeaderButton{
   width: 100%;
   padding: 1rem min(3vmin, 3rem);
-  height: 80%;
   margin: 10% 0;
 
   display: flex;
