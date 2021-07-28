@@ -131,3 +131,13 @@ html {
   align-items: center;
   justify-content: center;
 }
+
+.chainWarning{
+  position: fixed;
+  bottom: 0;
+  background-color: var(--blue-gradient-start);
+  background-image: var(--blue-gradient);
+  width: 100vw;
+  padding: 1rem 0;
+  color: white;
+}
