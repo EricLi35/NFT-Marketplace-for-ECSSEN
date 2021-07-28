@@ -310,3 +310,9 @@ ul {
     display: none;
   }
 }
+
+.loggedInButtons{
+  display: flex;
+  align-items: center;
+  gap: min(1vmin, 1rem);
+}
