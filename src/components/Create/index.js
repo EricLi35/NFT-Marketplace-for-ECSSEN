@@ -10,7 +10,6 @@ import ProgressBar from "../Progress_bar";
 
 const Create = () => {  
     const CONTRACT_ADDR = "0x5f0ea95e05af06499b4f91a772f781816122dd54"
-
     const [imgPreview, setImgPreview] = useState(null);
     const [uploadFile, setUploadFile] = useState(null);
     const [error, setError] = useState(false);
@@ -185,7 +184,9 @@ const Create = () => {
     const renderLinkButton = () => {
       return(
         <Link to={`/asset/${CONTRACT_ADDR}/${tokenId}`}>
-          <button className="Linkbutton">View NFT</button>
+          <button className="LinkButton">
+            <p>View NFT</p>
+          </button>
         </Link>
       );
     }
@@ -290,7 +291,7 @@ const Create = () => {
           }
           {
             transactionHash !== ""
-            ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+            ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
             : <p></p>
           }
           </div>
