@@ -35,6 +35,22 @@ const Asset = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
+  const [loginStatus, setLoginStatus] = useState(true);
+
+  const checkLoginStatus = () => {
+    let userCookie = getCookie("uid");
+
+    if(userCookie === null){
+      setLoginStatus(false);
+      return;
+    }
+
+    let userInfo = JSON.parse(userCookie);
+    if(userInfo.walletAddress === ""){
+      setLoginStatus(false);
+    }
+  }
+
   /*
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
@@ -54,6 +70,7 @@ const Asset = () => {
    */
   useEffect(() => {
     getDetails();
+    checkLoginStatus();
     // addSmartContractListener();
   }, []);
 
@@ -69,7 +86,7 @@ const Asset = () => {
     let urlParts = window.location.pathname.split('/');
     const [collectionAddr, tokenID] = urlParts.splice(-2);
 
-    fetch(`${API_URL}/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
+    fetch(`${API_URL}/api/v1/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
       .then((res) => res.json())
       .then((json) => updateDetails(json))
       .catch((err) => console.error(err));
@@ -396,6 +413,89 @@ const Asset = () => {
     //return result;
   }
 
+  function renderLoginToggle(){
+    return(
+      <span>
+        <Link to="/Signin">
+          <button className="loginButtonAsset" id="loginButton" type="button">Login to Purchase</button>
+        </Link>
+      </span>
+    );
+  }
+  
+  function renderBuyToggle(){
+    return(
+      <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
+        Buy
+      </button>
+    );
+  }
+
+  function renderBidToggle(){
+    // ensure that the bid is greater than the current highest bid?
+    return(
+      <div>
+        <input type="number" id="bidPrice" placeholder="BID HERE"/>
+        <button className="placeBidButton" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
+      </div>
+    )
+  }
+
+  function renderSellToggle(){
+    let urlParts = window.location.pathname.split('/');
+    const [collectionAddr, tokenID] = urlParts.splice(-2);
+
+    return(
+      <span>
+        <Link to={`/Sell/${collectionAddr}/${tokenID}`}>
+          <button id="button" className="sellButtonAsset">
+            Sell
+          </button>
+        </Link>
+        
+      {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
+        <input type="text" id="salePrice" defaultValue={"0"} placeholder="sale price" />*/}
+      </span>
+    );
+  }
+
+  function renderCancelToggle(){
+    return(
+      <span>
+        <div className="TransactionDetails">
+        {
+          progress > 0
+          ? <ProgressBar completed={progress} bgcolor={progressBg} />
+          : <></>
+        }
+        {
+          transactionHash !== ""
+          ? <p>Your transaction is: {transactionHash}</p>
+          : <p></p>
+        }
+        </div>
+
+        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
+      </span>
+    );
+  }
+
+  function renderDonateToggle(){
+
+    let urlParts = window.location.pathname.split('/');
+    const [collectionAddr, tokenID] = urlParts.splice(-2);
+
+    return(
+      <div className="donateContainer">
+        <Link to={`/Donate/${collectionAddr}/${tokenID}`}>
+          <button id="button" className="donateButtonAsset">
+            Donate
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
   function renderToggles(){
 
     let userInfo = JSON.parse(getCookie("uid"));
@@ -404,6 +504,14 @@ const Asset = () => {
 
     if (userAddress === tokenOwnerId){ //check if the user owns the NFT displayed
       isOwner = true;
+    }
+
+    if(!loginStatus){
+      return(
+        <div className="AssetButtonContainer">
+          {renderLoginToggle()}
+        </div>
+      );
     }
 
     if(isOwner){ 
@@ -443,7 +551,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+          ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>

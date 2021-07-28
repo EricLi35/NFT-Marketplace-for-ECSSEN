@@ -3,8 +3,8 @@ require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const web3 = require("web3");
 const fetch = require('node-fetch');
-const MNEMONIC = "kitchen surprise flame reject catalog estate human brother boring they pretty tray";
-const NODE_API_KEY = "44vzE8vRWWtSyAF6SJ6e99rnpmpLFOXD";
+const MNEMONIC = "a2l0Y2hlbiBzdXJwcmlzZSBmbGFtZSByZWplY3QgY2F0YWxvZyBlc3RhdGUgaHVtYW4gYnJvdGhlciBib3JpbmcgdGhleSBwcmV0dHkgdHJheQ";
+const NODE_API_KEY = "NDR2ekU4dlJXV3RTeUFGNlNKNmU5OXJucG1wTEZPWEQ";
 const isInfura = false;
 const FACTORY_CONTRACT_ADDRESS = "0x12620d4958cb3c40159DE3Fbf2a9415e251A974D";
 const NFT_CONTRACT_ADDRESS = "0x5F0ea95E05af06499B4F91a772f781816122Dd54";
@@ -117,10 +117,10 @@ export async function mint(formbody, toAddress) {
   const network =
     NETWORK === "mainnet" || NETWORK === "live" ? "mainnet" : "rinkeby";
   const provider = new HDWalletProvider(
-    MNEMONIC,
+    atob(MNEMONIC),
     isInfura
-      ? "https://" + network + ".infura.io/v3/" + NODE_API_KEY
-      : "https://eth-" + network + ".alchemyapi.io/v2/" + NODE_API_KEY
+      ? "https://" + network + ".infura.io/v3/" + atob(NODE_API_KEY)
+      : "https://eth-" + network + ".alchemyapi.io/v2/" + atob(NODE_API_KEY)
   );
   const web3Instance = new web3(provider);
 
@@ -145,7 +145,10 @@ export async function mint(formbody, toAddress) {
       await passJson(tokenId, formbody);
       console.log("Minted token from factory. Transaction: " + result.transactionHash + "\ntoken ID: " + tokenId);
       provider.engine.stop();
-      return result.transactionHash;
+      return {
+        transactionHash: result.transactionHash, 
+        tokenId
+      };
     }
 
   } else if (NFT_CONTRACT_ADDRESS) {
@@ -169,7 +172,10 @@ export async function mint(formbody, toAddress) {
       await passJson(id, formbody);	
       console.log("Minted token to you. Transaction: " + result.transactionHash + "\n token ID: " + id);
       provider.engine.stop();
-      return result.transactionHash;
+      return {
+        transactionHash: result.transactionHash, 
+        tokenId: id
+      };
     }
   } else {
     console.error(

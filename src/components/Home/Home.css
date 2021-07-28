@@ -5,6 +5,7 @@
     display: grid;
     grid-template-rows: repeat(3, min-content);
     gap: 20vh;
+    margin-bottom: 3rem;
 }
 
 .homepage-top{
@@ -53,6 +54,11 @@
     padding: 15px 40px 15px 40px;
     /* border: lightgreen solid; */
     cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.top-button-left:hover{
+    background-color:rgb(168, 168, 168)
 }
 
 .ExploreButton {
@@ -74,6 +80,11 @@
     padding: 15px 40px 15px 40px;
     /* border: purple solid; */
     cursor: pointer;
+    transition-duration: 0.2s;
+}
+
+.top-button-right:hover{
+    background-color: rgb(79, 47, 255);
 }
 
 .homepage-top-right{
@@ -85,6 +96,7 @@
 .catImg {
     width: 45vw;
     /* height: 500px; */
+    box-shadow: 0 2.5rem 0.5rem -2rem var(--shadow-color);
 }
 
 
@@ -160,8 +172,9 @@
 }
 
 .categoryBtn {
-    background: rgba(0, 0, 0, 0.03);
+    background: rgba(59, 171, 216, 0.616);
     border-color: rgba(0, 0, 0, 0.175);
+    box-shadow: 0px 0.2rem 0.2rem 0px var(--shadow-color), 0px 0.2rem 0.2rem 0px var(--shadow-color);
     padding: 5px;
     cursor: pointer;
     /* outline: hotpink solid; */

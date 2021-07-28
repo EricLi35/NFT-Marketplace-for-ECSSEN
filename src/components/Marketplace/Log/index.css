@@ -32,7 +32,7 @@
 }
 
 .btn-group_ml-4 button {
-    background: #459bdb;
+    background-color: #459bdb;
     /* background-image: var(--blue-gradient); */
     border-color: rgba(0, 0, 0, 0.175);
     padding: 5px;
@@ -43,8 +43,12 @@
     border-radius: 0.3rem;
 }
 
-.btn-group_ml-4 button:active {
-    background-color: #4547db;
+.btn-group_ml-4 button:hover {
+    box-shadow: 0 6px 8px 0 #88888844, 0 9px 25px 0 #88888844;
+}
+
+.activeFilter {
+    background-color: #6f12e0 !important;
 }
 
 .btn-group_ml-4 {

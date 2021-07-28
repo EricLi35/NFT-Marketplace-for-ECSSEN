@@ -7,78 +7,34 @@
  */
 
 import React from 'react';
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import './Sell.css';
 
 import { OpenSeaPort, Network } from 'opensea-js';
-import { getCookie, API_URL } from '../../constants';
+import { getCookie, onNetworkUpdate, API_URL, ETHERSCAN_URL } from '../../constants';
 import detectEthereumProvider from '@metamask/detect-provider';
-
-
 import ProgressBar from "../Progress_bar";
-function ElogDateTime({ selected, handleChange }) {
-    const [date, setDate] = useState(selected && selected.split(" ")[0]);
-    const [time, setTime] = useState(selected && selected.split(" ")[1]);
-    const dateRef = useRef(null);
-    const timeRef = useRef(null);
+import ElogDateTime from "./ElogDateTime";
 
-    useEffect(() => {
-        if (!date || !time) return;
-    }, [date, time]);
-
-    function _handleChange(e) {
-        // onChange();
-        const value = e.target.value;
-        const elid = e.target.id;
-        let newStr;
-
-        if ("elogdate" === elid) {
-            setDate(value);
-            newStr = new String("").concat(value || "0000-00-00", " ", time || "00:00");
-        } else if ("elogtime" === elid) {
-            setTime(value);
-            newStr = new String("").concat(date || "0000-00-00", " ", value || "00:00");
-        }
-        handleChange(newStr);
-    }
-
-    return (
-        <div className='auction-date-time'>
-            <div className='auction-date'>
-                <input
-                    id="elogdate"
-                    ref={dateRef}
-                    value={date}
-                    onChange={_handleChange}
-                    type="date"
-                    min="2000-01-01"
-                />
-            </div>
-            <div className="auction-time">
-                <input
-                    id="elogtime"
-                    ref={timeRef}
-                    value={time}
-                    onChange={_handleChange}
-                    type="time"
-                />
-            </div>
-        </div>
-    );
-}
-
-function setPriceErrorMsg() {
-    return <p>Invalid start price.</p>
-}
 
 function Sell() {
 
     const [tokenName, setTokenName] = useState("");
     const [tokenCollection, setTokenCollection] = useState("");
     const [imgUrl, setImgUrl] = useState("");
-    const [tokenOwnerId, setTokenOwnerId] = useState("");
     const [schemaName, setSchemaName] = useState("");
-    const [tokenPrice, setTokenPrice] = useState(-1);
+
+    const [fixedPrice, setFixedPrice] = useState(null);
+    const [method, setMethod] = useState('set');
+    const [bid, setBid] = useState(null);
+    const [reserved, setReserved] = useState(null);
+    const [expireDate, setExpireDate] = useState(null);
+    const [message, setMessage] = useState("");
+    const [bidMessage, setBidMessage] = useState(null);
+    const [reserveMessage, setReserveMessage] = useState(null);
+    const [msg, setMsg] = useState("");
+    const [dateMsg, setDateMsg] = useState("");
+    const [todayDateTime, setTodayDateTime] = useState('');
 
     // progress bar info
     const [progress, setProgress] = useState(0);
@@ -106,7 +62,7 @@ function Sell() {
         let urlParts = window.location.pathname.split('/');
         const [collectionAddr, tokenID] = urlParts.splice(-2);
 
-        fetch(`${API_URL}/asset/${collectionAddr}/${tokenID}`, { method: "GET" })
+        fetch(`${API_URL}/api/v1/asset/${collectionAddr}/${tokenID}`, { method: "GET" })
             .then((res) => res.json())
             .then((json) => updateDetails(json))
             .catch((err) => console.error(err));
@@ -123,11 +79,6 @@ function Sell() {
         setTokenCollection(tokenData.collection.name);
         setImgUrl(tokenData.image_url);
         setSchemaName(tokenData.asset_contract.schema_name);
-        setTokenOwnerId(tokenData.top_ownerships[0].owner.address);
-
-        if (tokenData.orders.length > 0) {
-            setTokenPrice(tokenData.orders[0].base_price * Math.pow(10, -18));
-        }
 
         console.log(tokenData);
     }
@@ -145,7 +96,7 @@ function Sell() {
     // const[datetime, setDatetime] = useState('')
 
     function changeData(val) {
-        setData(val.target.value);
+        setFixedPrice(val.target.value);
     }
 
     function changeSellMethod(val) {
@@ -162,6 +113,7 @@ function Sell() {
 
     async function makeSellOrder() {
 
+        setProgress(25);
         const seaport = await getOpenSeaPort()
 
         let urlParts = window.location.pathname.split('/');
@@ -172,14 +124,26 @@ function Sell() {
 
         let asset = { tokenId, tokenAddress };
         // if (schemaName === "ERC1155") {asset["schemaName"] = "ERC1155"};
+        setProgress(50);
 
-        const listing = await seaport.createSellOrder({
-            asset,
-            accountAddress,
-            startAmount: getSalePrice()
-        })
+        try{
 
-        document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
+          setProgress(75);
+          const listing = await seaport.createSellOrder({
+              asset,
+              accountAddress,
+              startAmount: getSalePrice()
+          });
+
+          setProgress(100);
+          document.getElementsByClassName("post-button")[0].innerHTML = "Your item has been put on sale";
+          setTransactionHash(listing.hash);
+          setProgressBg("var(--success-color)");
+        }catch(err){
+          console.error(err);
+          setProgress(100);
+          setProgressBg("var(--failure-color)");
+        }
     }
 
     /*
@@ -283,19 +247,19 @@ function Sell() {
 
     function validateFixedPrice() {
         setMessage("")
-        if (data === null){
+        if (fixedPrice === null){
             setMessage("Input price cannot be null.")
             return false;
         }
-        if (data === ''){
+        if (fixedPrice === ''){
             setMessage("Input price cannot be null.")
             return false;
         }
-        if (data.includes('-')){
+        if (fixedPrice.includes('-')){
             setMessage("The price you entered is invalid.")
             return false;
         }
-        if (data.includes('+')){
+        if (fixedPrice.includes('+')){
             setMessage("The price you entered is invalid.")
             return false;
         }
@@ -330,19 +294,30 @@ function Sell() {
 
     function validateReservedGreaterThanBid(){
         setMsg("")
-        if (bid < reserved){
+        if (Number(bid) < Number(reserved)){
             return true;
         }
         setMsg("The reserved price must be greater than the start price.")
         return false;
     }
 
+    function validateDate(){
+        setDateMsg("")
+        getCurrentDate();
+        if ((expireDate === null) || (expireDate === '') || (expireDate==='0000-00-00 00:00') || (expireDate <= todayDateTime)){
+            setDateMsg("Expiration time must be at least 2 minute from now.")
+            return false;
+        }
+        return true;
+    }
+
     function handlePostBid(){
         const bidIsValid = validateBid();
         const reservedIsValid = validateReserved();
-        if (bidIsValid && reservedIsValid){
-            const auctionIsValid = validateReservedGreaterThanBid();
-            if (auctionIsValid){
+        const dateIsValid = validateDate();
+        if (bidIsValid && reservedIsValid && dateIsValid){
+            const reservedGreaterThanBid = validateReservedGreaterThanBid();
+            if (reservedGreaterThanBid){
                 console.log("This item will be on auction")
                 makeAscendingAuction();
             }
@@ -350,19 +325,18 @@ function Sell() {
     }
 
     function getCurrentDate(){
-        var today = new Date(),
-        date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        
-        const [currentDate, setCurrentDate] = useState('')
-        setCurrentDate(date)
+        var current = new Date()
+        var today = new Date()
+        today.setTime(current.getTime() + (2*60*1000));
 
-        return (
-            <div>{currentDate}</div>
-        )
-    }
-
-    function compareDates(){
-        
+        if (today.getMonth() < 9){
+            var currentDate = today.getFullYear() + '-0' + (today.getMonth() + 1) + '-' + today.getDate();
+        } else {
+            var currentDate = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        }
+        var currentTime = today.getHours() + ':' + today.getMinutes();
+        var dateTime = currentDate + " " + currentTime;
+        setTodayDateTime(dateTime)
     }
 
     return (
@@ -449,13 +423,10 @@ function Sell() {
                             <hr />
                             <div className='expiration-date'>
                                 <div className='expiration-date-left'>
-                                    <h3 className='expire-date'>Expiration Date</h3>
+                                    <h3 className='expire-date'>Expiration Time</h3>
                                     <p className='expiration-date-description'>Your auction will automatically end at this time and the highest bidder will win. No need to cancel it!</p>
                                 </div>
                                 <div className='expiration-date-right'>
-                                    {/* <input type="datetime-local" className="expiration-date-time"
-                                            value={(datetime || '').toString().substring(0, 16)}
-                                            onChange={changeDateTime} /> */}
                                     <ElogDateTime handleChange={(val) => {
                                         setExpireDate(val);
                                     }} />
@@ -476,24 +447,33 @@ function Sell() {
                             method === 'set' &&
 
                             <div>
-                                <p className='listing-description'>Your item will be listed for {data}.</p>
+                                <p className='listing-description'>Your item will be listed for {fixedPrice}.
+                                </p>
                                 <p className='listing-error-message'>{message}</p>
                                 {/* <button className='post-button' onClick={() => makeSellOrder()}>Post your listing</button> */}
+                                <div className="TransactionDetails">
+                                {
+                                  progress > 0
+                                  ? <ProgressBar completed={progress} bgcolor={progressBg} />
+                                  : <></>
+                                }
+                                {
+                                  transactionHash !== ""
+                                  ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+                                  : <p></p>
+                                }
+                                </div>
                                 <button className='post-button' onClick={() => handlePostFixedPrice()}>Post your listing</button>
                             </div>
                         }
                         {
                             method === 'bid' &&
                             <div>
-                                {/* { 
-                                    let bidDescription = ({bid}===null) ?
-                                        "Invalid price." : 
-                                        "Your item will be listed for ${bid}"
-                                    }  */}
                                 <p className='listing-description'>Your item will be auctioned.
                                 The highest bidder will win it on {expireDate}, as long as their bid is at least {reserved}.</p>
                                 <p className='listing-error-message'>{bidMessage}</p>
                                 <p className='listing-error-message'>{reserveMessage}</p>
+                                <p className='listing-error-message'>{dateMsg}</p>
                                 <p className='listing-error-message'>{msg}</p>
                                 {/* <button className='post-button' onClick={() => makeAscendingAuction()}>Post your listing</button> */}
                                 <div className="TransactionDetails">
@@ -504,7 +484,7 @@ function Sell() {
                                 }
                                 {
                                   transactionHash !== ""
-                                  ? <p>Your transaction is: {transactionHash}</p>
+                                  ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
                                   : <p></p>
                                 }
                                 </div>

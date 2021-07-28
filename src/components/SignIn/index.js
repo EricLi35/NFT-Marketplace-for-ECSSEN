@@ -12,6 +12,7 @@ import { string } from "prop-types";
 import React from "react";
 import "./index.css"
 import { useEffect, useState } from "react";
+import {Redirect} from "react-router";
 import {
 	//oursmartcontract
 	connectWallet,
@@ -19,6 +20,7 @@ import {
 	loadCurrentMessage,
 	getCurrentWalletConnected,
 } from "./interact.js";
+import {saveUserInfo} from "../../constants";
 
 const SignIn = () => { // Change the name after
     //state variables
@@ -77,7 +79,7 @@ const SignIn = () => { // Change the name after
       if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts) => {
           if (accounts.length > 0) {
-            setWallet(accounts[0]);
+            setWallet(accounts[0] && window.localStorage.getItem("logged-in") !== null);
             setStatus("Write a message in the text-field above.");
           } else {
             setWallet("");
@@ -100,9 +102,11 @@ const SignIn = () => { // Change the name after
     This function will be called to connect the user's Metamask wallet to frontend
     */
     const connectWalletPressed = async () => {
+      window.localStorage.setItem("logged-in", true);
       const walletResponse = await connectWallet();
       setStatus(walletResponse.status);
       setWallet(walletResponse.address);
+      saveUserInfo({walletAddress: walletResponse.address});
     };
 
     /*
@@ -114,9 +118,19 @@ const SignIn = () => { // Change the name after
       setStatus(status);
     };
 
+    function redirectRefresh(path){
+      window.history.pushState({}, "", path);
+      window.location.reload(false);
+    }
+
     // The UI of the sign-in page
     return (
       <div className="wholeThing">
+      {
+        walletAddress === ""
+        ? <></>
+        : redirectRefresh("/user")
+      }
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
           Sign in to your wallet

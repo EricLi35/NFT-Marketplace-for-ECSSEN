@@ -46,7 +46,7 @@ export const getCurrentWalletConnected = async () => {
             const addressArray = await window.ethereum.request({
                 method: "eth_accounts",
             });
-            if (addressArray.length > 0){
+            if (addressArray.length > 0 && window.localStorage.getItem("logged-in") !== null){
                 return {
                     address: addressArray[0],
                     status: "Write a message in the text-field above,"
