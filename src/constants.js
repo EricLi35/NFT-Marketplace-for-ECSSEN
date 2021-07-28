@@ -13,7 +13,15 @@ export const smartContract = new web3.eth.Contract(contractABI, contractAddress)
 // */
 
 export const NETWORK = process.env.REACT_APP_NETWORK;
-console.log(NETWORK);
+
+const NETWORK_IDS = {
+  "mainnet" : 1,
+  "rinkeby" : 4,
+  "polygon_mainnet" : 137,
+  "polygon_mumbai" : 80001
+};
+
+export const NETWORK_ID = NETWORK_IDS[NETWORK] || 1;
 
 export const OPENSEA_URL = "https://opensea.io"
 export const OPENSEA_JS_URL = "https://github.com/ProjectOpenSea/opensea-js"
