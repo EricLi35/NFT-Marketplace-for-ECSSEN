@@ -119,3 +119,14 @@ export function getCookie(name){
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
+/**
+ * Checks the chain the user is currently connected to
+ *
+ * @returns true if their wallet is currently connected to the correct
+ * chain, false otherwise.
+ */
+export function checkChain(){
+  if(!window.ethereum) return false;
+  return window.ethereum.networkVersion === NETWORK_ID;
+}
