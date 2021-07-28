@@ -278,7 +278,7 @@ ul {
   text-decoration: none;
 }
 
-.icon-button:hover
+.icon-button:hover,
 .userHeaderButton:hover{
   cursor: pointer;
 }
