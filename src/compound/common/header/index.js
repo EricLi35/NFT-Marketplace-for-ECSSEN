@@ -17,6 +17,16 @@ import './Header.css';
 function Header(){
     const [userWallet, setUserWallet] = useState("");
 
+    /**
+     * Sets up a listener that detects whenever the users clicks on the page, and
+     * will update the navbar depending on the current page
+     */
+    function addClickListener(){
+      window.addEventListener("click", () => {
+        setCurrent();
+      });
+    }
+
     /*
     This function sets up a listener that detects changes in the user's Metamask
     wallet state, such as when the user disconnects their wallet or switch addresses
@@ -58,12 +68,14 @@ function Header(){
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
         console.log(currentPath, item.firstChild.href);
+        item.classList.remove("navbar-active");
         if(item.firstChild.href.toUpperCase() !== currentPath.toUpperCase()) return;
         item.classList.add("navbar-active");
       });
     }
 
     useEffect(() => {
+      addClickListener();
       setCurrent();
       addWalletListener();
 
