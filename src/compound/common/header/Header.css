@@ -109,6 +109,7 @@ ul {
   padding-top: 3px;
   flex-shrink: 1;
   /* outline: red solid; */
+  transition: transform 500ms;
 }
 
 .navbar-item.navbar-active{
