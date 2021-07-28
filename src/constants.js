@@ -17,8 +17,8 @@ export const NETWORK = process.env.REACT_APP_NETWORK;
 const NETWORK_IDS = {
   "mainnet" : 1,
   "rinkeby" : 4,
-  "polygon_mainnet" : 137,
-  "polygon_mumbai" : 80001
+  "polygon" : 137,
+  "polygon_test" : 80001
 };
 
 export const NETWORK_ID = NETWORK_IDS[NETWORK] || 4;
