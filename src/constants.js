@@ -126,7 +126,7 @@ export function getCookie(name){
  * @returns true if their wallet is currently connected to the correct
  * chain, false otherwise.
  */
-export function checkChain(){
+export function checkChain(chain){
   if(!window.ethereum) return false;
-  return window.ethereum.networkVersion == NETWORK_ID;
+  return chain == NETWORK_ID;
 }

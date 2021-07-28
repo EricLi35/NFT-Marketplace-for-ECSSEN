@@ -53,11 +53,24 @@ function App(){
    * This function will display a prompt with a button to ask Metamask to
    * switch networks.
    */
-  function promptChainUpdate(){
+  function promptChainUpdate(chain){
     if(!window.ethereum) return;
-    if(checkChain()) return;
+    chain = chain || window.ethereum.networkVersion;
+    if(checkChain(chain)) return;
 
     alert(`you need to connect to the ${NETWORK.toUpperCase()} network to use this site`);
+  }
+
+  /**
+   * Adds a wallet listener to check whenever the chain id the user is connected
+   * to changes.
+   */
+  function addChainListener(){
+    if(!window.ethereum) return;
+    window.ethereum.on("chainChanged", (chain) => {
+      console.log(chain);
+      promptChainUpdate(Number(chain));
+    });
   }
 
   /**
@@ -103,6 +116,7 @@ function App(){
     getCurrentWalletConnected();
     addWalletListener();
     promptChainUpdate();
+    addChainListener();
   }, []);
 
   // document.body.style = 'background: var(--main-background-colour);'; 
