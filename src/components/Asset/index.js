@@ -120,6 +120,79 @@ const Asset = () => {
 
   } 
 
+  function renderBuyToggle(){
+    return(
+      <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
+        Buy
+        </button>
+    );
+  }
+
+  function renderBidToggle(){
+    // ensure that the bid is greater than the current highest bid?
+    return(
+      <div>
+        <input type="number" id="bidPrice" placeholder="BID HERE"/>
+        <button className="placeBidButton" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
+      </div>
+    )
+  }
+
+  function renderSellToggle(){
+    let urlParts = window.location.pathname.split('/');
+    const [collectionAddr, tokenID] = urlParts.splice(-2);
+
+    return(
+      <span>
+        <Link to={`/Sell/${collectionAddr}/${tokenID}`}>
+          <button id="button" className="sellButtonAsset">
+            Sell
+          </button>
+        </Link>
+        
+      {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
+        <input type="text" id="salePrice" defaultValue={"0"} placeholder="sale price" />*/}
+      </span>
+    );
+  }
+
+  function renderCancelToggle(){
+    return(
+      <span>
+        <div className="TransactionDetails">
+        {
+          progress > 0
+          ? <ProgressBar completed={progress} bgcolor={progressBg} />
+          : <></>
+        }
+        {
+          transactionHash !== ""
+          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+          : <p></p>
+        }
+        </div>
+
+        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
+      </span>
+    );
+  }
+
+  function renderDonateToggle(){
+
+    let urlParts = window.location.pathname.split('/');
+    const [collectionAddr, tokenID] = urlParts.splice(-2);
+
+    return(
+      <div className="donateContainer">
+        <Link to={`/Donate/${collectionAddr}/${tokenID}`}>
+          <button id="button" className="donateButtonAsset">
+            Donate
+          </button>
+        </Link>
+      </div>
+    );
+  }
+
   async function makeBuyOrder(){
 
     setProgress(25);
@@ -285,7 +358,7 @@ const Asset = () => {
       */
 
       setProgressBg("var(--success-color)");
-    } catch(err){
+    }catch(err){
       setProgress(100);
       setProgressBg("var(--failure-color)");
       console.error(err);
@@ -321,79 +394,6 @@ const Asset = () => {
       });
 
     //return result;
-  }
-  
-  function renderBuyToggle(){
-    return(
-      <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
-        Buy
-        </button>
-    );
-  }
-
-  function renderBidToggle(){
-    // ensure that the bid is greater than the current highest bid?
-    return(
-      <div>
-        <input type="number" id="bidPrice" placeholder="BID HERE"/>
-        <button className="placeBidButton" id="bidButton" type="button" onClick={() => makeBuyOffer()}>Place Bid</button>
-      </div>
-    )
-  }
-
-  function renderSellToggle(){
-    let urlParts = window.location.pathname.split('/');
-    const [collectionAddr, tokenID] = urlParts.splice(-2);
-
-    return(
-      <span>
-        <Link to={`/Sell/${collectionAddr}/${tokenID}`}>
-          <button id="button" className="sellButtonAsset">
-            Sell
-          </button>
-        </Link>
-        
-      {/*  onClick={() => makeSellOrder()} className="button"> Sell</button>
-        <input type="text" id="salePrice" defaultValue={"0"} placeholder="sale price" />*/}
-      </span>
-    );
-  }
-
-  function renderCancelToggle(){
-    return(
-      <span>
-        <div className="TransactionDetails">
-        {
-          progress > 0
-          ? <ProgressBar completed={progress} bgcolor={progressBg} />
-          : <></>
-        }
-        {
-          transactionHash !== ""
-          ? <p>Your transaction is: {transactionHash}</p>
-          : <p></p>
-        }
-        </div>
-
-        <button type="button" id="cancelSellButton" onClick={() => cancelOrder()} className="cancelSellButton"> Cancel Sell Listing</button>
-      </span>
-    );
-  }
-
-  function renderDonateToggle(){
-
-    let urlParts = window.location.pathname.split('/');
-    const [collectionAddr, tokenID] = urlParts.splice(-2);
-
-    return(
-      <div className="donateContainer">
-        <Link to={`/Donate/${collectionAddr}/${tokenID}`}>
-          <button id="button" className="donateButtonAsset">
-            Donate
-          </button>
-        </Link>
-      </div>
-    );
   }
 
   function renderToggles(){
