@@ -5,6 +5,7 @@
     display: grid;
     grid-template-rows: repeat(3, min-content);
     gap: 20vh;
+    margin-bottom: 3rem;
 }
 
 .homepage-top{
