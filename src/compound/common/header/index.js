@@ -176,8 +176,8 @@ function Header(){
                 </NavLink>
             </DropdownItem>
         </div>
-    )
-}
+      )
+    }
 
     return (
         <section className = "navbar">
