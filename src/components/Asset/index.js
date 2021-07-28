@@ -86,7 +86,7 @@ const Asset = () => {
     let urlParts = window.location.pathname.split('/');
     const [collectionAddr, tokenID] = urlParts.splice(-2);
 
-    fetch(`${API_URL}/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
+    fetch(`${API_URL}/api/v1/asset/${collectionAddr}/${tokenID}`, {method: "GET"})
       .then((res) => res.json())
       .then((json) => updateDetails(json))
       .catch((err) => console.error(err));
@@ -478,7 +478,7 @@ const Asset = () => {
         }
         {
           transactionHash !== ""
-          ? <a href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
+          ? <a target="_blank" href={`${ETHERSCAN_URL}/tx/${transactionHash}`}>View your transaction</a>
           : <p></p>
         }
         </div>

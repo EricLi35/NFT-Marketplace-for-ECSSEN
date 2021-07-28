@@ -14,7 +14,7 @@ import Sell from "./components/Sell"
 import Progress_bar from "./components/Progress_bar"
 import './App.css';
 
-import {getCookie} from "./constants.js";
+import {getCookie, saveUserInfo, checkChain, NETWORK, NETWORK_ID} from "./constants.js";
 
 function App(){
   
@@ -41,9 +41,49 @@ function App(){
     let expiryDate = new Date();
     expiryDate.setDate(new Date().getDate() + 1);
 
-    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path='/';`;
+    document.cookie = `uid=${userString}; expires=${expiryDate}; SameSite=Lax; path=/`;
 
     // console.log(JSON.parse(getCookie("uid"))); // DEBUG
+  }
+
+  /**
+   * Prompts the user to switch their connected chain if they are currently
+   * connected to the incorrect chain for the website.
+   *
+   * This function will display a prompt with a button to ask Metamask to
+   * switch networks.
+   */
+  function promptChainWarning(chain){
+    if(!window.ethereum) return;
+    chain = chain || window.ethereum.networkVersion;
+    if(checkChain(chain)){
+      document.querySelector(".chainWarning").classList.add("hidden");
+      return;
+    }
+
+    document.querySelector(".chainWarning").classList.remove("hidden");
+  }
+
+  /**
+   * Adds a wallet listener to check whenever the chain id the user is connected
+   * to changes.
+   */
+  function addChainListener(){
+    if(!window.ethereum) return;
+    window.ethereum.on("chainChanged", (chain) => {
+      console.log(chain);
+      promptChainWarning(Number(chain));
+    });
+  }
+
+  /**
+   * Calls metamask to update the current chain.
+   */
+  function callChainUpdate(){
+    window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{chainId: `0x${NETWORK_ID.toString(16)}`}]
+    })
   }
 
   /**
@@ -53,7 +93,7 @@ function App(){
   function addWalletListener(){
     if(window.ethereum){
       window.ethereum.on("accountsChanged", (accounts) => {
-        if(accounts.length > 0){
+        if(accounts.length > 0 && window.localStorage.getItem("logged-in") !== null){
           saveUserInfo({walletAddress: accounts[0]});
           return;
         }
@@ -72,7 +112,7 @@ function App(){
         const addressArray = await window.ethereum.request({
           method: "eth_accounts"
         });
-        if(addressArray.length > 0){
+        if(addressArray.length > 0 && window.localStorage.getItem("logged-in") !== null){
           saveUserInfo({walletAddress: addressArray[0]});
           return;
         }
@@ -88,6 +128,8 @@ function App(){
   useEffect(() => {
     getCurrentWalletConnected();
     addWalletListener();
+    promptChainWarning();
+    addChainListener();
   }, []);
 
   // document.body.style = 'background: var(--main-background-colour);'; 
@@ -139,6 +181,12 @@ function App(){
           <Route path="/donate/*" component={Donate}/>
           <Route path="/sell/*" component={Sell} />
           <Route path="/Progress_bar" component={Progress_bar} />
+        </div>
+        <div className={"chainWarning hidden"}>
+          <p>
+            You're currently connected to the incorrect chain.
+            Please click <a onClick={callChainUpdate}>here</a> to connect to the {NETWORK.toUpperCase()} chain.
+          </p>
         </div>
       </Router>
     </div>

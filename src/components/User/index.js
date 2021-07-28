@@ -68,7 +68,7 @@ const User = () => {
 
     if(wa === undefined || wa === 0){return;}
 
-    fetch(`${API_URL}/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
+    fetch(`${API_URL}/api/v1/assets?order_by=token_id&limit=${limit}&offset=${offset}&owner=${wa}`)
     .then((resp) => resp.json())
     // .then((json) => console.log(json))
     .then((json) => updateAssets(json.assets))
@@ -126,6 +126,21 @@ const User = () => {
     )
   }
 
+  function renderAssetList(){
+    return(
+      <div>
+        {
+          myAccount
+          ? renderCreateLink()
+          : <></>
+        }
+        <div className="UserAssets">
+          {userAssets}
+        </div>
+      </div>
+    )
+  }
+
   /**
    * Displays everything about the user, if they are signed in at the moment
    */
@@ -150,14 +165,7 @@ const User = () => {
             ? "Your Assets"
             : "Their Assets"
           }</h2>
-          {
-            myAccount
-            ? renderCreateLink()
-            : <></>
-          }
-          <div className="UserAssets">
-            {userAssets}
-          </div>
+          {renderAssetList()}
           <div className="pageButtons">
             <button
               className="pageSwitch"
