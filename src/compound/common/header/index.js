@@ -114,7 +114,7 @@ function Header(){
 
       return (
           <li className="login-item">
-              <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
+              <a className="icon-button" onClick={() => setOpen(!open)}>
                   {props.children}
               </a>
               {open && DropdownMenu()}

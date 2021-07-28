@@ -278,6 +278,11 @@ ul {
   text-decoration: none;
 }
 
+.icon-button:hover
+.userHeaderButton:hover{
+  cursor: pointer;
+}
+
 .userHeaderButton{
   width: 100%;
   padding: 1rem min(5vmin, 3rem);
