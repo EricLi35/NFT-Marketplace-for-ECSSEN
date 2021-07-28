@@ -94,7 +94,10 @@ function Header(){
       return(
         <Login_item>
           <button className="userHeaderButton">
-            {walletShorten}
+            <PersonCircle />
+            <p className="signInText">
+              {walletShorten}
+            </p>
           </button>
         </Login_item>
       )
