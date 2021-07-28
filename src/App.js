@@ -56,9 +56,12 @@ function App(){
   function promptChainWarning(chain){
     if(!window.ethereum) return;
     chain = chain || window.ethereum.networkVersion;
-    if(checkChain(chain)) return;
+    if(checkChain(chain)){
+      document.querySelector(".chainWarning").classList.add("hidden");
+      return;
+    }
 
-    alert(`you need to connect to the ${NETWORK.toUpperCase()} network to use this site`);
+    document.querySelector(".chainWarning").classList.remove("hidden");
   }
 
   /**
