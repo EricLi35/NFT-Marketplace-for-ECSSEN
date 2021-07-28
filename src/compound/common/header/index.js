@@ -43,25 +43,6 @@ function Header(){
       }
     }
 
-    const updateNavbar = async (evt) => {
-        let focusElement = evt.target;
-        let counter = 0;
-        while(focusElement.href === undefined && counter < 5){
-          focusElement = focusElement.parentElement;
-          counter++;
-        }
-
-        console.log(focusElement);
-        let activeElement = document.querySelector(".navbar-active")
-        if(activeElement !== null) activeElement.classList.remove("navbar-active");
-        document.querySelectorAll(".navbar-item").forEach((item) => {
-            if(item.firstChild.href !== focusElement.href){
-                return;
-            }
-            item.classList.add("navbar-active");
-        });
-    }
-
     function setCurrent(){
       let currentPath = window.location.toLocaleString();
       if(currentPath === `${window.location.origin}/`) currentPath += "home";
@@ -206,10 +187,7 @@ function Header(){
             </div>
 
             <div className = "navbar-item-container">
-                <div 
-                  className="navbar-item"
-                  onClick={updateNavbar}
-                >
+                <div className="navbar-item">
                     <NavLink as={Link} to={"/home"} className="navlink-items">
                       <House />
                       <p className="navlink-text">
@@ -217,10 +195,7 @@ function Header(){
                       </p>
                     </NavLink>
                 </div>
-                <div
-                  className="navbar-item"
-                  onClick={updateNavbar}
-                >
+                <div className="navbar-item">
                     <NavLink as={Link} to={"/marketplace"} className="navlink-items">
                       <ShopWindow />
                         <p className="navlink-text">
@@ -228,7 +203,7 @@ function Header(){
                         </p>
                     </NavLink>
                 </div>
-                <div className="navbar-item" onClick={updateNavbar}>
+                <div className="navbar-item">
                   <NavLink as={Link} to={"/defi"} className="navlink-items">
                     <Coin />
                     <p className="navlink-text">
