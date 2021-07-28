@@ -48,7 +48,6 @@ function Header(){
       if(currentPath === `${window.location.origin}/`) currentPath += "home";
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
-        console.log(currentPath, item.firstChild.href);
         item.classList.remove("navbar-active");
         if(item.firstChild.href.toUpperCase() !== currentPath.toUpperCase()) return;
         item.classList.add("navbar-active");
