@@ -29,6 +29,11 @@
     margin-bottom: auto;
 }
 
+.homepage-top-left h1{
+    border: skyblue solid;
+}
+
+
 .homepage-top-left-button-container{
     margin-top: 2rem;
     /* text-align: center; */
@@ -166,4 +171,35 @@
     width: max-content;
     justify-self: center;
     border-radius: 0.3rem;
+}
+
+
+@media (orientation: portrait) {
+    .homepage {
+        border: blue solid;
+        /* width: 200vw; */
+
+    }
+
+    .homepage-top {
+        border: gold solid;
+        width: min-content;
+        /* left: 50%; */
+    }
+
+
+    .homepage-top-left {
+        /* width: max-content; */
+        border: springgreen solid;
+        position: relative;
+        left: 35%;
+    }
+
+    .homepage-top-right {
+        /* margin-top: 5vh; */
+        bottom: 0;
+        left: 100vw;
+        border: red solid;
+        position: absolute;
+    }
 }

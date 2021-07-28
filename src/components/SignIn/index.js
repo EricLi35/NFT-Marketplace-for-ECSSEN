@@ -17,7 +17,6 @@
    connectWallet,
    updateMessage,
    getCurrentWalletConnected,
-   disconnectWallet,
  } from "./interact.js";
  
  const SignIn = () => { // Change the name after
@@ -47,24 +46,6 @@
  
        addWalletListener();
      }, []);
- 
-     /*
-     This function sets up a listener that will watch for the smart contract's
-     updateMessages event and update the UI when the information is chaaned in 
-     the smart contract
-     
-     function addSmartContractListener() {
-       
-       ourSmartContract.events.updatedMessages({}, (error, data) => {
-         if (error){
-           setStatus("😥 " + error.message)
-         } else {
-           setMessage(data.returnValues[i]);
-           setNewMessage("");
-           setStatus(" Your message has been updated!");
-         }
-       });
-     } */
  
      /*
      This function sets up a listener that detects changes in the user's Metamask
@@ -97,26 +78,12 @@
      This function will be called to connect the user's Metamask wallet to frontend
      */
      const connectWalletPressed = async () => {
-       // const walletResponse = await connectWallet();
-       setStatus("");
-       setWallet("");
-     };
- 
- 
-     const disconnectWalletPressed = async () => {
-       const walletResponse = await disconnectWallet();
+       const walletResponse = await connectWallet();
        setStatus(walletResponse.status);
        setWallet(walletResponse.address);
-     }
+     };
  
-     /*
-     This function will be called when the user wants to update the message stored
-     in the smart contract
-     
-     const onUpdatePressed = async () => {
-       const { status } = await updateMessage(walletAddress, newMessage);
-       setStatus(status);
-     }; */
+   
  
      // The UI of the sign-in page
      return (
@@ -138,22 +105,8 @@
          String(walletAddress).substring(38)) : (
          <span>Connect Wallet</span>
        )}
-       </button>
-       <button id="walletButton" onClick={disconnectWalletPressed}>
-         Log out
-       </button>
+     </button>
      
-         {/* Took this out because we're just using metamask as the wallet right now
-         <div id="different-wallet" className="different-wallet">
-           <button className="wallet-dropdown"> → USE A DIFFERENT WALLET</button>
-           <div className="wallet-options" //should be a dropdown menu>
-            <a href="#">Option 1</a>
-            <a href="#">Option 2</a>
-            <a href="#">Option 3</a>
-         </div>       
-         </div>
-         */}
- 
          <h3 className="metamaskQuestion">
            <a href="https://docs.metamask.io/guide" target="_blank">
              What is MetaMask?

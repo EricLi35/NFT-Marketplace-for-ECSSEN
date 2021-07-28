@@ -1,28 +1,6 @@
 // export const smartcontract;
 import React from "react";
 
-/*
-This function handles the logic of loading the current message stored in the smart contract
-It will make a read call to the smartcontract using Web3 API
-*/
-export const loadCurrentMessage = async () => {
-    //const message = await oursmartContract.methods.message().call();
-    //return message;
-};
-
-export const disconnectWallet = async () => {
-
-    const addressArray = await window.ethereum.request({
-        method: "eth_requestAccounts",
-    });
-    
-    const obj = {
-        status: "",
-        address: "",
-    };
-    return obj;
-}
-
 // This function will connect the user's Metamask to dApp
 export const connectWallet = async () => {
     if (window.ethereum){
@@ -119,35 +97,4 @@ export const updateMessage = async (address, message) => {
             status: "Your message cannot be an empty string.",
         };
     }
-    /*
-    // Set up transcation parameters
-    const transcationParameters = {
-        to: contractAddress, 
-        from: address,
-        data: oursmartContract.methods.update(message).encodeABI(),
-    }; 
-    // Sign the transaction
-    try {
-        const txHash = await window.ethereum.request({
-            method: "eth_sendTransaction",
-            params: [transcationParameters],
-        });
-        return {
-            status: (
-                <span>
-                    ✅{" "}
-                    <a target="_blank" href={`https.//ropsten.etherscan.io/tx/${txHash}`}>
-                    View the status of your transcation on Etherscan!
-                    </a>
-                    <br />
-                    Once the transcation is verified by the network, the message will be updated automatically.
-                </span>
-            ),
-        };
-    } catch (error) {
-        return {
-            status: "😥 " + error.message,
-        };
-    }
-    */
 };
