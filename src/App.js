@@ -175,7 +175,7 @@ function App(){
         <div className={"chainWarning hidden"}>
           <p>
             You're currently connected to the incorrect chain.
-            Please click <a href="#">here</a> to update your chain.
+            Please click <a href="#">here</a> to connect to the {NETWORK.toUpperCase()} chain.
           </p>
         </div>
       </Router>
