@@ -156,19 +156,23 @@ export default class Log extends React.Component {
     )
   }
 
-  colorToggle(id) {
-    const toggleButton = document.getElementById(id);
-    const styles = window.getComputedStyle(toggleButton);
-    const backgroundColor = styles.getPropertyValue("background");
+  // colorToggle(id) {
+  //   const toggleButton = document.getElementById(id);
+  //   const styles = window.getComputedStyle(toggleButton);
+  //   const backgroundColor = styles.getPropertyValue("background");
     
-    if (backgroundColor == "#459bdb") {
-      document.getElementById(id).style.background = "#6f12e0";
+  //   if (backgroundColor == "#459bdb") {
+  //     document.getElementById(id).style.background = "#6f12e0";
       
-    } 
-    if (backgroundColor == "#6f12e0") {
-      document.getElementById(id).style.background = "#459bdb";
-    }
-    console.log("backgroundColor", document.getElementById(id).style.background);
+  //   } 
+  //   if (backgroundColor == "#6f12e0") {
+  //     document.getElementById(id).style.background = "#459bdb";
+  //   }
+  //   console.log("backgroundColor", document.getElementById(id).style.background);
+  // }
+
+  async colorToggle(id) {
+    document.getElementById(id).classList.toggle('activeFilter')
   }
 
   renderFilters() {
@@ -183,13 +187,11 @@ export default class Log extends React.Component {
           <p>Filter by:</p>
           <div className="btn-group_ml-4" role="group">
             <button type="button" id="AuctionsButton" className={"btn btn-outline-primary " + (sellSide ? "active" : "")} data-toggle="button" 
-              onClick={() => {this.toggleSide(OrderSide.Sell); 
-                              this.colorToggle('AuctionsButton')}}>
+              onClick={() => this.colorToggle('AuctionsButton')}>
               Auctions
             </button>
             <button type="button" id="BidsButton" className={"btn btn-outline-success " + (buySide ? "active" : "")} data-toggle="button" 
-              onClick={() => {this.toggleSide(OrderSide.Buy);  
-                              this.colorToggle('BidsButton')}}>
+              onClick={() => this.colorToggle('BidsButton')}>
               Bids
             </button>
           </div>

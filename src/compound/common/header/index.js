@@ -64,7 +64,11 @@ function Header(){
                         Marketplace
                     </NavLink>
                 </div>
-                <div className="navbar-item" onClick={updateNavbar}>About</div>
+                <div className="navbar-item" onClick={updateNavbar}>
+                  <NavLink as={Link} to={"/defi"} className="navlink-items">
+                    DeFi
+                  </NavLink>
+                </div>
              </div>
              <div className="navbar_search">
                  <label className="searchLabel">

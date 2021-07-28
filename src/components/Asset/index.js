@@ -35,6 +35,22 @@ const Asset = () => {
   const [progressBg, setProgressBg] = useState("var(--blue-gradient)");
   const [transactionHash, setTransactionHash] = useState("");
 
+  const [loginStatus, setLoginStatus] = useState(true);
+
+  const checkLoginStatus = () => {
+    let userCookie = getCookie("uid");
+
+    if(userCookie === null){
+      setLoginStatus(false);
+      return;
+    }
+
+    let userInfo = JSON.parse(userCookie);
+    if(userInfo.walletAddress === ""){
+      setLoginStatus(false);
+    }
+  }
+
   /*
   function addSmartContractListener(){
     smartContract.events.Approval({}, (err, data) => {
@@ -54,6 +70,7 @@ const Asset = () => {
    */
   useEffect(() => {
     getDetails();
+    checkLoginStatus();
     // addSmartContractListener();
   }, []);
 
@@ -322,12 +339,22 @@ const Asset = () => {
 
     //return result;
   }
+
+  function renderLoginToggle(){
+    return(
+      <span>
+        <Link to="/Signin">
+          <button className="loginButtonAsset" id="loginButton" type="button">Login to Purchase</button>
+        </Link>
+      </span>
+    );
+  }
   
   function renderBuyToggle(){
     return(
       <button className="buyButtonAsset" id="buyButton" type="button" onClick={() => makeBuyOrder()}>
         Buy
-        </button>
+      </button>
     );
   }
 
@@ -404,6 +431,14 @@ const Asset = () => {
 
     if (userAddress === tokenOwnerId){ //check if the user owns the NFT displayed
       isOwner = true;
+    }
+
+    if(!loginStatus){
+      return(
+        <div className="AssetButtonContainer">
+          {renderLoginToggle()}
+        </div>
+      );
     }
 
     if(isOwner){ 
