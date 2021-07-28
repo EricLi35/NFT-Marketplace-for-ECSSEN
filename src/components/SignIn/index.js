@@ -114,8 +114,9 @@ const SignIn = () => { // Change the name after
       setStatus(status);
     }; */
 
-    if(window.localStorage.getItem("logged-in") !== null){
-      return(<Redirect to={"/user"} />)
+    function redirectRefresh(path){
+      window.history.pushState({}, "", path);
+      window.location.reload(false);
     }
 
     // The UI of the sign-in page
@@ -124,7 +125,7 @@ const SignIn = () => { // Change the name after
       {
         walletAddress === ""
         ? <></>
-        : <Redirect to={"/user"} />
+        : redirectRefresh("/user")
       }
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
