@@ -169,6 +169,12 @@ function App(){
           <Route path="/sell/*" component={Sell} />
           <Route path="/Progress_bar" component={Progress_bar} />
         </div>
+        <div className={"chainWarning hidden"}>
+          <p>
+            You're currently connected to the incorrect chain.
+            Please click <a href="#">here</a> to update your chain.
+          </p>
+        </div>
       </Router>
     </div>
   );
