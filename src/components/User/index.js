@@ -21,6 +21,7 @@ const User = () => {
   const [myAccount, setMyAccount] = useState(true);
   const [userAssets, setUserAssets] = useState(new Array(20));
   const [assetPage, setAssetPage] = useState(0);
+  const [emptyPage, setEmptyPage] = useState(false);
   const [enableNext, setEnableNext] = useState(true);
   const [enablePrevious, setEnablePrevious] = useState(false);
 
@@ -105,6 +106,8 @@ const User = () => {
       htmlList.push(assetHTML);
     }
     setUserAssets(htmlList);
+
+    setEmptyPage(assetPage === 0 && htmlList.length === 0);
 
     setEnableNext(htmlList.length === 20);
   }
