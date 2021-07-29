@@ -3,123 +3,153 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as LoginIcon } from './login.svg';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import { House, ShopWindow, Coin, PersonCircle, Stars } from "react-bootstrap-icons";
+import { getCookie } from "../../../constants";
 /* import Marketplace from "./../../../components/Marketplace";
 import Home from '../../../components/Home';
 import SignIn from '../../../components/SignIn';
-import User from "../../../components/User"; */
+import User from "../../../components/User"; 
 import './bcharity_logo.png';
+import { nonEmptyArray } from 'check-types';
+*/
 import './Header.css';
 
 function Header(){
-    const updateNavbar = async (evt) => {
-        console.log(evt.target.innerText);
-        let activeElement = document.querySelector(".navbar-active")
-        if(activeElement !== null) activeElement.classList.remove("navbar-active");
-        document.querySelectorAll(".navbar-item").forEach((item) => {
-            if(item.innerText !== evt.target.innerText){
-                return;
-            }
-            item.classList.add("navbar-active");
+    const [userWallet, setUserWallet] = useState("");
+
+    /**
+     * Sets up a listener that detects whenever the users clicks on the page, and
+     * will update the navbar depending on the current page
+     */
+    function addClickListener(){
+      window.addEventListener("click", () => {
+        setCurrent();
+      });
+    }
+
+    /*
+    This function sets up a listener that detects changes in the user's Metamask
+    wallet state, such as when the user disconnects their wallet or switch addresses
+    */
+    function addWalletListener() {
+      if (window.ethereum) {
+        window.ethereum.on("accountsChanged", (accounts) => {
+          if (accounts.length > 0 && window.localStorage.getItem("logged-in") !== null){
+            setUserWallet(accounts[0]);
+          } else {
+            setUserWallet("");
+          }
         });
+      }
     }
 
     function setCurrent(){
-      let currentPath = window.location.pathname.substring(1);
-      if(currentPath === "") currentPath = "home";
+      let currentPath = window.location.toLocaleString();
+      if(currentPath === `${window.location.origin}/`) currentPath += "home";
 
       document.querySelectorAll(".navbar-item").forEach((item) => {
-        if(item.innerText.toUpperCase() !== currentPath.toUpperCase()) return;
+        item.classList.remove("navbar-active");
+        if(item.firstChild.href.toUpperCase() !== currentPath.toUpperCase()) return;
         item.classList.add("navbar-active");
       });
     }
 
     useEffect(() => {
+      addClickListener();
       setCurrent();
+      addWalletListener();
+
+      // Check for current wallet if connected
+      if(window.localStorage.getItem("logged-in") === null) return;
+      let userJson = getCookie("uid");
+      if(userJson === undefined){
+        return;
+      }
+
+      let userData = JSON.parse(userJson);
+      setUserWallet(userData.walletAddress);
     },[])
 
-    return (
-        <section className = "navbar">
-
-            <div className = "navbar_logo">
-                <img src="./bcharity_logo.png"alt="bcharity_logo"></img>
-            </div>
-            <div className="navbar_bcharity">
-                BCHARITY
-            </div>
-
-            <div className = "navbar-item-container">
-                <div 
-                  className="navbar-item"
-                  onClick={updateNavbar}
-                >
-                    <NavLink as={Link} to={"/home"} className="navlink-items">
-                        Home
-                    </NavLink>
-                </div>
-                <div
-                  className="navbar-item"
-                  onClick={updateNavbar}
-                >
-                    <NavLink as={Link} to={"/marketplace"} className="navlink-items">
-                        Marketplace
-                    </NavLink>
-                </div>
-                <div className="navbar-item" onClick={updateNavbar}>
-                  <NavLink as={Link} to={"/defi"} className="navlink-items">
-                    DeFi
-                  </NavLink>
-                </div>
-             </div>
-             <div className="navbar_search">
-                 <label className="searchLabel">
-                 <input className="searchBar" type="text" placeholder="Search..." />
-                 </label>
-             </div>
-             <Login>
-                 <Login_item icon={<LoginIcon />}>
-                     <DropdownMenu />
-                 </Login_item>
-             </Login>
-        </section>
-    )
- }  
-
- function Login(props) {
-    return (
-        <div className="login-section">
-            <ul className="login-div">{ props.children }</ul>
-        </div>
-    );
-}
-
-function Login_item(props){
-
-    const [open, setOpen] = useState(false);
-
-    return (
-        <li className="login-item">
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-                {props.icon}
-            </a>
-            {open && props.children}
-        </li>
-    )
-}
-
-function DropdownMenu(){
-
-    function DropdownItem(props){
-        return (
-            <a href="#" className="menu-item">
-                {props.children}
-            </a>
-        );
+    function showLoginButton(){
+      return(
+        <Link to="/signin" className="headerLink">
+          <button className="userHeaderButton">
+            <PersonCircle />
+            <p className="signInText">
+              Connect
+            </p>
+          </button>
+        </Link>
+      )
     }
+
+    function showUserButton(){
+      let walletShorten = `${userWallet.substring(0,4)}...${userWallet.substring(39, 42)}`;
+      return(
+        <div className="loggedInButtons">
+          <Link to="/user" className="headerLink">
+            <button className="userHeaderButton">
+              <Stars />
+              <p className="signInText">
+                My NFTs
+              </p>
+            </button>
+          </Link>
+          <Login_item>
+            <button className="userHeaderButton">
+              <PersonCircle />
+              <p className="signInText">
+                {walletShorten}
+              </p>
+            </button>
+          </Login_item>
+        </div>
+      )
+    }
+
+   function Login(props) {
+      return (
+          <div className="login-section">
+              <ul className="login-div">{ props.children }</ul>
+          </div>
+      );
+  }
+
+  function Login_item(props){
+
+      const [open, setOpen] = useState(false);
+
+      return (
+          <li className="login-item">
+              <a className="icon-button" onClick={() => setOpen(!open)}>
+                  {props.children}
+              </a>
+              {open && DropdownMenu()}
+          </li>
+      )
+  }
+
+  function DropdownMenu(){
+
+      function handleLogout(){
+        document.cookie = "uid={\"walletAddress\":\"\"}; path=/"
+        window.localStorage.removeItem("logged-in");
+        setUserWallet("");
+      }
+
+      function DropdownItem(props){
+          return (
+              <a href="#" className="menu-item">
+                  {props.children}
+              </a>
+          );
+      }
 
     return (
         <div className="dropdown">
+          {/*
             <DropdownItem>
-                <NavLink className="navv1" as={Link} to={"/Signin"}>
+                <NavLink className="dropnav" as={Link} to={"/Signin"}>
                     <h3>
                     Sign In
                     </h3>
@@ -127,23 +157,77 @@ function DropdownMenu(){
             </DropdownItem>
 
             <DropdownItem>
-                <NavLink className="navv2" as={Link} to={"/user"}>
+                <NavLink className="dropnav" as={Link} to={"/user"}>
                     <h3>
                     My NFTs
                     </h3>
                 </NavLink>
             </DropdownItem>
-            
-            <DropdownItem className="navv3">
-            <NavLink className="navv3" as={Link} to={"#"}>
+            */}
+            <DropdownItem>
+            <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
                     <h3>
                     Log Off
                     </h3>
                 </NavLink>
-                </DropdownItem>
+            </DropdownItem>
         </div>
+      )
+    }
+
+    return (
+        <section className = "navbar">
+
+            <div className = "navbar_logo">
+                <img src="./bcharity_logo.png"alt="bcharity_logo"></img>
+                <p className="navbar_bcharity">
+                    BCHARITY
+                </p>
+            </div>
+
+            <div className = "navbar-item-container">
+                <div className="navbar-item">
+                    <NavLink as={Link} to={"/home"} className="navlink-items">
+                      <House />
+                      <p className="navlink-text">
+                        Home
+                      </p>
+                    </NavLink>
+                </div>
+                <div className="navbar-item">
+                    <NavLink as={Link} to={"/marketplace"} className="navlink-items">
+                      <ShopWindow />
+                        <p className="navlink-text">
+                          Marketplace
+                        </p>
+                    </NavLink>
+                </div>
+                <div className="navbar-item">
+                  <NavLink as={Link} to={"/defi"} className="navlink-items">
+                    <Coin />
+                    <p className="navlink-text">
+                      DeFi
+                    </p>
+                  </NavLink>
+                </div>
+             </div>
+            {/*
+             <div className="navbar_search">
+                 <label className="searchLabel">
+                 <input className="searchBar" type="text" placeholder="Search..." />
+                 </label>
+             </div>
+             */}
+             <Login>
+              {
+                userWallet === ""
+                  ? showLoginButton()
+                  : showUserButton()
+              }
+             </Login>
+        </section>
     )
-}
+ }  
 
 export default Header;
 

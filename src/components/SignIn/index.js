@@ -8,22 +8,27 @@
  * @since 2021.06.22.0
  */
    
-
+import { string } from "prop-types";
 import React from "react";
 import "./index.css"
 import { useEffect, useState } from "react";
+import {Redirect} from "react-router";
 import {
 	//oursmartcontract
 	connectWallet,
 	updateMessage,
+	loadCurrentMessage,
 	getCurrentWalletConnected,
   disconnectWallet,
 } from "./interact.js";
+import {saveUserInfo} from "../../constants";
 
 const SignIn = () => { // Change the name after
     //state variables
     const [walletAddress, setWallet] = useState("");
     const [status, setStatus] = useState("");
+    const [message, setMessage] = useState("No connection to the network."); //default message
+    const [newMessage, setNewMessage] = useState("");
 
     /*
     This is a React hook that is called after your compoent is rendered.
@@ -52,9 +57,9 @@ const SignIn = () => { // Change the name after
     This function sets up a listener that will watch for the smart contract's
     updateMessages event and update the UI when the information is chaaned in 
     the smart contract
-    
+    */
     function addSmartContractListener() {
-      
+      /*
       ourSmartContract.events.updatedMessages({}, (error, data) => {
         if (error){
           setStatus("😥 " + error.message)
@@ -64,7 +69,8 @@ const SignIn = () => { // Change the name after
           setStatus(" Your message has been updated!");
         }
       });
-    } */
+      */
+    }
 
     /*
     This function sets up a listener that detects changes in the user's Metamask
@@ -74,7 +80,7 @@ const SignIn = () => { // Change the name after
       if (window.ethereum) {
         window.ethereum.on("accountsChanged", (accounts) => {
           if (accounts.length > 0) {
-            setWallet(accounts[0]);
+            setWallet(accounts[0] && window.localStorage.getItem("logged-in") !== null);
             setStatus("Write a message in the text-field above.");
           } else {
             setWallet("");
@@ -97,30 +103,35 @@ const SignIn = () => { // Change the name after
     This function will be called to connect the user's Metamask wallet to frontend
     */
     const connectWalletPressed = async () => {
-      // const walletResponse = await connectWallet();
-      setStatus("");
-      setWallet("");
-    };
-
-
-    const disconnectWalletPressed = async () => {
-      const walletResponse = await disconnectWallet();
+      window.localStorage.setItem("logged-in", true);
+      const walletResponse = await connectWallet();
       setStatus(walletResponse.status);
-      setWallet(walletResponse.address);
-    }
+      setWallet(walletResponse.address.trim());
+      saveUserInfo({walletAddress: walletResponse.address});
+    };
 
     /*
     This function will be called when the user wants to update the message stored
     in the smart contract
-    
+    */
     const onUpdatePressed = async () => {
       const { status } = await updateMessage(walletAddress, newMessage);
       setStatus(status);
-    }; */
+    };
+
+    function redirectRefresh(path){
+      window.history.pushState({}, "", path);
+      window.location.reload(false);
+    }
 
     // The UI of the sign-in page
     return (
       <div className="wholeThing">
+      {
+        walletAddress === ""
+        ? <></>
+        : redirectRefresh("/user")
+      }
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
           Sign in to your wallet
@@ -139,9 +150,6 @@ const SignIn = () => { // Change the name after
 				<span>Connect Wallet</span>
 			)}
 		  </button>
-      <button id="walletButton" onClick={disconnectWalletPressed}>
-        Log out
-      </button>
     
         {/* Took this out because we're just using metamask as the wallet right now
         <div id="different-wallet" className="different-wallet">
@@ -165,5 +173,4 @@ const SignIn = () => { // Change the name after
       )
   };
 
- 
-export default SignIn;
+ export default SignIn;

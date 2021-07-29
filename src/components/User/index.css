@@ -95,6 +95,7 @@
 .CreateLink{
   width: max-content;
   display: block;
+  text-decoration: none;
 }
 
 .UserCreateButton{
@@ -103,7 +104,6 @@
   
   width: max-content;
   padding: 1rem 3rem;
-  padding-right: 2rem;
 
   background-color: var(--pink-gradient-start);
   background-image: var(--pink-gradient);
@@ -127,9 +127,6 @@
   font-size: 33px;
   display: inline-block;
   /* margin-top: 10px; */
-  position: absolute;
-  top: 10px;
-  left: 20px;
   /* padding-top: 10px; */
   /* margin-top: 5px; */
 }
