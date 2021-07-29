@@ -131,7 +131,7 @@ const User = () => {
 
   function renderCreateAssets(){
     return(
-      <div>
+      <div className="emptyAssetList">
         <h2>It does not seem like you have any tokens</h2>
         <h3>Create your own!</h3>
         {renderCreateLink()}
