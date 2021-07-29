@@ -129,6 +129,16 @@ const User = () => {
     )
   }
 
+  function renderCreateAssets(){
+    return(
+      <div>
+        <h2>It does not seem like you have any tokens</h2>
+        <h3>Create your own!</h3>
+        {renderCreateLink()}
+      </div>
+    )
+  }
+
   function renderAssetList(){
     return(
       <div>
@@ -168,7 +178,11 @@ const User = () => {
             ? "Your Assets"
             : "Their Assets"
           }</h2>
-          {renderAssetList()}
+          {
+            emptyPage
+              ? renderCreateAssets()
+              : renderAssetList()
+          }
           <div className="pageButtons">
             <button
               className="pageSwitch"
