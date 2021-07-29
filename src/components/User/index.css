@@ -98,6 +98,11 @@
   text-decoration: none;
 }
 
+.UserCreateButton:hover {
+  background: var(--pink-gradient-start);
+}
+
+
 .UserCreateButton{
   display: flex;
   flex-direction: row;
@@ -119,7 +124,7 @@
   /* border: lightgreen solid; */
   position: relative;
   margin-top: 10px;
-
+  transition: background 5s;
 }
 
 .CreatePlus{

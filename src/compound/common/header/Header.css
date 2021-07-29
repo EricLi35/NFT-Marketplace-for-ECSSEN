@@ -289,26 +289,45 @@ ul {
   cursor: pointer;
 }
 
+
+
 .userHeaderButton{
   width: 100%;
   padding: 1rem min(3vmin, 3rem);
   margin: 10% 0;
-
+  
   display: flex;
   align-items: center;
   gap: 1rem;
-
+  
   border-radius: 999rem;
   border:none;
   /*background: none;*/
   box-shadow: 0 0.5rem 1rem 0.25rem var(--shadow-color);
-  background-color: var(--blue-gradient-start);
-  background-image: var(--blue-gradient);
+  
   color: white;
-
   font-size: 1.1rem;
   font-family: "Rubik", sans-serif;
+
+
+
+  background-color: var(--blue-gradient-start);
+  background-image: var(--blue-gradient);
+  transition-duration: 0.3s;
+
+  /* background: var(--blue-gradient);
+  transition: background 0.3s; */
+
+
 }
+
+.userHeaderButton:hover {
+  background-color: rgb(98, 205, 255);
+  background-image: none;
+}
+
+
+
 
 @media only screen and (max-device-width: 1100px){
   .signInText{

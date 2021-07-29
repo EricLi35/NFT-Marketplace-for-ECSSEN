@@ -58,3 +58,6 @@
     column-gap: 0.5rem;
 }
 
+#AuctionsButton:hover {
+    background: var(--blue-gradient-start);
+}

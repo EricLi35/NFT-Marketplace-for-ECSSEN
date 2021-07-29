@@ -192,7 +192,7 @@ function App(){
         <div className={"chainWarning hidden"}>
           <p>
             You're currently connected to the incorrect chain.
-            Please click <a onClick={callChainUpdate}>here</a> to connect to the {NETWORK.toUpperCase()} chain.
+            {/* Please click <a onClick={callChainUpdate}>here</a> to connect to the {NETWORK.toUpperCase()} chain. */}
           </p>
         </div>
       </Router>
