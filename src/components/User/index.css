@@ -146,6 +146,11 @@
   justify-content: center;
 }
 
+.emptyAssetList h3,
+.emptyAssetList h2{
+  text-align: center;
+}
+
 .disclaimerText{
   margin-top: 5rem;
   opacity: 0.5;
