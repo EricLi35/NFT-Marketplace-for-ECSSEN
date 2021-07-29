@@ -28,6 +28,7 @@ const SignIn = () => { // Change the name after
     const [status, setStatus] = useState("");
     const [message, setMessage] = useState("No connection to the network."); //default message
     const [newMessage, setNewMessage] = useState("");
+    const [prevPath, setPrevPath] = useState(undefined);
 
     /*
     This is a React hook that is called after your compoent is rendered.
@@ -49,6 +50,7 @@ const SignIn = () => { // Change the name after
 
       temp();
 
+      setPrevPath(window.localStorage.getItem("assetLook"));
       addWalletListener();
     }, []);
 
@@ -119,12 +121,14 @@ const SignIn = () => { // Change the name after
     };
 
     function redirectRefresh(){
-      let path = window.localStorage.getItem("assetLook")
-        ? `/asset/${window.localStorage.getItem("assetLook")}`
+      let path = prevPath
+        ? `/asset/${prevPath}`
         : "/user";
 
       window.history.pushState({}, "", path);
       window.location.reload(false);
+
+      window.localStorage.removeItem("assetLook");
     }
 
     // The UI of the sign-in page
