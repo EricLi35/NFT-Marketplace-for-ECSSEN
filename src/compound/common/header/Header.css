@@ -109,6 +109,8 @@ ul {
   padding-top: 3px;
   flex-shrink: 1;
   /* outline: red solid; */
+  transition: transform 300ms ease-in-out;
+  transition: transform 300ms cubic-bezier(.58,.56,0,1.42);
 }
 
 .navbar-item.navbar-active{

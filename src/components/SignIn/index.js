@@ -105,7 +105,7 @@ const SignIn = () => { // Change the name after
       window.localStorage.setItem("logged-in", true);
       const walletResponse = await connectWallet();
       setStatus(walletResponse.status);
-      setWallet(walletResponse.address);
+      setWallet(walletResponse.address.trim());
       saveUserInfo({walletAddress: walletResponse.address});
     };
 

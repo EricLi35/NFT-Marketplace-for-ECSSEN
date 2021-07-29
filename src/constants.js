@@ -12,7 +12,7 @@ const web3 = createAlchemyWeb3(alchemyKey);
 export const smartContract = new web3.eth.Contract(contractABI, contractAddress);
 // */
 
-export const NETWORK = process.env.REACT_APP_NETWORK;
+export const NETWORK = process.env.REACT_APP_NETWORK || "rinkeby";
 
 const NETWORK_IDS = {
   "mainnet" : 1,
