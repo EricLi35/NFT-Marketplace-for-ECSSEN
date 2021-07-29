@@ -145,3 +145,8 @@
   align-items: center;
   justify-content: center;
 }
+
+.disclaimerText{
+  margin-top: 5rem;
+  opacity: 0.5;
+}
