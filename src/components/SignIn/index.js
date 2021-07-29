@@ -118,7 +118,11 @@ const SignIn = () => { // Change the name after
       setStatus(status);
     };
 
-    function redirectRefresh(path){
+    function redirectRefresh(){
+      let path = window.localStorage.getItem("assetLook")
+        ? `/asset/${window.localStorage.getItem("assetLook")}`
+        : "/user";
+
       window.history.pushState({}, "", path);
       window.location.reload(false);
     }
@@ -129,7 +133,7 @@ const SignIn = () => { // Change the name after
       {
         walletAddress === ""
         ? <></>
-        : redirectRefresh("/user")
+        : redirectRefresh()
       }
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
