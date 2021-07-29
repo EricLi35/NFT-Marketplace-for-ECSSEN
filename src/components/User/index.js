@@ -21,6 +21,7 @@ const User = () => {
   const [myAccount, setMyAccount] = useState(true);
   const [userAssets, setUserAssets] = useState(new Array(20));
   const [assetPage, setAssetPage] = useState(0);
+  const [emptyPage, setEmptyPage] = useState(false);
   const [enableNext, setEnableNext] = useState(true);
   const [enablePrevious, setEnablePrevious] = useState(false);
 
@@ -106,6 +107,8 @@ const User = () => {
     }
     setUserAssets(htmlList);
 
+    setEmptyPage(assetPage === 0 && htmlList.length === 0);
+
     setEnableNext(htmlList.length === 20);
   }
 
@@ -123,6 +126,17 @@ const User = () => {
           <p>Mint a new Token </p>
         </button>
       </Link>
+    )
+  }
+
+  function renderCreateAssets(){
+    return(
+      <div className="emptyAssetList">
+        <h2>Don't have any tokens?</h2>
+        <h3>Create your own!</h3>
+        {renderCreateLink()}
+        <p className="disclaimerText"><i>If you believe this is an error, please refresh the page</i></p>
+      </div>
     )
   }
 
@@ -165,7 +179,11 @@ const User = () => {
             ? "Your Assets"
             : "Their Assets"
           }</h2>
-          {renderAssetList()}
+          {
+            emptyPage
+              ? renderCreateAssets()
+              : renderAssetList()
+          }
           <div className="pageButtons">
             <button
               className="pageSwitch"
