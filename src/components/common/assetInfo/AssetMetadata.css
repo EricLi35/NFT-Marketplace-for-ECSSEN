@@ -20,6 +20,13 @@
     border-radius: 1rem;
 
     box-shadow: 0rem 0.25rem 1rem 0.35rem var(--shadow-color);
+
+    transition: box-shadow 0.5s;
+}
+
+.card-container:hover{
+
+    box-shadow: 0rem 0.40rem 1.5rem 0.55rem #2b2a2a44;
 }
 
 .img-container{
@@ -30,7 +37,19 @@
     background-color: var(--blue-gradient-start);
     background-image: var(--blue-gradient);
     padding: 0.5rem;
+    will-change: transform;
+    transition: transform 2s;
 }
+
+.img-container:hover {
+    transition: transform 1s;
+    transform: translateY(-1rem);
+}
+
+/* .img-container:focus {
+    background-image: var(--blue-gradient-end);
+    background-color: var(--blue-gradient-end);
+} */
 
 .image-link{
     display: grid;
@@ -74,10 +93,10 @@
 .card-link{
   color: white;
   text-decoration: none;
-  width: min-content%;
+  width: min-content;
 
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;  
   align-items: center;
 }
 

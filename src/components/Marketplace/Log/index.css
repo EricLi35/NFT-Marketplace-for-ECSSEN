@@ -58,3 +58,24 @@
     column-gap: 0.5rem;
 }
 
+.noAssetsDisplay {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-inline: auto;
+    align-items: center;
+    gap: 5vw;
+    margin-top: 5vw;
+}
+
+.noAssetsImg {
+    width: 30vw;
+    height: auto;
+  }
+  
+.noAssetsText {
+    width: 20vw;
+    height: auto;
+    font-size: 2vw;
+    align-self: center;
+}

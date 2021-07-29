@@ -55,6 +55,18 @@ export default class Marketplace extends React.Component {
         </header>
         {/*<Sidebar />*/}
         <div className="MarketplaceMain">
+
+        {/* <div className="noAssetsDisplay">
+            <div className="noAssetsDisplayLeft">
+              <img src={require("./NoAssetsDisplayImg.png")} alt="No assets to display at the moment" className="noAssetsImg">
+              
+              </img>
+            </div>
+            <div className="noAssetsDisplayRight">
+
+            </div>
+          </div>
+         */}
           <Log
             seaport={this.seaport}
             accountAddress={this.state.accountAddress} />

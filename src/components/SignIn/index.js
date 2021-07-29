@@ -125,16 +125,12 @@ const SignIn = () => { // Change the name after
 
     // The UI of the sign-in page
     return (
-<<<<<<< HEAD
-      <div className="signInWholeThing">
-=======
       <div className="wholeThing">
       {
         walletAddress === ""
         ? <></>
         : redirectRefresh("/user")
       }
->>>>>>> main
       <main id="main">
         <h2 className="sign-in-message" id="sign-in-message">
           Sign in to your wallet
