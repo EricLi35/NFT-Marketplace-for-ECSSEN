@@ -14,7 +14,6 @@ import ProgressBar from "../Progress_bar";
 let charityAddrs = donateData;
 
 const Donate = () => {
-  console.log(charityAddrs[0].charityName)
   
   const [tokenName, setTokenName] = useState("");
   const [imgUrl, setImgUrl] = useState("");
@@ -75,7 +74,7 @@ const Donate = () => {
       const th = await seaport.transfer({
           asset,
           fromAddress, //your address (you must own the asset)
-          toAddress: charityAddrs["chosenCharity"].address
+          toAddress: charityAddrs[chosenCharity].address
       })
 
       setProgress(75);
