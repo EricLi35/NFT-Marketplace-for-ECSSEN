@@ -74,7 +74,7 @@ const Donate = () => {
       const th = await seaport.transfer({
           asset,
           fromAddress, //your address (you must own the asset)
-          toAddress: charityAddrs[chosenCharity].address
+          toAddress: charityAddrs[chosenCharity]
       })
 
       setProgress(75);
