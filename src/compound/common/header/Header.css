@@ -114,9 +114,8 @@ ul {
   flex-shrink: 1;
   /* outline: red solid; */
   transition: transform 300ms ease-in-out;
-  transition: transform 300ms cubic-bezier(.58,.56,0,1.42);
+  transition: transform 300ms cubic-bezier(.58,.56,0,1.42), background 0.4s;
   padding: 17px;
-  transition: background 0.4s;
 }
 
 .navbar-item:hover {
