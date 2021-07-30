@@ -110,18 +110,19 @@ ul {
   font-style: none;
   text-decoration: inherit;
   color: black;
+  width: 90%;
+  margin: 0 auto;
   padding-top: 3px;
   flex-shrink: 1;
   /* outline: red solid; */
   transition: transform 300ms ease-in-out;
   transition: transform 300ms cubic-bezier(.58,.56,0,1.42), background 0.4s;
   padding: 17px;
+  border-radius: 0.5rem;
 }
 
 .navbar-item:hover {
-  border-radius: 0.5rem;
   background: rgb(98, 205, 255);
-  
 }
 
 .navbar-item.navbar-active{
