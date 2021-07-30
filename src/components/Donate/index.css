@@ -37,8 +37,7 @@
 }
   
   .allCharitiesButton:hover {
-    background-image: #459bdb;
-    background-color: #2980B9;    
+    background-color: rgb(98, 205, 255);    
   } 
   
   .allCharitiesButton:focus {

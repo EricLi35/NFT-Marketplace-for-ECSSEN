@@ -7,17 +7,15 @@ import { OpenSeaPort, Network } from 'opensea-js';
 // import { getCookie, smartContract } from '../../constants';
 import { getCookie, ETHERSCAN_URL, API_URL } from "../../constants";
 import { func } from "prop-types";
+import donateData from "./DonateInfo";
 
 import ProgressBar from "../Progress_bar";
 
-let charityAddrs = {
-    "Charity 1 (Tony Address)": "0x11f408335E4B70459dF69390ab8948fcD51004D0",
-    "Charity 2 (Rui Address)": "0x6926f20dD0e6cf785052705bB39c91816a753D23",
-    "Charity 3 (Ethan Address)": "0x1437B4031f2b6c3a6d1D5F68502407283c3fAE31",
-  }
+let charityAddrs = donateData;
 
 const Donate = () => {
-
+  console.log(charityAddrs[0].charityName)
+  
   const [tokenName, setTokenName] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [chosenCharity, setChosenCharity] = useState("");
@@ -53,6 +51,7 @@ const Donate = () => {
 
   function updateChosenCharity(evt){
     console.log(evt.target);
+    console.log(evt.target.innerText);
     setChosenCharity(evt.target.innerText);
     // now the address of the charity can be retrieved via charityAddrs[chosenCharity];
   }
@@ -76,7 +75,7 @@ const Donate = () => {
       const th = await seaport.transfer({
           asset,
           fromAddress, //your address (you must own the asset)
-          toAddress: charityAddrs[chosenCharity]
+          toAddress: charityAddrs["chosenCharity"].address
       })
 
       setProgress(75);
@@ -151,14 +150,17 @@ const Donate = () => {
     }
   }
 
-  var div = document.getElementsByClassName('dropdown-content_eric');
-  for(var i=0 ; i < div.length ; i++){
-    for(var j=0 ; j < div[i].children.length ; j++){
-      div[i].children[j].addEventListener('click',function(){
+  var dropdown = document.getElementsByClassName('dropdown-content_eric');
+  for(var i=0 ; i < dropdown.length ; i++){
+    for(var j=0 ; j < dropdown[i].children.length ; j++){
+      dropdown[i].children[j].addEventListener('click',function(){
         this.parentNode.previousElementSibling.innerHTML = this.innerHTML;
       })
     }
   }
+
+  console.log(dropdown)
+  dropdown.innerHTML = "<p>This does not show up in the dropdown content for some reason</p>"
 
   return(
     <div className="donateWholeThing">
@@ -176,18 +178,15 @@ const Donate = () => {
       */}
 <div className="dropdown_eric">
   <button className="allCharitiesButton" onClick={showDropdownContent}>All Charities</button>
-  <div className="dropdown-content_eric" id="myDropdown">
-    <a href="#" onClick={updateChosenCharity} value={Object.values(charityAddrs)[0]}>{((Object.keys(charityAddrs))[0])}</a>
-    {/* <a href="#">{((Object.keys(charityAddrs))[1])}</a> */}
-    <a href="#">long charity name long charity name </a>
-    
-    <a href="#" onClick={updateChosenCharity} value={Object.values(charityAddrs)[2]} >{((Object.keys(charityAddrs))[2])}</a>
+  <div style={{border:"red solid"}} className="dropdown-content_eric" id="myDropdown">
+    <a href="#" onClick={updateChosenCharity} value={charityAddrs[0].address}>{charityAddrs[0].charityName}</a>
+    <a href="#" onClick={updateChosenCharity} value={charityAddrs[1].address}>{charityAddrs[1].charityName}</a>
+    <a href="#" onClick={updateChosenCharity} value={charityAddrs[2].address}>{charityAddrs[2].charityName}</a>
   </div>
 </div>
 
 
 <div className="tyAndInfo">
-
 <div className="nftInfo">
   <h3 className="nftName">{tokenName}</h3>
   <img className="nftImg" src={imgUrl}>
