@@ -10,45 +10,48 @@ import "./DefiLink.css";
 import coinImage from "./coin_isolated.png";
 import boxImage from "./box_isolated.png";
 import boxMaskImage from "./coin_box_mask.png";
+import {Reddit, Twitter, Telegram, Medium, Instagram} from "react-bootstrap-icons";
 
 const DefiLink = () => {
   return(
     <div className="DefiLinkPage">
-      <div className="Aboutpage-header">
-        <h2>This is the abuot page</h2>
+      <div className="about-page-left">
+        <div><h2 className='about-us-title'>About Us</h2></div>
+        <div><p className='about-us-description'>BCHARITY is a community-driven decentralized open protocol that innovates a new blockchain-based tokenomics ecosystem for charitable organizations to be more transparent and accountable in their operations to the public.</p></div>
+        <div><a href="https://bcharityfi.gitbook.io/bcharity/" target="_blank" className="about-page-read-more">
+          Read More
+        </a></div>
       </div>
 
-      <hr />
-
-      <div className="links-container">
-        <div className="defiTextContainer">
-          <h1>Link to DeFi Page</h1>
-          <a href="https://bcharityecssen.netlify.app" target="_blank" clasName="link-items">
-            <p>Support our token!</p>
-          </a>
+      <div className="about-page-right">
+        <div class="about-other-links">
+          <h3 className="links-to-other-websites">Link to our other websites!</h3>
+          <div className="links-container">
+            <div className="defiTextContainer">
+              <a href="https://bcharityecssen.netlify.app" target="_blank" className="link-items">
+                <h1 className='defi-website'>DeFi Website</h1>
+                <p clasasName='defi-website-description'>Support our token!</p>
+              </a>
+            </div>
+          </div>
         </div>
-
-        <div className="redditLinkContainer">
-          <h1>Link to Reddit</h1>
-          <a href="https://www.reddit.com/r/BCharity/" target="_blank" clasName="link-items">
-            <p>Connect us on Reddit!</p>
-          </a>
+        <div className="about-connect-social-medias">
+          <h3 className="connect-social-medias">Connect to us on social medias!</h3>
+          <div className="list-of-social-medias">
+            <a href="https://www.reddit.com/r/BCharity/" target="_blank" className="social-medias">
+              <Reddit />
+            </a>
+            <a href="https://www.reddit.com/r/BCharity/" target="_blank" className="social-medias">
+              <Twitter />
+            </a>
+            <a href="https://www.instagram.com/bcharityofficial/" target="_blank" className="social-medias">
+              <Instagram />
+            </a>
+            <a href="https://www.reddit.com/r/BCharity/" target="_blank" className="social-medias">
+              <Telegram />
+            </a>
+          </div>
         </div>
-
-        <div className="mediumLinkContainer">
-          <h1>Link to Medium</h1>
-          <a href="https://bcharityfi.medium.com" target="_blank" clasName="link-items">
-            <p>Connect us on Medium!</p>
-          </a>
-        </div>
-
-        <div className="telegramLinkContainer">
-          <h1>Link to Telegram</h1>
-          <a href="https://t.me/BCharitynet" target="_blank" clasName="link-items">
-            <p>Connect us on Telegram!</p>
-          </a>
-        </div>
-
       </div>
     </div>
   )

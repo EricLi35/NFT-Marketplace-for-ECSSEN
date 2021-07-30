@@ -3,9 +3,56 @@
   margin-top: 30px;
   height: 100%;
   width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 8em;
 }
 
-.Aboutpage-header{
+.about-page-left{
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 70vh;
+  width: 100%;
+}
+
+.about-us-title{
+  width: 100%;
+  font-size: 100px;
+  text-align: left;
+  margin-top: 80px;
+}
+
+.about-us-description{
+  text-align: left;
+  line-height: 125%;
+}
+
+.about-page-read-more{
+  text-decoration: none;
+  border:blue solid;
+  border-radius: 10%;
+  padding: 10px 15px 10px 15px;
+  color: white;
+  background-color: blue;
+}
+
+.about-page-right{
+  grid-column: 2 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70vh;
+}
+
+.about-other-links{
+  display: flex;
+  flex-direction: column;
+}
+
+.links-to-other-websites{
   text-align: left;
 }
 
@@ -18,41 +65,34 @@
   /* min-height: 80vh; */
   height: 100%;
   width: 100%;
-
-  /* display: flex;
-  flex-direction: column; */
-  align-items: center;
-  justify-content: center;
-
   background-color: white;
-  margin: 30px 0px 30px 0px;
+  display: flex;
+  flex-direction: column;
   border-radius: 15px;
   text-align: left;
+  padding: 20px 0px 20px 20px;
+  margin-top: 30px;
 }
 
-.redditLinkContainer {
-  background-color: white;
-  border: white solid;
-  margin-bottom: 30px;
-  border-radius: 15px;
-  text-align: left;
+.defi-website{
+  margin-bottom: 10px;
 }
 
-.mediumLinkContainer{
-  border: white solid;
-  background-color: white;
-  margin-bottom: 30px;
-  border-radius: 15px;
-  text-align: left;
-}
-
-.telegramLinkContainer{
-  border: white solid;
-  background-color: white;
-  border-radius: 15px;
-  text-align: left;
-}
-
-.link-items a {
+.link-items{
   text-decoration: none;
+}
+
+.connect-social-medias{
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.list-of-social-medias{
+  display: flex;
+  flex-direction: row;
+}
+
+.social-medias{
+  font-size: 2rem;
+  width: 10vh;
 }
