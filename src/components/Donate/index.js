@@ -161,6 +161,23 @@ const Donate = () => {
   console.log(dropdown)
   dropdown.innerHTML = "<p>This does not show up in the dropdown content for some reason</p>"
 
+  function renderCharityInfo(charityName, counter){
+    return(
+      <a key={counter} onClick={updateChosenCharity} value={charityName}>{charityName}</a>
+    )
+  }
+
+  function renderCharityOptions(){
+    let charities = [];
+    let counter = 0;
+    for(var charity in charityAddrs){
+      charities.push(renderCharityInfo(charity, counter));
+      counter++;
+    }
+
+    return charities;
+  }
+
   return(
     <div className="wholeThing">
      <h1>
@@ -178,9 +195,7 @@ const Donate = () => {
 <div className="dropdown_eric">
   <button className="allCharitiesButton" onClick={showDropdownContent}>All Charities</button>
   <div style={{border:"red solid"}} className="dropdown-content_eric" id="myDropdown">
-    <a href="#" onClick={updateChosenCharity} value={charityAddrs[0].address}>{charityAddrs[0].charityName}</a>
-    <a href="#" onClick={updateChosenCharity} value={charityAddrs[1].address}>{charityAddrs[1].charityName}</a>
-    <a href="#" onClick={updateChosenCharity} value={charityAddrs[2].address}>{charityAddrs[2].charityName}</a>
+    {renderCharityOptions()}
   </div>
 </div>
 
