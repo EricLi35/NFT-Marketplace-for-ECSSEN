@@ -95,6 +95,7 @@ function Header(){
               </p>
             </button>
           </Link>
+
           <Login_item>
             <button className="userHeaderButton">
               <PersonCircle />
@@ -164,6 +165,8 @@ function Header(){
                 </NavLink>
             </DropdownItem>
             */}
+            <div>
+
             <DropdownItem>
             <NavLink className="dropnav" as={Link} to={"/home"} onClick={handleLogout}>
                     <h3>
@@ -171,6 +174,7 @@ function Header(){
                     </h3>
                 </NavLink>
             </DropdownItem>
+            </div>
         </div>
       )
     }

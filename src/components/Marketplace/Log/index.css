@@ -58,6 +58,19 @@
     column-gap: 0.5rem;
 }
 
+#AuctionsButton {
+    transition: background 0.3s;
+}
+
+#BidsButton {
+    transition: background 0.3s;
+}
+
+
 #AuctionsButton:hover {
-    background: var(--blue-gradient-start);
+    background: rgb(98, 205, 255);
+}
+
+#BidsButton:hover {
+    background: rgb(98, 205, 255);
 }

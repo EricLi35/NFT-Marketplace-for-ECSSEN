@@ -1,11 +1,11 @@
 
 .homepage {
-    margin-top: 20vh;
+    margin-top: 10vh;
     /* border: 2px red solid; */
     display: grid;
     grid-template-rows: repeat(3, min-content);
     gap: 20vh;
-    margin-bottom: 3rem;
+    padding-bottom: 6rem;
 }
 
 .homepage-top{
@@ -184,8 +184,12 @@
     width: max-content;
     justify-self: center;
     border-radius: 0.3rem;
+    transition: background 0.4s;
 }
 
+.categoryBtn:hover {
+    background: rgb(98, 205, 255);
+}
 
 @media (orientation: portrait) {
     .homepage {

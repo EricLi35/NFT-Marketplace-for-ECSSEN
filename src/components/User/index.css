@@ -98,9 +98,7 @@
   text-decoration: none;
 }
 
-.UserCreateButton:hover {
-  background: var(--pink-gradient-start);
-}
+
 
 
 .UserCreateButton{
@@ -124,7 +122,11 @@
   /* border: lightgreen solid; */
   position: relative;
   margin-top: 10px;
-  transition: background 5s;
+  transition: background 0.3s;
+}
+
+.UserCreateButton:hover {
+  background: lightpink ;
 }
 
 .CreatePlus{
