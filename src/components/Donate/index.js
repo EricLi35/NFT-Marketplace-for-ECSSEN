@@ -158,8 +158,6 @@ const Donate = () => {
     }
   }
 
-  console.log(dropdown)
-  dropdown.innerHTML = "<p>This does not show up in the dropdown content for some reason</p>"
 
   function renderCharityInfo(charityName, counter){
     return(
