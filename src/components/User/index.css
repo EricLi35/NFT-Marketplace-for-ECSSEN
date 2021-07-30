@@ -98,6 +98,9 @@
   text-decoration: none;
 }
 
+
+
+
 .UserCreateButton{
   display: flex;
   flex-direction: row;
@@ -119,7 +122,11 @@
   /* border: lightgreen solid; */
   position: relative;
   margin-top: 10px;
+  transition: background 0.3s;
+}
 
+.UserCreateButton:hover {
+  background: lightpink ;
 }
 
 .CreatePlus{
@@ -134,4 +141,24 @@
 .UserCreateButton p{
   margin: auto;
   display: inline;
+}
+
+.emptyAssetList{
+  min-height: 50vh;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptyAssetList h3,
+.emptyAssetList h2{
+  text-align: center;
+}
+
+.disclaimerText{
+  margin-top: 5rem;
+  opacity: 0.5;
 }
