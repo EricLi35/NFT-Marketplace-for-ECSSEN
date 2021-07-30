@@ -58,7 +58,6 @@
     column-gap: 0.5rem;
 }
 
-<<<<<<< HEAD
 .noAssetsDisplay {
     display: flex;
     flex-direction: row;
@@ -85,7 +84,6 @@
     margin-top: 5rem;
     opacity: 0.5;
   }
-=======
 #AuctionsButton {
     transition: background 0.3s;
 }
@@ -102,4 +100,3 @@
 #BidsButton:hover {
     background: rgb(98, 205, 255);
 }
->>>>>>> main
