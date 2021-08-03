@@ -1,6 +1,8 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import "./index.css";
+import renderCharityInfo from "./renderCharityInfo";
+
 
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
@@ -190,7 +192,7 @@ const Donate = () => {
     {/* this still needs work... 
         i'm adding things to it for now, but again, this need to be reworked
       */}
-<div className="dropdown_eric">
+  <div className="dropdown_eric">
   <button className="allCharitiesButton" onClick={showDropdownContent}>All Charities</button>
   <div style={{border:"red solid"}} className="dropdown-content_eric" id="myDropdown">
     {renderCharityOptions()}
