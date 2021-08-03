@@ -1,6 +1,8 @@
 import React from "react";
 import {useEffect, useState} from "react";
 import "./index.css";
+import renderCharityInfo from "./renderCharityInfo";
+
 
 import detectEthereumProvider from '@metamask/detect-provider';
 import { OpenSeaPort, Network } from 'opensea-js';
@@ -160,7 +162,20 @@ const Donate = () => {
   }
 
   console.log(dropdown)
-  dropdown.innerHTML = "<p>This does not show up in the dropdown content for some reason</p>"
+  dropdown.innerHTML += "<p>This does not show up in the dropdown content for some reason</p>"
+
+
+
+
+  function renderCharityInfo(num1 , num2) {
+    // console.log(props.charityName)
+    return(
+        <a href="#" onClick={updateChosenCharity} value={num1}>{num2}</a>
+    )
+  }
+
+
+
 
   return(
     <div className="wholeThing">
@@ -176,12 +191,25 @@ const Donate = () => {
     {/* this still needs work... 
         i'm adding things to it for now, but again, this need to be reworked
       */}
-<div className="dropdown_eric">
+  <div className="dropdown_eric">
   <button className="allCharitiesButton" onClick={showDropdownContent}>All Charities</button>
   <div style={{border:"red solid"}} className="dropdown-content_eric" id="myDropdown">
-    <a href="#" onClick={updateChosenCharity} value={charityAddrs[0].address}>{charityAddrs[0].charityName}</a>
+    
+    {/* <div>HELLO</div>
+    <div>Testing here</div>
+    <div>ANOTHER TEST</div> */}
+
+    {renderCharityInfo(charityAddrs[0].address,charityAddrs[0].charityName)}
+    {renderCharityInfo(charityAddrs[1].address,charityAddrs[1].charityName)}
+    {renderCharityInfo(charityAddrs[2].address,charityAddrs[2].charityName)}
+
+    {/* <renderCharityInfo 
+    charityName="ECSSEN"
+    /> */}
+
+    {/* <a href="#" onClick={updateChosenCharity} value={charityAddrs[0].address}>{charityAddrs[0].charityName}</a>
     <a href="#" onClick={updateChosenCharity} value={charityAddrs[1].address}>{charityAddrs[1].charityName}</a>
-    <a href="#" onClick={updateChosenCharity} value={charityAddrs[2].address}>{charityAddrs[2].charityName}</a>
+    <a href="#" onClick={updateChosenCharity} value={charityAddrs[2].address}>{charityAddrs[2].charityName}</a> */}
   </div>
 </div>
 
