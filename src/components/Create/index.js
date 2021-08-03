@@ -255,7 +255,7 @@ const Create = () => {
             
             </div>
 
-            <br />
+            {/* <br /> */}
 
             <div className="tags">
               <strong>Item tags</strong>
@@ -263,7 +263,7 @@ const Create = () => {
               <input className="name_textbox_size" type="text" placeholder="Art, Abstract, Colourful, ..." />
             </div>
 
-            <br />
+            {/* <br /> */}
             
             {/* <h4 className = "description"> */}
             <div className = "description">
