@@ -33,6 +33,12 @@ const DefiLink = () => {
                 <p clasasName='defi-website-description'>Support our token!</p>
               </a>
             </div>
+            <div className="bcharityContainer">
+              <a href="https://bcharityfi.gitbook.io/bcharity/" target="_blank" className="link-items">
+                <h1 className='defi-website'>BCharity Website</h1>
+                <p clasasName='defi-website-description'>Support our token!</p>
+              </a>
+            </div>
           </div>
         </div>
         <div className="about-connect-social-medias">

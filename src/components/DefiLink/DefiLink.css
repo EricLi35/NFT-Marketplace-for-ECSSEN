@@ -63,8 +63,16 @@
 
 .defiTextContainer{
   /* min-height: 80vh; */
-  height: 100%;
-  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  text-align: left;
+  padding: 20px 0px 20px 20px;
+  margin-top: 30px;
+}
+
+.bcharityContainer{
   background-color: white;
   display: flex;
   flex-direction: column;
