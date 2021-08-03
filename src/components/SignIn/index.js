@@ -19,6 +19,7 @@ import {
 	updateMessage,
 	loadCurrentMessage,
 	getCurrentWalletConnected,
+  disconnectWallet,
 } from "./interact.js";
 import {saveUserInfo} from "../../constants";
 
@@ -156,7 +157,7 @@ const SignIn = () => { // Change the name after
 				String(walletAddress).substring(38)) : (
 				<span>Connect Wallet</span>
 			)}
-		</button>
+		  </button>
     
         {/* Took this out because we're just using metamask as the wallet right now
         <div id="different-wallet" className="different-wallet">

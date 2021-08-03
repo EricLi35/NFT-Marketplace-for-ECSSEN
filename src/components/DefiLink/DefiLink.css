@@ -1,15 +1,108 @@
 .DefiLinkPage{
+  margin: auto;
   height: 100%;
+  width: 60%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 8em;
+}
+
+.about-page-left{
+  grid-column: 1 / 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  height: 70vh;
   width: 100%;
 }
 
-.defiTextContainer{
-  min-height: 80vh;
-  height: 100%;
+.about-us-title{
   width: 100%;
+  font-size: 100px;
+  text-align: left;
+  margin-top: 80px;
+}
 
+.about-us-description{
+  text-align: left;
+  line-height: 125%;
+}
+
+.about-page-read-more{
+  text-decoration: none;
+  border:blue solid;
+  border-radius: 10%;
+  padding: 10px 15px 10px 15px;
+  color: white;
+  background-color: blue;
+}
+
+.about-page-right{
+  margin-top: 50px;
+  grid-column: 2 / 4;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content:space-around;
+  height: 70vh;
+}
+
+.about-other-links{
+  display: flex;
+  flex-direction: column;
+}
+
+.links-to-other-websites{
+  text-align: left;
+}
+
+.links-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.defiTextContainer{
+  /* min-height: 80vh; */
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;  
+  text-align: left;
+  padding: 20px 0px 20px 20px;
+  margin-top: 30px;
+}
+
+.bcharityContainer{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;  
+  text-align: left;
+  padding: 20px 0px 20px 20px;
+  margin-top: 30px;
+}
+
+.defi-website{
+  margin-bottom: 10px;
+}
+
+.link-items{
+  text-decoration: none;
+}
+
+.connect-social-medias{
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.list-of-social-medias{
+  display: flex;
+  flex-direction: row;
+}
+
+.social-medias{
+  font-size: 2rem;
+  width: 10vh;
 }
