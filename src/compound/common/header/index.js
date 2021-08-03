@@ -192,7 +192,7 @@ function Header(){
             <div className = "navbar-item-container">
                 <div className="navbar-item">
                     <NavLink as={Link} to={"/home"} className="navlink-items">
-                      <House />
+                      <House className="navlink-icon" />
                       <p className="navlink-text">
                         Home
                       </p>
@@ -200,7 +200,7 @@ function Header(){
                 </div>
                 <div className="navbar-item">
                     <NavLink as={Link} to={"/marketplace"} className="navlink-items">
-                      <ShopWindow />
+                      <ShopWindow className="navlink-icon" />
                         <p className="navlink-text">
                           Marketplace
                         </p>
@@ -208,7 +208,7 @@ function Header(){
                 </div>
                 <div className="navbar-item">
                   <NavLink as={Link} to={"/defi"} className="navlink-items">
-                    <Coin />
+                    <Coin className="navlink-icon" />
                     <p className="navlink-text">
                       About
                     </p>

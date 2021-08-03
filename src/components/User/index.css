@@ -153,12 +153,22 @@
   justify-content: center;
 }
 
+.emptyAssetList h1 {
+  font-size: 5vw;
+}
+
+.emptyAssetList h2 {
+  margin-bottom: 3rem;
+}
+
 .emptyAssetList h3,
-.emptyAssetList h2{
+.emptyAssetList h2,
+.emptyAssetList h1{
   text-align: center;
 }
 
 .disclaimerText{
   margin-top: 5rem;
   opacity: 0.5;
+  text-align: center;
 }

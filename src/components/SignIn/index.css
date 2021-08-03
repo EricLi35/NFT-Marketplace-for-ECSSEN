@@ -1,50 +1,69 @@
 .wholeThing {
-    /* border: red solid; */
+    height: 100vh;
+    width: 100vw;
+}
+
+#main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .sign-in-message {
     text-align: center;
     font-size: 2rem;
+    margin-top: 2rem;
 }
 
 .metamask-img {
-    width: 50%;
+    width: 20vw;
     height: auto;
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    justify-self: end;
-    margin-left: 12rem;
-    margin-right: 0px;
-    padding-right: 0px;
+    /* grid-column: 1 / 2;
+    grid-row: 1 / 2; */
 } 
 
 .img-div {
+    display: flex;
+    flex-direction: column;
     justify-items: end;
     justify-self: end;
-    padding-right: 0px;
-    margin-right: 0px;
+
+}
+
+@media (min-width: 1200px) {
+    .img-div {
+        margin-right: 10%;
+    }
+
+}
+
+@media (max-width: 1200px) {
+    .wallet-page {
+        flex-direction: column;
+    }
 }
 
 .metamaskQuestion {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: center; 
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    margin-left: 12rem;
+    /* grid-column: 1 / 2;
+    grid-row: 2 / 3; */
 }
 
 #walletButton {
-    grid-column: 2 / 3;
-    justify-self: start;
+    /* grid-column: 2 / 3; */
     align-self: center;
+
     background-color: var(--blue-gradient-start);
     background-image: var(--blue-gradient);
     color: white;
-    width: 50%;
-    height: 50%;
+
+    width: 20vw;
+    height: 20vh;
+
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 2rem;
-    border-radius: 1rem;
+    font-size: 2vh;
+
+    border-radius: 1em;
     border: 2px solid rgb(0, 162, 255);
     transition-duration: 0.3s;
     cursor: pointer;
@@ -59,20 +78,18 @@
 }
 
 .wallet-page {
-    width: 100%;
-    height: fit-content;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: 3fr 1fr;
-}
+    width: 50vw;
+    height: 50vh;
+    margin-inline: auto;
 
-#main {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
 }
 
-
-.wallet-options {
+/* .wallet-options {
 
     width: 15%;
 }
@@ -89,5 +106,5 @@
     width: 100%;
     justify-items: center;
     align-items: center;
-}
+} */
 

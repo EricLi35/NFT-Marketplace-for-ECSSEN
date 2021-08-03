@@ -20,13 +20,18 @@ ul {
   color: inherit;
   text-decoration: none;
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 0.5rem;
   height: 100%;
   width: 100%;
 }
 
-
+@media only screen and (min-device-width: 1100px) and (max-device-width: 1350px){
+  .navlink-icon{
+    display:none;
+  }
+}
 
 @media only screen and (max-device-width: 1100px){
   .navlink-text{
@@ -83,7 +88,7 @@ ul {
   font-size: min(5vw, 3rem);
 }
 
-@media only screen and (max-device-width : 1150px){
+@media only screen and (max-device-width : 1100px){
   .navbar_bcharity{
     display: none;
   }
@@ -98,7 +103,6 @@ ul {
   height: 70px;
   background-color: transparent;
   /* margin-left: 150px; */
-  border-radius: 0.5rem;
   flex-shrink: 1;
   /* border: yellow solid; */
 }
@@ -341,7 +345,9 @@ ul {
   background-image: none;
 }
 
-
+.signInText {
+  white-space: nowrap;
+}
 
 
 @media only screen and (max-device-width: 1100px){

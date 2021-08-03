@@ -9,6 +9,7 @@
     /* background-color: green; */
     min-height: 75vh;
     /* height: max-content; */
+    margin-bottom: 5vh;
 }
 
 
@@ -58,6 +59,32 @@
     column-gap: 0.5rem;
 }
 
+.noAssetsDisplay {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-inline: auto;
+    align-items: center;
+    gap: 5vw;
+    margin-top: 5vw;
+}
+
+.noAssetsImg {
+    width: 30vw;
+    height: auto;
+  }
+  
+.noAssetsText {
+    width: 20vw;
+    height: auto;
+    font-size: 2vw;
+    align-self: center;
+}
+
+.disclaimerText{
+    margin-top: 5rem;
+    opacity: 0.5;
+  }
 #AuctionsButton {
     transition: background 0.3s;
 }

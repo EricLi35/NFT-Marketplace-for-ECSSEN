@@ -170,6 +170,26 @@ export default class Log extends React.Component {
     )
   }
 
+  renderNoAssetsDisplay() {
+  // const { orders } = this.state;
+
+  // if (orders <= 0 || orders == undefined) {
+    return (
+      <div className="noAssetsDisplay">
+        <div className="noAssetsDisplayLeft">
+        <img src={require("./NoAssetsDisplayImg.png")} alt="No assets to display at the moment" className="noAssetsImg">
+        </img>
+        </div>
+
+        <div className="noAssetsDisplayRight">
+          <h3 className="noAssetsText">There are no NFTs to display at the moment.</h3>
+          <p className="disclaimerText"><i>If you believe this is an error, please refresh the page.</i></p>
+        </div>
+        </div>
+    )
+  // }  
+  }
+
   // colorToggle(id) {
   //   const toggleButton = document.getElementById(id);
   //   const styles = window.getComputedStyle(toggleButton);
@@ -229,6 +249,27 @@ export default class Log extends React.Component {
     )
   }
 
+  renderCardDeck() {
+    const { orders } = this.state
+
+    return (
+
+      orders != null
+        
+        ? <React.Fragment>
+            <div className="card-deck">
+              {orders.map((order, i) => {
+                return <Order {...this.props} key={i} order={order}  />
+              })}
+            </div>
+            {this.renderPagination()}
+          </React.Fragment>
+
+        : <div className="text-center">Loading...</div>
+      
+    )
+  }
+
   render() {
     const { orders } = this.state
 
@@ -237,20 +278,39 @@ export default class Log extends React.Component {
         
         {this.renderFilters()}
 
-        {orders != null
-        
-          ? <React.Fragment>
-              <div className="card-deck">
-                {orders.map((order, i) => {
-                  return <Order {...this.props} key={i} order={order}  />
-                })}
-              </div>
-              {this.renderPagination()}
-            </React.Fragment>
-
-          : <div className="text-center">Loading...</div>
+        { orders <= 0 || orders == undefined ? 
+          this.renderNoAssetsDisplay()
+        : this.renderCardDeck()
         }
+        
       </div>
     );
   }
 }
+
+
+//   render() {
+//     const { orders } = this.state
+
+//     return (
+//       <div className="py-3" id="Log">
+        
+//         {this.renderFilters()}
+//         {this.renderNoAssetsDisplay()}
+//         {orders != null
+        
+//           ? <React.Fragment>
+//               <div className="card-deck">
+//                 {orders.map((order, i) => {
+//                   return <Order {...this.props} key={i} order={order}  />
+//                 })}
+//               </div>
+//               {this.renderPagination()}
+//             </React.Fragment>
+
+//           : <div className="text-center">Loading...</div>
+//         }
+//       </div>
+//     );
+//   }
+// }
