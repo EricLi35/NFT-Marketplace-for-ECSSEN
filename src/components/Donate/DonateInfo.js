@@ -1,20 +1,7 @@
-const donateData = [
-    {
-        id: 1, 
-        charityName: "ECSSEN Career School" ,
-        address: "0xABcc9DC07C239f585F6fe158f0BBd8d1eCfa817a", 
-    },
-    {
-        id: 2, 
-        charityName: "United Way" ,
-        address: "0xABcc9DC07C239f585F6fe158f0BBd8d1eCfa817a", 
-    },
-    {
-        id: 3, 
-        charityName: "Children Hospital" ,
-        address: "0xABcc9DC07C239f585F6fe158f0BBd8d1eCfa817a", 
-    }
-
-]
+const donateData = {
+    "ECSSEN Career School": " 0xE8B0F3a71edFF410a82B0c4FcD2C4aD1a94d0Ee2", 
+    "United Way": "0xE8B0F3a71edFF410a82B0c4FcD2C4aD1a94d0Ee2", // same as ecssen carrer school, temp 
+    "Children Hospital": "0xE8B0F3a71edFF410a82B0c4FcD2C4aD1a94d0Ee2", // same as ecssen carrer school, temp
+}
 
 export default donateData

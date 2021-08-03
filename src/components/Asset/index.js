@@ -413,10 +413,16 @@ const Asset = () => {
     //return result;
   }
 
+  function onLoginClick(){
+    let urlParts = window.location.pathname.split('/');
+    const [collectionAddr, tokenID] = urlParts.splice(-2);
+    window.localStorage.setItem("assetLook", `${collectionAddr}/${tokenID}`);
+  }
+
   function renderLoginToggle(){
     return(
       <span>
-        <Link to="/Signin">
+        <Link to="/Signin" onClick={onLoginClick}>
           <button className="loginButtonAsset" id="loginButton" type="button">Login to Purchase</button>
         </Link>
       </span>
