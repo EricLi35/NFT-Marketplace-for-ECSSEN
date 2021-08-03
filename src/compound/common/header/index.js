@@ -210,7 +210,7 @@ function Header(){
                   <NavLink as={Link} to={"/defi"} className="navlink-items">
                     <Coin />
                     <p className="navlink-text">
-                      DeFi
+                      About
                     </p>
                   </NavLink>
                 </div>
