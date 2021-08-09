@@ -42,7 +42,7 @@ export default class Marketplace extends React.Component {
       <div className="MarketplaceContainer">
         <header>
           <h1 className="title">
-            The NyanFT Marketplace
+            The BCharity Marketplace
           </h1>
           {/* <h4 className="subtitle">
           Lorem ipsum sit amet, consectetur adipiscing elit.
